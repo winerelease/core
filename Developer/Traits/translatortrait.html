@@ -229,7 +229,7 @@ Typically this will be set to the <code>'translator'</code> service.</p>
             $(function() {
                 $('section > h1').wrap('<div class="page-header" />');
                                 hljs.initHighlightingOnLoad();
-                console.log('HM');
+                $("a[href^='http']:not([href*='docs.ziku.la'])").attr('target', '_blank');
             });
         </script>
     </body>

@@ -234,7 +234,7 @@ These are translated to other language stored in files or database and loaded on
             $(function() {
                 $('section > h1').wrap('<div class="page-header" />');
                                 hljs.initHighlightingOnLoad();
-                console.log('HM');
+                $("a[href^='http']:not([href*='docs.ziku.la'])").attr('target', '_blank');
             });
         </script>
     </body>

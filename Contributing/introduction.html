@@ -324,7 +324,7 @@ This PR corrects issue #1234 by improving the logic of the loop.
             $(function() {
                 $('section > h1').wrap('<div class="page-header" />');
                                 hljs.initHighlightingOnLoad();
-                console.log('HM');
+                $("a[href^='http']:not([href*='docs.ziku.la'])").attr('target', '_blank');
             });
         </script>
     </body>

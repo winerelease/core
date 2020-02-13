@@ -272,7 +272,7 @@ Although no extension would implement every capability, here is a full example o
             $(function() {
                 $('section > h1').wrap('<div class="page-header" />');
                                 hljs.initHighlightingOnLoad();
-                console.log('HM');
+                $("a[href^='http']:not([href*='docs.ziku.la'])").attr('target', '_blank');
             });
         </script>
     </body>

@@ -237,7 +237,7 @@ plural_n.registered.user: "{count, plural,\n  one   {one registered user}\n  oth
             $(function() {
                 $('section > h1').wrap('<div class="page-header" />');
                                 hljs.initHighlightingOnLoad();
-                console.log('HM');
+                $("a[href^='http']:not([href*='docs.ziku.la'])").attr('target', '_blank');
             });
         </script>
     </body>
