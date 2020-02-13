@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title></title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                The title
+                <small class="hidden-xs hidden-sm">
+                    This is the default subtitle!
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section id="content" class="col-sm-12">
+                    <h1 id="sensiolabs-deprecationdetector">SensioLabs DeprecationDetector</h1>
+<p><a href="https://travis-ci.org/sensiolabs-de/deprecation-detector"><img src="https://img.shields.io/travis/sensiolabs-de/deprecation-detector/master.svg?style=flat-square" alt="Build Status" /></a>
+<a href="https://gitter.im/sensiolabs-de/deprecation-detector?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter" /></a></p>
+<p>The SensioLabs DeprecationDetector runs a static code analysis against your project's source code to find usages of deprecated methods, classes and interfaces. For Symfony projects, it also detects usages of deprecated services.
+It identifies the use of deprecated code thanks to the <code>@deprecated</code> annotation.</p>
+<h3 id="disclaimer">Disclaimer</h3>
+<p><strong>Please note this tool is in a very early stage of development. Expect bugs and quirks.</strong> </p>
+<h2 id="basic-knowledge">Basic knowledge</h2>
+<p>The Sensiolabs DeprecationDetector is a command line command based on the <a href="https://github.com/symfony/Console">Symfony Console component</a>.
+It makes heavy use of the <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a> library for analyzing PHP code.  </p>
+<p>The command works in three steps:</p>
+<ol>
+<li>Scanning your vendor libraries for defined deprecations and cache them as a <code>ruleset</code></li>
+<li>Finding usages of those deprecations from your ruleset.</li>
+<li>Output with the affected code parts.</li>
+</ol>
+<h2 id="installation">Installation</h2>
+<h3 id="composer">Composer</h3>
+<p>For a system-wide installation via Composer, you can run:</p>
+<pre><code class="language-bash">$ composer global require sensiolabs-de/deprecation-detector</code></pre>
+<p>Make sure you have <code>~/.composer/vendor/bin/</code> in your <code>PATH</code> and you will be able to call the <code>deprecation-detector</code> command.</p>
+<h3 id="phar">PHAR</h3>
+<p>You can download the PHAR file available on the <a href="https://github.com/sensiolabs-de/deprecation-detector/releases">releases page</a>:</p>
+<pre><code>curl -OL https://github.com/sensiolabs-de/deprecation-detector/releases/download/0.1.0-alpha4/deprecation-detector.phar
+php deprecation-detector.phar</code></pre>
+<h3 id="standalone">Standalone</h3>
+<p>Clone the repository</p>
+<pre><code class="language-bash">$ git clone git@github.com:sensiolabs-de/deprecation-detector.git</code></pre>
+<p>Run composer</p>
+<pre><code class="language-bash">$ composer install</code></pre>
+<p>Create phar archive with <a href="http://box-project.github.io/box2/">Box</a> (optional)</p>
+<pre><code class="language-bash">$ box build</code></pre>
+<p>Provided you created the phar archive, if you want to call the deprecation-detector globally, it needs to be placed in your <code>PATH</code>. For example with:</p>
+<pre><code class="language-bash">$ chmod a+x deprecation-detector.phar
+$ mv deprecation-detector.phar /usr/local/bin/deprecation-detector</code></pre>
+<p>Otherwise you can call <code>bin/deprecation-detector</code> directly.</p>
+<h2 id="usage">Usage</h2>
+<p>To use the DeprecationDetector you need to provide the <code>source</code> and the <code>ruleset</code> arguments</p>
+<pre><code class="language-bash">$ deprecation-detector check src/ vendor/
+$ deprecation-detector check src/ composer.lock
+$ deprecation-detector check src/ .rules/some_generated_rule_set</code></pre>
+<h3 id="output">Output</h3>
+<p>There are different output formats available, by default the output is printed in the commandline.</p>
+<h4 id="html">Html</h4>
+<pre><code class="language-bash">$ deprecation-detector check src/ vendor/ --log-html deprecationlog.html</code></pre>
+<p>You can get a list of all options and arguments by running</p>
+<pre><code class="language-bash">$ deprecation-detector check --help</code></pre>
+<p>The default output might not fit into the cli. If that is the case you can set the output to a list by setting <code>--output=simple</code>.</p>
+<pre><code class="language-bash">$ deprecation-detector check src/ vendor/ --output=simple</code></pre>
+<h2 id="excluding-deprecated-method-calls">Excluding deprecated method calls</h2>
+<p>You can exclude deprecated method calls by using the <code>filter-methods</code> option. This option takes a comma separated list of method references to exclude.</p>
+<pre><code class="language-bash">$ deprecation-detector check --filter-methods=MyClass::method,Foo::bar src/ vendor/</code></pre>
+<p>This will exclude all deprecated calls to MyClass::method and Foo::bar.</p>
+<h2 id="contribution">Contribution</h2>
+<p>Currently, the SensioLabs DeprecationDetector is in a very early state. Pull requests are welcome!</p>
+<h2 id="maintainers">Maintainers</h2>
+<p>The DeprecationDetector is a project developed by the team at <a href="http://sensiolabs.de/">SensioLabs Deutschland</a>, maintained by <a href="https://twitter.com/marvin_klemp">@marvin_klemp</a>.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
