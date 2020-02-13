@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,28 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="javascript-translation">JavaScript translation</h1>
+<p>Zikula includes <code>willdurand/js-translation-bundle</code> also known as <a href="https://github.com/willdurand/BazingaJsTranslationBundle">BazingaJsTranslationBundle</a>.</p>
+<p>Bazinga adds native symfony translation support like so:</p>
+<pre><code class="language-js">var myText = Translator.trans('Foo bar baz');
+var myChoiceText = Translator.transChoice('%count% foo|%count% foos', 5);</code></pre>
+<p>The methods are defined like so:</p>
+<pre><code class="language-js">Translator.trans(key, params, domain, locale);
+Translator.transChoice(key, count, params, domain, locale);</code></pre>
+<p>See <a href="https://github.com/willdurand/BazingaJsTranslationBundle/blob/master/Resources/doc/index.html#the-js-translator">BazingaJsTranslation docs</a> for further details and examples.</p>
+<h2 id="extraction-from-javascript-files">Extraction from JavaScript files</h2>
+<p>Zikula also provides an Extractor for both native Symfony and Zikula translation functions. This is run automatically
+when translations are extracted. By default, <strong>all javascript translations</strong> are added to the <code>messages</code> domain (same as in PHP, too).
+<strong>This catalog is automatically added to every page</strong>.</p>
+<p>If an extension <em>chooses</em>, it can set the domain manually in each method call, e.g.:</p>
+<pre><code class="language-js">var myText = Translator.trans('Foo bar baz', {}, 'special_domain');</code></pre>
+<p>In this case, the extractor will export these strings to its own translation file:</p>
+<pre><code>/MyModule/Resources/translations/special_domain.yaml</code></pre>
+<p>Then, your extension <strong>must</strong> manually include each of these files in the required template like so:</p>
+<pre><code class="language-twig">{{ pageAddAsset('javascript', url('bazinga_jstranslation_js', {domain: 'special_domain'}), constant('Zikula\\ThemeModule\\Engine\\AssetBag::WEIGHT_JS_TRANSLATIONS')) }}</code></pre>
+<h2 id="javascripts-in-twig-templates">JavaScripts in Twig templates</h2>
+<p>Translation usage in scripts that are created <em>within</em> a twig template (not a standalone file) should utilize standard
+Twig template translation and not utilize javascript translation.</p>
                 </section>
             </div>
         </main>

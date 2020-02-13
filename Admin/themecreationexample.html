@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,75 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="creating-a-theme-based-on-zikulabootstraptheme">Creating a theme based on ZikulaBootstrapTheme</h1>
+<p>If you want to create your own theme, the starting point of reusing the ZikulaBoostrapTheme is a good idea. This
+example is based on the ZikulaBoostrapTheme of Zikula 1.4.5</p>
+<ul>
+<li>First create a new vendor folder inside the extensions folder. It should start with a capital letter. For our example we should start with <code>Company</code>.</li>
+<li>In this folder we will now create a theme folder. Let us name it <code>PaulaTheme</code>. So we now have the following: <code>/src/extensions/Company/PaulaTheme</code>.</li>
+<li>Copy all the files and folder of the folder ZikulaBootstrapTheme into the folder <code>PaulaTheme</code>.</li>
+<li>Rename <code>Company/PaulaTheme/ZikulaBootstrapTheme.php</code> to <code>Company/PaulaTheme/CompanyPaulaTheme.php</code>.</li>
+<li>Change the content as follows:</li>
+</ul>
+<pre><code class="language-php">namespace Company\PaulaTheme;
+
+use Zikula\ExtensionsModule\AbstractTheme;
+
+class CompanyPaulaTheme extends AbstractTheme
+{
+}</code></pre>
+<ul>
+<li>Next the <code>composer.json</code> file must be changed. It is also located inside the theme root.
+It should look like:</li>
+</ul>
+<pre><code class="language-json">{
+    "name": "company/paula-theme",
+    "version": "1.0.0",
+    "description": "Our fancy Bootstrap based theme",
+    "type": "zikula-theme",
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name": "Company",
+            "homepage": "http://company.tld/"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Company\\PaulaTheme\\": "" }
+    },
+    "require": {
+        "php": "&gt;=5.4.1"
+    },
+    "extra": {
+        "zikula" : {
+            "core-compatibility": "&gt;=1.4.5",
+            "class": "Company\\PaulaTheme\\CompanyPaulaTheme",
+            "displayname": "Paula",
+            "capabilities": {
+                "user": {
+                    "theme": true
+                },
+                "admin": {
+                    "theme": true,
+                    "icon": "fab fa-bootstrap"
+                }
+            }
+        }
+    }
+}</code></pre>
+<ul>
+<li>In <code>home.html.twig</code>, <code>master.html.twig</code> and <code>admin.html.twig</code> you have to change all instance of <code>@ZikulaBoostrapTheme</code>
+to <code>@CompanyPaulaTheme</code>. They are located in <code>/src/extensions/Company/PaulaTheme/Resources/views</code></li>
+<li>Do the same in <code>header.html.twig</code> which is located in <code>/src/extensions/Company/PaulaTheme/Resources/views/include</code></li>
+<li>Next change <code>{{ knp_menu_render('ZikulaBootstrapTheme:AdminMenu:menu') }}</code> with
+<code>{{ knp_menu_render('CompanyPaulaTheme:AdminMenu:menu') }}</code></li>
+<li>There is a file named <code>AdminMenu</code> in the <code>/Menu</code> directory. Inside this file you will find the namespace. You have to adjust
+this accordingly: <code>namespace Company\PaulaTheme\Menu;</code></li>
+<li>at the end you have to adjust the bootstrap css file. It is located inside <code>config/theme.yaml</code>.
+Normally it looks like <code>bootstrapPath: "@ZikulaBootstrapTheme:css/cerulean.min.css"</code>.
+It should get the right path: <code>bootstrapPath: "@CompanyPaulaTheme:css/cerulean.min.css</code></li>
+</ul>
+<p>Now you should be able to activate your theme.</p>
                 </section>
             </div>
         </main>

@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -62,7 +62,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/upgrade.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/upgrade.html" class="nav-link active">
                                             Upgrade
                                         </a>
                                     </li>
@@ -209,10 +209,68 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="upgrading-zikula">Upgrading Zikula</h1>
+<ol>
+<li><a href="#test-environment">Test Environment</a></li>
+<li><a href="#download">Before upgrading</a></li>
+<li><a href="#upgrading">Upgrading</a></li>
+</ol>
+<h2 id="test-environment">Test Environment</h2>
+<p>The Zikula team strongly recommends having a duplicate testing environment of the live site in which all
+changes including upgrades are tested on before application to the live site.</p>
+<h2 id="download">Download</h2>
+<p><strong><em>Prior to any upgrade ensure that you have created a reliable backup of all files and the database.</em></strong></p>
+<p>Download the current release from <a href="https://github.com/zikula/core/releases/">GitHub releases</a>
+All the dependencies and requirements are included in this package.</p>
+<h2 id="upgrading">Upgrading</h2>
+<p>The minimum upgrade version is Zikula Core 1.4.3. Please upgrade to at least this version before attempting to upgrade
+to Core-2.0.x.</p>
+<p>The following process should be followed for all upgrades even small point releases (e.g. <code>2.0.x</code>).</p>
+<ul>
+<li>First: <strong>Backup all your files and database.</strong></li>
+<li>Make a note of your 'startpage' settings as they must be cleared in the upgrade process.</li>
+<li>All blocks using MenuTree, ExtMenu or Menu will be DELETED during the upgrade as these are no longer available in Core-2.0.
+You should consider deleting and replacing these with a MenuModule block before upgrading.</li>
+<li>Before uploading the new files, delete <strong>all files</strong> in your web root (typically <code>public_html</code> or <code>httpdocs</code>).</li>
+<li>Upload the new package and unpack the archive.
+<ul>
+<li>Please read the <a href="install.html#upload">INSTALL docs</a> for detailed information on proper uploading.</li>
+<li>Note 1: One common issue when installing is that the <code>/var/cache</code> and <code>/var/log</code> directories must be writable both by the
+web server and the command line user. See Symfony's <a href="http://symfony.com/doc/current/setup/file_permissions.html">Setting up or Fixing File Permissions</a>
+to see potential solutions to this problem when installing from the CLI.</li>
+<li>Note 2: If you have <code>mod_suexec</code> installed for Apache the CLI will run into permission problems. (If you are not sure
+check your phpinfo.) <code>mod_suexec</code> often is used in shared hosting environments. In this case, the CLI installer is not
+recommended, please use the Web Installer.</li>
+</ul></li>
+<li>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.
+<ul>
+<li><strong>Add an entry named <code>core_installed_version: a.b.c</code></strong> whereby <code>a.b.c</code> should be your old version if it does not exist yet.</li>
+<li><strong>Change the value of <code>datadir</code> to <code>public/uploads</code></strong></li>
+<li>Do not change any other values.</li>
+</ul></li>
+</ul>
+<h3 id="continue">Continue</h3>
+<ul>
+<li>Copy your custom theme to your new installation. The folders of your theme should be in the exact same place as your backup.</li>
+<li>Return compatible extensions to the <code>/src/extensions</code> directory.
+<ul>
+<li><strong>DO NOT copy the old Profile and Legal module</strong> as new versions of these are provided, and their location may differ.</li>
+</ul></li>
+<li>Copy your backup contents of <code>/userdata</code> into <code>/public/uploads</code></li>
+<li>
+<p>Then <strong>start the upgrade (do one or the other)</strong></p>
+<ul>
+<li>Via Web: launch <code>http://yoursiteurl/</code> (you will be redirected to <code>/upgrade</code>) and follow any on-screen prompts.</li>
+<li>Via CLI:</li>
+<li>
+<p>Access your main zikula directory and run this command:</p>
+<pre><code class="language-Shell">php bin/console zikula:upgrade</code></pre>
+</li>
+<li>Follow the prompts and complete that step. When you are finished, Open your browser and login!</li>
+<li>Visit the extensions page and run each module upgrade one at a time.</li>
+</ul>
+</li>
+</ul>
                 </section>
             </div>
         </main>

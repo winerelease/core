@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -177,7 +177,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Twig/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Twig/index.html" class="nav-link active">
                                             Twig
                                         </a>
                                     </li>
@@ -209,10 +209,90 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="twig-functions-provided-by-zikula-core">Twig functions provided by Zikula Core</h1>
+<p>The following twig functions are available in templates. These are in addition to the standard functions provided
+by the Twig package itself. See <a href="https://twig.symfony.com">Twig documentation</a> for more information.
+Also see <a href="https://symfony.com/doc/current/reference/twig_reference.html">standard Symfony functions</a> for additional
+functions, filters, tags, tests and global variables.</p>
+<h2 id="functions">Functions</h2>
+<h3 id="useful">Useful</h3>
+<ul>
+<li>array_unset(array, key)</li>
+<li>callFunc(callable, params = [])</li>
+<li>defaultPath(extensionName, type = 'user')</li>
+<li>dispatchEvent($name, GenericEvent $providedEvent = null, $subject = null, array $arguments = [], $data = null)</li>
+<li>getModVar(module, name, default = null)</li>
+<li>getSystemVar(name, default = null)</li>
+<li>hasPermission(component, instance, level)</li>
+<li>pageAddAsset(type, value, weight = 100)</li>
+<li>pageGetVar(name, default = null)</li>
+<li>pageSetVar(name, value)</li>
+<li>pager(params)</li>
+<li>pagerabc(params)</li>
+<li>showflashes(params = [])</li>
+<li>stateLabel(extensionEntity, upgradedExtensions = null)</li>
+<li>zasset(path)</li>
+</ul>
+<h3 id="hooks">Hooks</h3>
+<ul>
+<li>notifyDisplayHooks(eventName, id = null, urlObject = null)</li>
+<li>routeUrl(routeName, routeParameters = [], fragment = null)</li>
+</ul>
+<h3 id="admin-interface">Admin Interface</h3>
+<ul>
+<li>adminHeader()</li>
+<li>adminFooter()</li>
+<li>adminBreadcrumbs()</li>
+<li>adminMenu(mode, template)</li>
+<li>adminPanelMenu(mode)
+<ul>
+<li>this function is a short-cut to  <code>adminMenu(mode, 'panel')</code></li>
+</ul></li>
+<li>adminDeveloperNotices()</li>
+<li>adminSecurityAnalyzer()</li>
+<li>
+<p>adminUpdateCheck()</p>
+</li>
+<li>moduleHeader(type, title, titlelink, set_page_title, insert_flashes, menufirst, image)</li>
+<li>moduleFooter()</li>
+<li>moduleBreadcrumbs()</li>
+<li>moduleHelp(type)</li>
+<li>moduleLinks(type, links, modname, menuid, menuclass, itemclass, first, last)</li>
+</ul>
+<h3 id="users">Users</h3>
+<h4 id="messages">Messages</h4>
+<ul>
+<li>messageInboxLink($uid = null, $urlOnly = false, $text = '', $class = '')</li>
+<li>messageSendLink($uid = null, $urlOnly = false, $text = '', $class = '') (filter)</li>
+<li>messageCount($uid = null, $unreadOnly = false)</li>
+</ul>
+<h4 id="online-state">Online state</h4>
+<ul>
+<li>onlineSince(UserEntity $userEntity = null, $minutes = 10) (filter)</li>
+</ul>
+<h4 id="profiles">Profiles</h4>
+<ul>
+<li>userAvatar($uid = 0, array $parameters = [])</li>
+<li>profileLinkByUserId($userId, $class = '', $image = '', $maxLength = 0, $title = '') (filter)</li>
+<li>profileLinkByUserName($userName, $class = '', $image = '', $maxLength = 0, $title = '') (filter)</li>
+</ul>
+<h3 id="system-specific">System Specific</h3>
+<ul>
+<li>adminPanelMenu()</li>
+<li>extensionActions(extension)</li>
+<li>getPreviewImagePath(themeName, size = &quot;medium&quot;)</li>
+</ul>
+<h4 id="blocks">Blocks</h4>
+<ul>
+<li>positionavailable(name)</li>
+<li>showblock(block, positionName = &quot;&quot;)</li>
+<li>showblockposition(positionName, implode = true)</li>
+</ul>
+<h4 id="atom-theme">Atom Theme</h4>
+<ul>
+<li>atomFeedLastUpdated()</li>
+<li>atomId()</li>
+</ul>
                 </section>
             </div>
         </main>

@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,33 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="debugging-translations">Debugging translations</h1>
+<p>Symfony comes with <code>bin/console debug:translation</code> command line tool to debug translations.</p>
+<p>Example output:</p>
+<pre><code>%&gt; php bin/console debug:translation pl --domain=mydomain
++----------+-------------+----------------------+
+| State(s) | Id          | Message Preview (pl) |
++----------+-------------+----------------------+
+| o        | Pages       | Strony               |
+| o        | Page        | Strona               |
+| o        | pages       | strony               |
+| o        | page        | strona               |
+| o        | read more   | czytaj więcej        |
+| o        | title       | tytuł                |
+| o        | description | opis                 |
++----------+-------------+----------------------+
+
+Legend:
+    x Missing message
+    o Unused message
+    = Same as the fallback message</code></pre>
+<p>For more information please check <a href="https://symfony.com/doc/current/translation.html#debugging-translations">Debugging Translations</a>.</p>
+<h2 id="important-notes">Important notes</h2>
+<p>From Symfony translator documentation:</p>
+<blockquote>
+<p>Each time you create a new translation resource (or install a bundle that includes a translation resource), be sure to
+clear your cache so that Symfony can discover the new translation resources.</p>
+</blockquote>
                 </section>
             </div>
         </main>

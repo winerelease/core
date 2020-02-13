@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -137,7 +137,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/UsersAndAuthentication/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/UsersAndAuthentication/index.html" class="nav-link active">
                                             Users and authentication
                                         </a>
                                     </li>
@@ -209,10 +209,60 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="authenticationmethodinterface">AuthenticationMethodInterface</h1>
+<p>As of Zikula Core-1.4.3 a new method is introduced to provide a means for users to be authenticated for use in the
+Zikula website. This method provides for two different types of authentication</p>
+<ul>
+<li><code>Zikula\UsersModule\AuthenticationMethodInterface\ReEntrantAuthenticationMethodInterface</code></li>
+<li><code>Zikula\UsersModule\AuthenticationMethodInterface\NonReEntrantAuthenticationMethodInterface</code></li>
+</ul>
+<p>both methods extend a common interface</p>
+<ul>
+<li><code>Zikula\UsersModule\AuthenticationMethodInterface\AuthenticationMethodInterface</code></li>
+</ul>
+<h2 id="reentrantauthenticationmethodinterface">ReEntrantAuthenticationMethodInterface</h2>
+<p>A ReEntrant method requires no local (e.g. as part of this website) data input. For example, Facebook or Google will ask
+for credentials (if not already logged in), but these credentials are not entered 'locally' but rather at their website.
+After authentication at their site, the user is 're-entered' back into the site where they requested the access.
+When this is done, a 'token' is provided to the requesting website that indicates the user's status. This is then
+used to provide access locally. The <a href="https://github.com/zikula/OAuth">OAuthModule</a> is an example of this type of method.</p>
+<h2 id="nonreentrantauthenticationmethodinterface">NonReEntrantAuthenticationMethodInterface</h2>
+<p>A NonReEntrant method never leaves the local site to determine authentication and therefore typically requires a form
+and the processing of that form. The method can maintain it's own table(s) and use this information to indicate a user's
+status to the zikula website. The <a href="https://github.com/zikula/core/tree/master/src/system/ZAuthModule/">ZAuthModule</a> is an example of this type of method. Registration forms MUST contain an <code>email</code>, <code>uname</code> and <code>submit</code> field (may be hidden) and login forms must contain a <code>rememberme</code> field (boolean). </p>
+<h2 id="authentication-login-and-registration">Authentication, Login and Registration</h2>
+<p>As stated in the README.md file, Authentication is a method where a trusted relationship is established to indicate that
+a user <em>is who they say they are</em>. It should be pointed out that this neither means 'login' nor 'registration' to a
+website. An Authentication method is required to provide a means to authenticate. This will allow the Zikula website to
+<em>login</em> that user based on the results of the authentication.</p>
+<p><em>Registration</em> is a more complicated process which also requires authentication, but additionally requires persisting
+some data about the relationship between a Zikula UserEntity::Uid and the corresponding authentication data. This
+process differs for all systems, but in each some relationship must be established. The custom AuthenticationMethod
+module is required to manage this data and provide appropriate user/admin interfaces as needed for such management.</p>
+<h2 id="user-creation-modification-and-deletion">User creation, modification and deletion</h2>
+<p>Because an AuthenticationMethod providing module is responsible for the initial authentication of a user, it is therefore
+considered the user <em>creator</em>. The module therefore assumes responsibility for the modification of said user (for the
+properties it manages, e.g. uname, email, password, etc).</p>
+<p>However - it is <em>very important</em> to note that the providing module must rely on the UsersModule for deletion (via admin
+interface) of said user. This is because UserModule will take appropriate steps to not orphan data and will fire the
+required events, et al on user deletion. The providing authenticationMethod should react to said events in managing
+their own data.</p>
+<h2 id="hooks-and-events-in-templates">Hooks and events in templates</h2>
+<p>Authentication modules <em>must</em> implement hooks and events within their login and registration templates.
+See <a href="https://github.com/zikula/core/tree/master/src/system/ZAuthModule/">ZAuthModule</a> for examples:</p>
+<ul>
+<li><code>src/system/ZAuthModule/Resources/views/Authentication/register.html.twig</code></li>
+<li><code>src/system/ZAuthModule/Resources/views/Authentication/EmailLogin.html.twig</code></li>
+</ul>
+<p>Also see:</p>
+<ul>
+<li><code>\Zikula\UsersModule\Container\HookContainer</code></li>
+<li><code>\Zikula\UsersModule\RegistrationEvents</code></li>
+</ul>
+<h2 id="installation-and-discoverability">Installation and discoverability</h2>
+<p>In order for a method to be usable, the owning module must be installed. Afterwards, the method will appear in
+the Authentication Methods list in the UsersModule administration.</p>
+<p>In order to be used, the method must be activated in this list.</p>
                 </section>
             </div>
         </main>

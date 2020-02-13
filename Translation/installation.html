@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,15 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="installation-of-translations">Installation of translations</h1>
+<p>Translations must be located in <code>translations</code>.</p>
+<p>Files should be be named <code>&lt;domain&gt;.&lt;locale&gt;.&lt;extension&gt;</code>.</p>
+<p>Examples:</p>
+<pre><code>translations/messages.de.yaml
+translations/routes.de.po
+translations/validators.de.xlf</code></pre>
+<p>After the files have been placed, you must 'install' them by going to <em>&quot;General Settings &gt; Localisation settings&quot;</em>.</p>
+<p>This will update the <code>/config/dynamic/generated.yaml</code> file in order to indicate to the system that your new locale/translation is available.</p>
                 </section>
             </div>
         </main>

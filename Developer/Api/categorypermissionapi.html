@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link active">
                                             APIs
                                         </a>
                                     </li>
@@ -209,10 +209,27 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="categorypermissionapi">CategoryPermissionApi</h1>
+<p>classname: <code>\Zikula\CategoriesModule\Api\CategoryPermissionApi</code>.</p>
+<p>The CategoryPermissionApi helps with implementing permission checks based on categories.</p>
+<p>The class makes the following method available:</p>
+<pre><code class="language-php">/**
+ * Check for access to a certain set of categories.
+ *
+ * For each category property in the list, check if we have access to that category in that property.
+ * Check is done as "ZikulaCategoriesModule:PropertyId:CategoryId", "$regId::$catId"
+ *
+ * @param AbstractCategoryAssignment[] $categoryAssignments
+ */
+public function hasCategoryAccess(
+    array $categoryAssignments,
+    int $permLevel = ACCESS_OVERVIEW,
+    bool $requireAccessForAll = false
+): bool;</code></pre>
+<p><code>$categoryAssignments</code> must be an array of <code>\Zikula\CategoriesModule\Entity\AbstractCategoryAssignment</code>.</p>
+<p>The class is fully tested.</p>
+<p>Usage example:</p>
+<pre><code class="language-php">$hasAccess = $this-&gt;categoryPermissionApi-&gt;hasCategoryAccess($page-&gt;getCategoryAssignments());</code></pre>
                 </section>
             </div>
         </main>

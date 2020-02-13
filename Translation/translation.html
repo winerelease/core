@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,55 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="translation-in-zikula">Translation in Zikula</h1>
+<p>Zikula uses the native Symfony translation system. Please refer to <a href="https://symfony.com/doc/current/translation.html">Symfony docs</a> for more information about Symfony features.</p>
+<h2 id="paths-and-file-names-used-by-symfony-translator">Paths and file names used by Symfony translator</h2>
+<h3 id="zikula-core-system">Zikula core system</h3>
+<pre><code>translations/&lt;domain&gt;.&lt;locale&gt;.&lt;loader&gt;</code></pre>
+<p>e.g.</p>
+<pre><code>translations/zikula.en.yaml</code></pre>
+<h3 id="bundles-modules-themes-etc">Bundles (modules, themes etc.)</h3>
+<pre><code>&lt;bundle folder&gt;/Resources/translations/&lt;domain&gt;.&lt;locale&gt;.&lt;loader&gt;</code></pre>
+<h2 id="symfony-translator-loaders">Symfony translator loaders</h2>
+<p>Symfony comes with standard file format loaders:</p>
+<ul>
+<li>ArrayLoader - to load catalogs from PHP arrays.</li>
+<li>CsvFileLoader - to load catalogs from CSV files.</li>
+<li>IcuDatFileLoader - to load catalogs from resource bundles.</li>
+<li>IcuResFileLoader - to load catalogs from resource bundles.</li>
+<li>IniFileLoader - to load catalogs from INI files.</li>
+<li>JsonFileLoader - to load catalogs from JSON files.</li>
+<li>MoFileLoader - to load catalogs from gettext files.</li>
+<li>PhpFileLoader - to load catalogs from PHP files.</li>
+<li>PoFileLoader - to load catalogs from gettext files.</li>
+<li>QtFileLoader - to load catalogs from QT XML files.</li>
+<li>XliffFileLoader - to load catalogs from Xliff files.</li>
+<li>YamlFileLoader - to load catalogs from Yaml files.</li>
+</ul>
+<h2 id="important-notes">Important notes</h2>
+<p>From Symfony translator documentation:</p>
+<blockquote>
+<p>Each time you create a new translation resource (or install a bundle that includes a translation resource), be sure to
+clear your cache so that Symfony can discover the new translation resources.</p>
+</blockquote>
+<p>Translations are cached in <code>var/cache/&lt;env&gt;/translations/catalogue.&lt;locale&gt;.&lt;key&gt;</code></p>
+<h3 id="fallback-locale">Fallback locale</h3>
+<p>There is something new in Symfony translator that was not available with legacy mode.
+Let's look at a website with 3 languages: <code>en</code> (strings are in <code>en</code>), <code>de</code> and <code>pl</code>.
+All languages are enabled but some translations are missing for some strings.</p>
+<p>Normally it would show English as default because strings are in English.
+The fallback locale is a feature that reads translator 'fallback' setting from config.yaml
+and sets this as locale to show instead the one that is missing.
+So when viewing a German site in Polish language and Polish translations are not complete
+while the German is, it will show German translations instead. This will happen only
+when translator fallback setting locale is set to <code>de</code>. At the end there is always an English string.</p>
+<h2 id="further-resources">Further resources</h2>
+<ul>
+<li><a href="https://www.gnu.org/software/gettext/manual/gettext.html#I18n_002c-L10n_002c-and-Such">Gettext documentation</a></li>
+<li><a href="https://symfony.com/doc/current/translation.html">Symfony Translator documentation</a></li>
+<li><a href="https://github.com/zikula/zikula-docs/tree/master/guides/translation">Zikula legacy translations guides</a></li>
+<li><a href="https://www.icanlocalize.com/site/tutorials/how-to-translate-with-gettext-po-and-pot-files/">How to Translate With GetText PO and POT Files</a></li>
+</ul>
                 </section>
             </div>
         </main>

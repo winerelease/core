@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -122,7 +122,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link active">
                                             Hooks
                                         </a>
                                     </li>
@@ -209,10 +209,31 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="zikula-hook-naming">Zikula hook naming</h1>
+<p>By convention we use lower case letters and numbers, with full-stop and underscore
+characters only.  The full-stop is used to separate out logically separate items
+(a kind of namespacing) while the underscore is used in place of a space character
+to punctuate logically connected items.</p>
+<h2 id="area-naming">Area naming</h2>
+<p>Areas must all be unique, please use this format:</p>
+<pre><code>&lt;type&gt;.&lt;name&gt;.&lt;category&gt;.&lt;areaname&gt;</code></pre>
+<p>Type can be 'subscriber' or 'provider'</p>
+<p>For example:</p>
+<pre><code>provider.ratings.ui_hooks.rating (the provider area in 'ui_hooks' category)
+subscriber.blog.ui_hooks.articles  (the subscriber area in 'ui_hooks' category)
+
+provider.ratings.filter_hooks.rating (the provider area in 'filter_hooks' category)
+subscriber.blog.filter_hooks.articles  (the subscriber area in 'filter_hooks' category)</code></pre>
+<h2 id="hook-events">Hook events</h2>
+<p>In this section we will discuss the actual hookable event that is triggered by
+a subscriber module.  The hook event object encapsulates information about the
+hookable event. First, we need the hook event name, e.g. <code>&lt;module&gt;.&lt;category&gt;.&lt;area&gt;.&lt;type&gt;</code>.</p>
+<h3 id="naming-convention">Naming convention</h3>
+<p>Hook events should be named as follows:</p>
+<pre><code>&lt;module&gt;.&lt;category&gt;.&lt;area&gt;.&lt;type&gt;</code></pre>
+<h3 id="event-trigger">Event Trigger</h3>
+<p>To create a hookable event, create an appropriate hook object and then notify that
+hook using hook's <code>notify()</code> method.</p>
                 </section>
             </div>
         </main>

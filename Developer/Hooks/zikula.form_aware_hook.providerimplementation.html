@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -122,7 +122,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link active">
                                             Hooks
                                         </a>
                                     </li>
@@ -209,10 +209,45 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="provider-workflow-for-form-aware-hooks">Provider workflow for form-aware hooks</h1>
+<p>Recommend use of class constants for all hook names.</p>
+<p>when adding form children include all <code>constraints</code> required to validate each child.</p>
+<p>Response templates should include as little formatting as possible (e.g. no <code>fieldset</code>, etc.).</p>
+<p>If add entire form:</p>
+<pre><code class="language-php">public function edit(FormAwareHook $hook)
+{
+    $myForm = $this-&gt;formFactory-&gt;createNamedBuilder('fooName', FormType::class);
+    $myForm-&gt;add('foo', TextType::class);
+    $hook
+        -&gt;formAdd($myForm)
+        -&gt;addTemplate('@ZikulaFooHookModule/Hook/test.html.twig')
+    ;
+}</code></pre>
+<p>and <code>test.html.twig</code>:</p>
+<pre><code class="language-twig">{% for element in form.fooName %}
+    {{ form_row(element) }}
+{% endfor %}</code></pre>
+<p>then</p>
+<pre><code class="language-php">public function processEdit(FormAwareResponse $hook)
+{
+    $data = $hook-&gt;getFormData('fooName');
+}</code></pre>
+<p>OR</p>
+<p>If add only one field:</p>
+<pre><code class="language-php">public function edit(FormAwareHook $hook)
+{
+    $hook
+        -&gt;formAdd('test', TextType::class)
+        -&gt;addTemplate('@ZikulaFooHookModule/Hook/test.html.twig')
+    ;
+}</code></pre>
+<p>and <code>test.html.twig</code>:</p>
+<pre><code class="language-twig">{{ form_row(form.test) }}</code></pre>
+<p>then</p>
+<pre><code class="language-php">public function processEdit(FormAwareResponse $hook)
+{
+    $test = $hook-&gt;getFormData('test');
+}</code></pre>
                 </section>
             </div>
         </main>

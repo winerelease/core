@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -122,7 +122,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link active">
                                             Hooks
                                         </a>
                                     </li>
@@ -209,10 +209,76 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="tagged-hook-services">Tagged hook services</h1>
+<h2 id="hookproviderinterface">HookProviderInterface</h2>
+<p>A HookProvider is very much like a Symfony EventSubscriber and so, the interface has a similar look and implementation -
+The most obvious is the similarity between <code>HookProviderInterface::getProviderTypes</code> and <code>EventSubscriberInterface::getSubscribedEvents</code>
+There are some obvious difference to account for the special needs of hooks over events.</p>
+<p>Interface: <code>\Zikula\Bundle\HookBundle\HookProviderInterface</code></p>
+<p>Extends: <code>\Zikula\Bundle\HookBundle\HookInterface</code></p>
+<p>Example:</p>
+<pre><code class="language-php">class FormAwareHookProvider implements HookProviderInterface
+{
+    private $session;
+    private $translator;
+    private $formFactory;
+
+    public function __construct(
+        SessionInterface $session,
+        TranslatorInterface $translator,
+        FormFactoryInterface $formFactory
+    ) {
+        $this-&gt;session = $session;
+        $this-&gt;translator = $translator;
+        $this-&gt;formFactory = $formFactory;
+    }
+
+    public function getOwner()
+    {
+        return 'ZikulaFooHookModule';
+    }
+
+    public function getCategory()
+    {
+        return FormAwareCategory::NAME;
+    }
+
+    public function getTitle()
+    {
+        return $this-&gt;translator-&gt;__('FooHook Provider');
+    }
+
+    public function getProviderTypes()
+    {
+        return [
+            FormAwareCategory::TYPE_EDIT =&gt; 'edit',
+            FormAwareCategory::TYPE_PROCESS_EDIT =&gt; 'processEdit',
+        ];
+    }
+
+    public function edit(FormAwareHook $hook)
+    {
+        $myForm = $this-&gt;formFactory-&gt;create(FooType::class, null, [
+            'auto_initialize' =&gt; false, // required
+            'mapped' =&gt; false // required
+        ]);
+        $hook
+            -&gt;formAdd($myForm)
+            -&gt;addTemplate(('@ZikulaFooHookModule/Hook/test_fooform.html.twig'))
+        ;
+    }
+
+    public function processEdit(FormAwareResponse $hook)
+    {
+        $fooForm = $hook-&gt;getFormData('zikulafoomodule_fooform');
+        $this-&gt;session-&gt;getFlashBag()-&gt;add('success', sprintf('The FormAwareHookProvider foo form was processed and the answer was %s', $fooForm['textField']));
+    }
+
+    public function getAreaName()
+    {
+        return 'provider.zikulafoomodule.form_aware_hook.foo';
+    }
+}</code></pre>
                 </section>
             </div>
         </main>

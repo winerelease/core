@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,24 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="plural-forms">Plural forms</h1>
+<p>Note: before reading this you should have read the <a href="extraction.html">extraction chapter</a> first.</p>
+<h2 id="php-files">PHP files</h2>
+<p>PHP example using plural forms:</p>
+<pre><code class="language-php">// 4. With plural forms and advanced substitution
+$this-&gt;_fn('User deleted!', '%n users deleted!', count($deletedUsers), ['%n' =&gt; count($deletedUsers)]);
+/** @Desc("{count, plural,\n  one   {User deleted!}\n  other {# users deleted!}\n}") */
+$this-&gt;getTranslator()-&gt;trans('plural_n.users.deleted', ['%count%' =&gt; count($deletedUsers)]);</code></pre>
+<h2 id="twig-template-files">Twig template files</h2>
+<p>Here is an example using plural forms, advanced substitution and the <code>desc</code> filter:</p>
+<pre><code class="language-twig">Old: {% set amountOfUsers = _fn('%amount% registered user', '%amount% registered users', users|length, {'%amount%': users|length}) %}
+New: {% set amountOfUsers = 'plural_n.registered.user'|trans({count: users|length})|desc('{count, plural,\n  one   {one registered user}\n  other {# registered users}\n}') %}</code></pre>
+<p>The <code>plural_n</code> portion of the translation key is simply a convention established to note that this key requires plural translation.</p>
+<p>The translation of this would look something like:</p>
+<pre><code class="language-yaml">#messages+intl-icu.en.yaml
+plural_n.registered.user: "{count, plural,\n  one   {one registered user}\n  other {# registered users}\n}"</code></pre>
+<h2 id="note-about-icu">Note about ICU</h2>
+<p>More advanced translation like plurals and other substitutions require using the Symfony ICU MessageFormatter. See <a href="https://symfony.com/doc/current/translation/message_format.html">How to Translate Messages using the ICU MessageFormat</a>. This requires a specific name format on the translation file and other adjustments.</p>
                 </section>
             </div>
         </main>

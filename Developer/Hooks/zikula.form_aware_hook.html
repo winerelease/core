@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -122,7 +122,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link active">
                                             Hooks
                                         </a>
                                     </li>
@@ -209,10 +209,35 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="form-aware-hooks">Form-aware hooks</h1>
+<p>The following is a list of valid hook types.</p>
+<h2 id="form_aware_hook-category">'form_aware_hook' category</h2>
+<p>See <code>\Zikula\Bundle\HookBundle\Category\FormAwareCategory</code>.</p>
+<pre><code class="language-php">public const NAME = 'form_aware_hook';
+
+/**
+ * Display hook for create/edit forms
+ * dispatches \Zikula\Bundle\HookBundle\FormAwareHook\FormAwareHook
+ */
+public const TYPE_EDIT = 'edit';
+
+/**
+ * Display hook for delete forms
+ * dispatches \Zikula\Bundle\HookBundle\FormAwareHook\FormAwareHook
+ */
+public const TYPE_DELETE = 'delete';
+
+/**
+ * Process the results of the edit form after the main form is processed
+ * dispatches \Zikula\UsersModule\Event\FormAwareResponse
+ */
+public const TYPE_PROCESS_EDIT = 'process_edit';
+
+/**
+ * Process the results of the delete form after the main form is processed
+ * dispatches \Zikula\UsersModule\Event\FormAwareResponse
+ */
+public const TYPE_PROCESS_DELETE = 'process_delete';</code></pre>
                 </section>
             </div>
         </main>

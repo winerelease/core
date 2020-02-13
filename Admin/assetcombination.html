@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,39 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="asset-combination">Asset combination</h1>
+<p>Zikula Core provides functionality to combine both CSS and JavScript files into one cached file in your twig template
+which can improve performance of your website. Additionally, one can further minify the css files and also compress the
+response to even further improve performance.</p>
+<p>To enable the features, modify these parameters in the <code>/config/services_custom.yaml</code> file:</p>
+<table>
+<thead>
+<tr>
+<th>parameter</th>
+<th>possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zikula_asset_manager.combine</td>
+<td><code>true</code> or <code>false</code> (enables combination)</td>
+</tr>
+<tr>
+<td>zikula_asset_manager.lifetime</td>
+<td>string like <code>"1 day"</code> or <code>"1 hour"</code></td>
+</tr>
+<tr>
+<td>zikula_asset_manager.compress</td>
+<td><code>true</code> or <code>false</code></td>
+</tr>
+<tr>
+<td>zikula_asset_manager.minify</td>
+<td><code>true</code> or <code>false</code></td>
+</tr>
+</tbody>
+</table>
+<p>If <code>zikula_asset_manager.combine</code> is false, none of the other parameters have any effect.</p>
+<p>Please note: Asset combination only occurs in the <code>prod</code> environment. If <code>env</code> is set to another value, it is disabled.</p>
                 </section>
             </div>
         </main>

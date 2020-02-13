@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -122,7 +122,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link active">
                                             Hooks
                                         </a>
                                     </li>
@@ -209,10 +209,15 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="tagged-hook-services">Tagged hook services</h1>
+<h2 id="hookselfallowedproviderinterface">HookSelfAllowedProviderInterface</h2>
+<p>Interface: <code>\Zikula\Bundle\HookBundle\HookSelfAllowedProviderInterface</code></p>
+<p>Extends: <code>\Zikula\Bundle\HookBundle\HookProviderInterface</code></p>
+<p>The <code>HookSelfAllowedProviderInterface</code> is an empty interface that is used to identify the class to the HookCollector
+service as a special HookProvider that is allowed to hook to its own <code>HookSubscribers</code>. No special implementation is
+required, but care should be taken when utilizing this feature. Logic should be implemented within the <code>Provider</code> to
+avoid circular references. Because the <code>areaId</code> is available for reference within the <code>Hook</code>, this value should be
+confirmed before amending content or taking other potentially recursive actions.</p>
                 </section>
             </div>
         </main>

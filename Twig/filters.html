@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -177,7 +177,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Twig/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Twig/index.html" class="nav-link active">
                                             Twig
                                         </a>
                                     </li>
@@ -209,10 +209,24 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="twig-filters-provided-by-zikula-core">Twig filters provided by Zikula Core</h1>
+<p>The following twig filters are available in templates. These are in addition to the standard functions provided
+by the Twig package itself. See <a href="https://twig.symfony.com">Twig documentation</a> for more information.
+Also see <a href="https://symfony.com/doc/current/reference/twig_reference.html">standard Symfony functions</a> for additional
+functions, filters, tags, tests and global variables.</p>
+<h2 id="filters">Filters</h2>
+<ul>
+<li>isCoreModule</li>
+<li>notifyFilters(filterEventName)</li>
+<li>php(func)</li>
+<li>profileLinkByUserId</li>
+<li>profileLinkByUserName</li>
+<li>protectMail</li>
+<li>safeHtml</li>
+<li>urldecode</li>
+<li>yesNo</li>
+<li>onlineSince(minutes)</li>
+</ul>
                 </section>
             </div>
         </main>

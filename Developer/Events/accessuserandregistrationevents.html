@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -112,7 +112,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Events/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Events/index.html" class="nav-link active">
                                             Events
                                         </a>
                                     </li>
@@ -209,10 +209,22 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="access-user-and-registration-events">Access, User and Registration events</h1>
+<p>The following classes provide different events:</p>
+<ul>
+<li><code>\Zikula\UsersModule\AccessEvents</code></li>
+<li><code>\Zikula\UsersModule\RegistrationEvents</code></li>
+<li><code>\Zikula\UsersModule\UserEvents</code></li>
+</ul>
+<p>There are MANY events throughout the UsersModule. These have been divided amongst three classes to better organize them.
+Because there are so many, they are not documented here. Please see the respective classes for further information.</p>
+<ul>
+<li>Access Events: Events concerning login/logout/authentication</li>
+<li>Registration Events: Events concerning user registration</li>
+<li>User Events: Events concerning user account creation/display/manipulation.</li>
+</ul>
+<p>In addition, Hooks are used extensively within the UsersModule. There are also 'hook-like' events that are used
+within the UsersModule.</p>
                 </section>
             </div>
         </main>

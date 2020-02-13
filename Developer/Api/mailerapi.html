@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link active">
                                             APIs
                                         </a>
                                     </li>
@@ -209,10 +209,60 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="mailerapi">MailerApi</h1>
+<p>classname: <code>\Zikula\MailerModule\Api\MailerApi</code>.</p>
+<p>This class is used to send a mail using SwiftMailer configured with settings from the Mailer module configuration.</p>
+<p>The class makes the following method available:</p>
+<pre><code class="language-php">/**
+ * API function to send e-mail message.
+ * It is assumed that basic parameters for sender and recipient(s) have already been set.
+ *
+ * @param Swift_Message $message The message object
+ * @param string        $subject message subject
+ * @param string        $body message body, if altbody is provided then
+ *                            this is the HTML version of the body
+ * @param string        $altBody alternative plain-text message body, if specified the
+ *                               e-mail will be sent as multipart/alternative
+ * @param bool          $html HTML flag, if altbody is not specified then this
+ *                            indicates whether body contains HTML or not; if altbody is
+ *                            specified, then this value is ignored, the body is assumed
+ *                            to be HTML, and the altbody is assumed to be plain text
+ * @param array         $headers custom headers to add - an array ['header' =&gt; 'content', 'header' =&gt; 'content']
+ * @param array         $attachments array of either absolute filenames to attach
+ *                                   to the mail or array of arrays in format
+ *                                   [$path, $filename, $encoding, $type]
+ * @param array         $stringAttachments array of arrays to treat as attachments, format [$string, $filename, $encoding, $type]
+ * @param array         $embeddedImages array of absolute filenames to image files to embed in the mail
+ *
+ * @throws \RuntimeException Thrown if there's an error sending the e-mail message
+ *
+ * @return bool true if successful
+ */
+public function sendMessage(
+    Swift_Message $message,
+    string $subject = null,
+    string $body = null,
+    string $altBody = '',
+    bool $html = false,
+    array $headers = [],
+    array $attachments = [],
+    array $stringAttachments = [],
+    array $embeddedImages = []
+): bool;</code></pre>
+<p>The class is fully tested.</p>
+<p>The fastest way to use this Api:</p>
+<pre><code class="language-php">$message = new Swift_Message('my subject', 'the body text');
+$message-&gt;setFrom('admin@example.com');
+$message-&gt;setTo('foo@bar.com');
+$this-&gt;mailerAPi-&gt;sendMessage($message);</code></pre>
+<p>Another example for using this service can be found in the <code>Zikula\MailerModule\Controller\ConfigController#testAction(Request $request)</code> method:</p>
+<pre><code class="language-php">// create new message instance
+$message = new Swift_Message();
+
+$message-&gt;setFrom([$adminMail =&gt; $siteName]);
+$message-&gt;setTo([$formData['toAddress'] =&gt; $formData['toName']]);
+
+$result = $this-&gt;mailerApi-&gt;sendMessage($message, $formData['subject'], $msgBody, $altBody, $html);</code></pre>
                 </section>
             </div>
         </main>

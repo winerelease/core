@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -182,7 +182,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Workflows/workflows.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Workflows/workflows.html" class="nav-link active">
                                             Workflows
                                         </a>
                                     </li>
@@ -209,10 +209,33 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="workflows">Workflows</h1>
+<p>Zikula utilises the Symfony Workflow component to provide workflow functionality.</p>
+<p>You can read more about it in <a href="https://symfony.com/doc/master/components/workflow.html">the manual</a>.</p>
+<h2 id="workflow-events">Workflow events</h2>
+<p>Please see the <a href="https://symfony.com/doc/current/workflow/usage.html#using-events">Symfony docs</a> for a list of existing workflow events.</p>
+<h2 id="custom-functionality">Custom functionality</h2>
+<p>There are some slight differences regarding workflow behaviour in Zikula.</p>
+<h3 id="workflow-locations">Workflow locations</h3>
+<p>It seems that usually workflow definitions can only be stored at a central location. We wanted to make this more flexible so we allowed three different levels:</p>
+<ol>
+<li>Central workflows in the core system are placed in: <code>/src/Zikula/CoreBundle/Resources/workflows/</code></li>
+<li>Modules can define their own workflows in: <code>/src/modules/Acme/MyBundle/Resources/workflows/</code></li>
+<li>Also it is possible to define custom workflows (or override existing ones) in: <code>/config/workflows/</code></li>
+</ol>
+<p>Each of these directories may contain several YML (<code>*.yaml</code>) or XML (<code>*.xml</code>) files.</p>
+<p><strong>Caution:</strong> when overriding existing workflows in <code>/config/workflows/someFile.yaml</code> (or <code>someFile.xml</code>) ensure that these workflows get new, unique names. Otherwise transitions will be added to the original workflow instead of redefining a custom workflow.</p>
+<h3 id="workflow-editor">Workflow editor</h3>
+<p>Zikula provides a JavaScript-based workflow editor.</p>
+<p><img src="images/workflow_ui.png" alt="Workflow editor" /></p>
+<p>The editor expects the name of a workflow which should be loaded. You can for example include a link to it like this:</p>
+<pre><code class="language-twig">&lt;p&gt;&lt;a href="{{ path('zikula_workflow_editor_index', { 'workflow': 'acmetestmodule_enterprise' }) }}" title="{{ __('Edit workflow for articles') }}" target="_blank"&gt;{{ __('Articles workflow') }}&lt;/a&gt;</code></pre>
+<p>The editor can switch between <code>workflow</code> (petri net) and <code>state_machine</code> modes. There are several differences between these. For example if you have a transition with more than one input like this:</p>
+<pre><code class="language-yaml">accept:
+    from: [initial, waiting]
+    to: accepted</code></pre>
+<p>When using in a petri net this transition is only enabled if the marking has both places. So your object needs both <code>froms</code> to transition into <code>to</code>. If you want two different <code>froms</code> you'll need two different transitions.</p>
+<p>At the moment the editor supports YAML and XML output. It does not provide means for saving the changed workflows, because when upgrading an existing workflows it must be considered that objects could be in a state which does not exist anymore. You need to update your database to update these objects in order to avoid problems.</p>
                 </section>
             </div>
         </main>

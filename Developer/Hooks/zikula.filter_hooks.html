@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -122,7 +122,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link active">
                                             Hooks
                                         </a>
                                     </li>
@@ -209,10 +209,29 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="filter-hooks">Filter hooks</h1>
+<h2 id="filter_hooks-category">'filter_hooks' category</h2>
+<p>See <code>\Zikula\Bundle\HookBundle\Category\FilterHooksCategory</code>.</p>
+<pre><code class="language-php">public const NAME = 'filter_hooks';
+
+/**
+ * Dispatches FilterHook instances.
+ */
+public const TYPE_FILTER = 'filter';</code></pre>
+<p>A filter is simply a something that alters data in some way.
+A filter might be used to sanitize HTML content, format text in some way, or otherwise transform content.</p>
+<h2 id="area-type">Area Type</h2>
+<p>There is only one kind of hook type in a filter bundle:</p>
+<pre><code>filter   - This is a filter to be applied in a given area.  Filters should probably
+            Have their own separate area(s) as it would give a user more control over
+            what filters are applied and where.</code></pre>
+<h2 id="subscriber-implementation">Subscriber implementation</h2>
+<p>Usage in a Twig template:</p>
+<pre><code class="language-twig">{{ var|notifyfilters:'news.filter_hooks.articles.filter'|safeHtml }}</code></pre>
+<p>This generates a <code>Zikula\Bundle\HookBundle\Hook\FilterHook</code> event object that has the event name and
+the data to be filtered.</p>
+<h2 id="provider-implementation">Provider implementation</h2>
+<p>See <a href="zikula.ui_hooks.providerimplementation.html">zikula.ui_hooks.ProviderImplementation.md</a>.</p>
                 </section>
             </div>
         </main>

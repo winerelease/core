@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -52,7 +52,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/install.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/install.html" class="nav-link active">
                                             Installation
                                         </a>
                                     </li>
@@ -209,10 +209,76 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="zikula-installation-instructions">Zikula installation instructions</h1>
+<p>First please check <a href="requirements.html">requirements</a>.</p>
+<ol>
+<li><a href="#upload">Install by uploading package</a></li>
+<li><a href="#installing-using-composer-for-developers">Install via Composer</a></li>
+<li><a href="#vagrant-installation">Install with Vagrant</a></li>
+<li><a href="#finish-installation">Finish Installation</a></li>
+</ol>
+<h2 id="install-by-uploading-package">Install by uploading package</h2>
+<h3 id="upload">Upload</h3>
+<p>If you obtained Zikula Core from the CI server, then you can upload the entire archive (<code>.zip</code> or <code>.tgz</code> file)
+to your server and then <code>unzip</code> them there. (This is faster and much more reliable than uploading many small
+files via FTP). <strong>Make sure to include the <code>-p</code> flag if you extract from <code>.tgz</code> to keep the correct permissions
+(for example: <code>tar -xpzvf Zikula_Core-2.0.0.build123.tar.gz</code>) change the filename to match the current download.</strong>
+Copy all the files and directories to your webroot (typically <code>public_html</code> or <code>httpdocs</code>).</p>
+<p>Another option can be to download the tar.gz directly from the ci server: e.g.
+<code>wget http://ci.zikula.org/job/Zikula_Core-2.0.0/lastSuccessfulBuild/artifact/build/archive/Zikula_Core-2.0.0.tar.gz</code>.
+Again, change the filename/url to match the correct filename from the ci server.</p>
+<p>Windows/FTP users: Take care about copying all files. If there are some files you are not able to transfer
+to the server check if your longest path length is longer than Windows/FTP-Software allows (more than 256 characters).</p>
+<h3 id="set-file-permissions-critical">Set file permissions (Critical)</h3>
+<p>If you installed from a <code>.zip</code> archive or uploaded the files via FTP, the permissions for some folders must be changed
+prior to installing so that your webserver's user has write access:</p>
+<ul>
+<li><code>config</code></li>
+<li><code>config/dynamic</code></li>
+<li><code>var/cache</code></li>
+<li><code>var/log</code></li>
+<li><code>public</code></li>
+</ul>
+<p>You normally do so using <code>chmod 777 var/cache</code> and so on. (<code>.tgz</code> archives maintain
+the permission settings as they were set correctly by the development team, if you unpacked it using the <code>-p</code> flag).</p>
+<h2 id="installing-using-composer-for-developers">Installing using Composer (for developers)</h2>
+<p>Zikula makes use of <a href="https://getcomposer.org/">Composer</a> to manage and download all dependencies.
+If cloning via GitHub, Composer must be run prior to installation. Run:</p>
+<pre><code>composer self-update
+composer install</code></pre>
+<p>If you store Composer in the root of the Zikula Core checkout, please rename it from <code>composer.phar</code> to <code>composer</code>
+to avoid your IDE reading the package contents.</p>
+<h2 id="vagrant-installation">Vagrant installation</h2>
+<p>You can use vagrant to easily setup a complete Zikula development environment.
+All you need to do is install <a href="https://vagrantup.com">Vagrant</a> and
+<a href="https://www.virtualbox.org/">VirtualBox</a>. Then run <code>vagrant up</code> inside the
+cloned repository and wait for the machine to boot (first time booting might
+take several minutes). Then head over to <code>localhost:8080</code> and install Zikula.
+Database user, password and table are all set to <code>zikula</code>. PHPMyAdmin is
+accessible from <code>localhost:8081</code>.</p>
+<h2 id="finish-installation">Finish Installation</h2>
+<p><em>Note 1:</em> One common issue when installing is that the <code>var/cache</code> and <code>var/log</code> directories must be writable both by the
+web server and the command line user. See Symfony's <a href="https://symfony.com/doc/current/setup/file_permissions.html">Setting up or Fixing File Permissions</a>
+to see potential solutions to this problem when installing from the CLI.</p>
+<p><em>Note 2:</em> If you have <code>mod_suexec</code> installed for Apache the CLI will run into permission problems. (If you are not sure
+check your phpinfo.) <code>mod_suexec</code> often is used in shared hosting environments. In this case, the CLI installer is not
+recommended, please use the Web Installer. </p>
+<h3 id="create-the-database">Create the Database</h3>
+<p>Create a database on your server. Take note of the database <strong>name</strong> as well as the database <strong>username</strong> and
+<strong>password</strong> which are possibly given by your provider. These will be needed during install. You can use an existing
+database, but this is not recommended unless Zikula will be the only application using that database. In this case,
+remove all existing tables from the existing database.</p>
+<h3 id="install-by-the-web-installer-or-command-line-not-both">Install by the Web installer or Command Line (not both!)</h3>
+<h4 id="web-installer">Web Installer</h4>
+<p>To begin the installer, simply visit the root directory with your browser, e.g. <code>http://www.example.com/</code>.
+If you installed Zikula into a subdirectory 'foo' the URL would be <code>http://www.example.com/foo/</code>. You will be
+automatically redirected to the installer.</p>
+<h4 id="command-line-installer">Command Line Installer</h4>
+<p>Via CLI, access your main zikula directory (<code>/src</code> if a Github clone) and run this command:</p>
+<pre><code class="language-Shell">php bin/console zikula:install:start</code></pre>
+<p>Follow the prompts and complete that step. When you are finished, you are directed to run the next command:</p>
+<pre><code class="language-Shell">php bin/console zikula:install:finish</code></pre>
+<p>Open your browser and login!</p>
                 </section>
             </div>
         </main>

@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link active">
                                             APIs
                                         </a>
                                     </li>
@@ -209,10 +209,37 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="permissionapi">PermissionApi</h1>
+<p>classname: <code>\Zikula\PermissionsModule\Api\PermissionApi</code>.</p>
+<p>This class is used to determine whether a user has rights (or permissions) to a given component. Rights are granted
+or denied from the Permissions module User Interface. Components/Extensions must declare their Permission structure in
+their <code>composer.json</code> file.</p>
+<p>The class makes the following methods available:</p>
+<pre><code class="language-php">/**
+ * Check permissions
+ * @api Core-2.0
+ */
+public function hasPermission(string $component = null, string $instance = null, int $level = ACCESS_NONE, int $user = null): bool;
+
+/**
+ * Translation functions
+ * Translate level -&gt; name
+ * @api Core-2.0
+ * @return string|array
+ */
+public function accessLevelNames(int $level = null);
+
+/**
+ * Set permissions for user to false, forcing a reload if called upon again.
+ * @api Core-2.0
+ */
+public function resetPermissionsForUser(int $userId): void;</code></pre>
+<p>The class is fully tested.</p>
+<p>In classes extending <code>\Zikula\Bundle\CoreBundle\Controller\AbstractController</code> the following convenience method is available:</p>
+<pre><code class="language-php">/**
+ * Convenience shortcut to check if user has requested permissions.
+ */
+protected function hasPermission(string $component = null, string $instance = null, int $level = null, int $user = null): bool;</code></pre>
                 </section>
             </div>
         </main>

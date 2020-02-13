@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -142,7 +142,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link active">
                                             Other topics
                                         </a>
                                     </li>
@@ -209,10 +209,15 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="searchable">Searchable</h1>
+<p>The Api/methodology for the search module requires a dedicated class which must implement <code>Zikula\SearchModule\SearchableInterface</code>.
+Please see the interface itself for documentation of the required methods.</p>
+<p>The <code>getResults()</code> method <strong>MUST</strong> return an array of <code>Zikula\SearchModule\Entity\SearchResultEntity</code>.</p>
+<p>The <code>amendForm()</code> method accepts an argument that is an instance of <code>Zikula\SearchModule\Form\Type\AmendableModuleSearchType</code>
+which already includes an <code>active</code> child object. Utilize this object to add additional child objects to the general
+search form object. </p>
+<p>The <strong>UsersModule</strong> has implemented the new Search method (<code>Zikula\UsersModule\Helper\SearchHelper</code>) and can be used as
+a simple reference.</p>
                 </section>
             </div>
         </main>

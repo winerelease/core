@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -102,7 +102,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Categories/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Categories/index.html" class="nav-link active">
                                             Categories
                                         </a>
                                     </li>
@@ -209,10 +209,24 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="categorytreetype">CategoryTreeType</h1>
+<p>The CategoriesModule provides a CategoryTreeType form type for ease of use with Symfony Forms.
+It is implemented by the <code>\Zikula\CategoriesModule\Form\Type\CategoryTreeType</code> class.</p>
+<p>With this you can add choice fields for selecting one or multiple categories from the overall categories tree.</p>
+<h2 id="required-options">Required options</h2>
+<ul>
+<li><code>translator</code> - the <code>translator.default</code> service</li>
+</ul>
+<h2 id="optional-options">Optional options</h2>
+<ul>
+<li>all attributes from the <code>choice</code> form type</li>
+<li><code>locale</code> - (string) the locale to be used (default <code>en</code>).</li>
+<li><code>recurse</code> - (boolean) whether or not to recurse (if false, only direct subfolders are retrieved) (default <code>true</code>).</li>
+<li><code>relative</code> - (boolean) whether or not to also generate relative paths (default <code>true</code>).</li>
+<li><code>includeRoot</code> - (boolean) whether to include the root node or not (default <code>false</code>).</li>
+<li><code>includeLeaf</code> - (boolean) whether to include leaf nodes or not (default <code>false</code>).</li>
+<li><code>all</code> - (boolean) whether or not to return all (or only active) categories (default <code>false</code>).</li>
+</ul>
                 </section>
             </div>
         </main>

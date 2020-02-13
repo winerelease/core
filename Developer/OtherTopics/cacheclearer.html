@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -142,7 +142,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link active">
                                             Other topics
                                         </a>
                                     </li>
@@ -209,10 +209,28 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="cache-clearer">Cache clearer</h1>
+<p>The cache clearer is implemented by the <code>\Zikula\Bundle\CoreBundle\CacheClearer</code> class and intended to be used
+for clearing (parts of) the Symfony cache. The cache clearer provides one method: <code>clear($type)</code>. The <code>$type</code>
+argument determines what part of the cache shall be deleted. The following types are supported:</p>
+<ol>
+<li><code>symfony</code>
+<ul>
+<li><code>symfony.routing.generator</code>: Deletes the url generator files.</li>
+<li><code>symfony.routing.matcher</code>:   Deletes the url matcher files.</li>
+<li><code>symfony.routing.fosjs</code>:     Deletes the cache files for route generation in javascript (using the FOSJsRoutingBundle)</li>
+<li><code>symfony.config</code>:            Deletes the container configuration cache files.</li>
+<li><code>symfony.annotations</code></li>
+<li><code>symfony.translations</code></li>
+</ul></li>
+<li><code>twig</code></li>
+<li><code>purifier</code></li>
+<li><code>assets</code></li>
+</ol>
+<p><strong>Note:</strong> The service keys are &quot;namespaced&quot;, meaning you can also specify <code>symfony.routing</code> to delete the url <code>generator</code>
+AND <code>matcher</code> files. Or, specifying simply <code>symfony</code> clears <em>all</em> symfony caches.</p>
+<p>Usage example:</p>
+<pre><code class="language-php">$cacheClearer-&gt;clear('symfony.config');</code></pre>
                 </section>
             </div>
         </main>

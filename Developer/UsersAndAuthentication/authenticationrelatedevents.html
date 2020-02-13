@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -137,7 +137,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/UsersAndAuthentication/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/UsersAndAuthentication/index.html" class="nav-link active">
                                             Users and authentication
                                         </a>
                                     </li>
@@ -209,10 +209,31 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="authentication-related-events">Authentication related events</h1>
+<p><code>Zikula\UsersModule\RegistrationEvents::FULL_USER_CREATE_VETO</code></p>
+<ul>
+<li>Force the registration to create a 'pending' user instead of a full user.</li>
+</ul>
+<p><code>Zikula\UsersModule\RegistrationEvents::REGISTRATION_SUCCEEDED</code></p>
+<ul>
+<li>React to a successfully completed registration</li>
+</ul>
+<p><code>Zikula\UsersModule\RegistrationEvents::FORCE_REGISTRATION_APPROVAL</code></p>
+<ul>
+<li>React to an administrator's wish to force a user to become a 'full' user.</li>
+</ul>
+<p><code>Zikula\UsersModule\UserEvents::DELETE_ACCOUNT</code></p>
+<ul>
+<li>React to the deletion of a user.</li>
+</ul>
+<p><code>Zikula\UsersModule\RegistrationEvents::DELETE_REGISTRATION</code></p>
+<ul>
+<li>React to the deletion of a pending user.</li>
+</ul>
+<p><code>Zikula\UsersModule\AccessEvents::LOGIN_VETO</code></p>
+<ul>
+<li>force the halt of an otherwise successful login and require user action.</li>
+</ul>
                 </section>
             </div>
         </main>

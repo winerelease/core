@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -127,7 +127,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/ModuleInterfaces/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/ModuleInterfaces/index.html" class="nav-link active">
                                             Module interfaces
                                         </a>
                                     </li>
@@ -209,10 +209,42 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="profile-interface">Profile interface</h1>
+<p>Modules that want the Core to identify the module as Profile-capable must provide a class which implements
+<code>\Zikula\UsersModule\ProfileModule\ProfileModuleInterface</code>.</p>
+<p>This interface requires:</p>
+<pre><code class="language-php">/**
+ * Display a module-defined user display name (e.g. set by the user) or display the uname as defined by the UserModule
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getDisplayName($userId = null): string;
+
+/**
+ * Get the url to a user's profile.
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getProfileUrl($userId = null): string;
+
+/**
+ * Get the avatar image for a given user.
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getAvatar($userId = null, array $parameters = []): string;
+
+/**
+ * Return the name of the providing bundle.
+ */
+public function getBundleName(): string;</code></pre>
+<p>These methods are used in the Core's twig filters - <code>userAvatar</code>, <code>profileLinkByUserId</code> and <code>profileLinkByUserName</code>.</p>
                 </section>
             </div>
         </main>

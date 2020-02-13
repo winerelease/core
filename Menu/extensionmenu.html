@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -162,7 +162,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Menu/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Menu/index.html" class="nav-link active">
                                             Menus
                                         </a>
                                     </li>
@@ -209,10 +209,30 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="extensionmenu">ExtensionMenu</h1>
+<p>The ExtensionMenu system is a method to store menus that the extension can utilize in various User Interfaces.
+In conjunction with the twig function <code>{{ knp_menu_render() }}</code>.</p>
+<p>The ExtensionMenu class must implement <code>\Zikula\MenuModule\ExtensionMenu\ExtensionMenuInterface</code>. The menu class should
+be placed in a <code>Menu</code> directory at the root of the module. Symfony's autowiring and autoconfiguration will take care
+of the required tagging, so there is nothing further to do.</p>
+<p>Currently, ExtensionMenuCollector directly supports three types of menus: <code>admin</code>, <code>user</code>, <code>account</code> (please use the
+constants defined in <code>ExtensionMenuInterface</code>). However, <em>any</em>
+type of menu can be created. For example, a module could create a <code>bar</code> type of menu and use the Collector service to
+collect them and utilize them in the module.</p>
+<p>See the <code>ExtensionMenuInterface</code> and <code>ExtensionMenuCollector</code> and examples in all system modules for more information.</p>
+<h2 id="general-structure">General structure</h2>
+<p>Menus in the module's ExtensionMenu should be structured like so:</p>
+<pre><code class="language-php">    $menu = $this-&gt;factory-&gt;createItem('fooAdminMenu');
+    if ($this-&gt;permissionApi-&gt;hasPermission($this-&gt;getBundleName() . '::', '::', ACCESS_ADMIN)) {
+        $menu-&gt;addChild('list', [
+            'route' =&gt; 'zikulafoomodule_menu_list',
+        ])-&gt;setAttribute('icon', 'fas fa-list');
+    }</code></pre>
+<p>The <code>icon</code> attribute is a FontAwesome icon identifier. </p>
+<h2 id="knpmenubundle">KnpMenuBundle</h2>
+<p>While it is true that system fully utilizes the KnpMenuBundle system, <strong>it is not required</strong> to manually tag and provide
+a menu alias for the ExtensionMenu like you might do for another Knp menu you create for your module. However, you
+<em>could</em> do so if you have need to use the menu elsewhere in your module.</p>
                 </section>
             </div>
         </main>

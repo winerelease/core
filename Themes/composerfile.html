@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -167,7 +167,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link active">
                                             Themes
                                         </a>
                                     </li>
@@ -209,10 +209,39 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="theme-composer-file">Theme composer file</h1>
+<p>Filename: <code>composer.json</code></p>
+<p>Status: Required</p>
+<p>Description: define the extension and various features and capabilities. Specific keys are required and others are optional.
+The composer.json file is also used by composer and packagist to enable package installation.</p>
+<p>Please see the <a href="https://getcomposer.org/doc/04-schema.html">Official JSON Schema</a> for full details on most items</p>
+<ul>
+<li>name: (required) can be anything, but typically <code>&lt;vendor&gt;/&lt;name&gt;-&lt;type&gt;</code></li>
+<li>version: (required) must adhere to <a href="http://semver.org">semver requirements</a>.</li>
+<li>description: (required) a one sentence description of the extension (translatable)</li>
+<li>type: (required) zikula-theme</li>
+<li>license: (required) License name (string) or an array of license names (array of strings) under which the extension
+is provided. You must use the standardized identifier acronym for the license as defined by
+<a href="http://spdx.org/licenses/">Software Package Data Exchange</a></li>
+<li>authors: (optional but recommended) an array of objects indicating author or group information</li>
+<li>autoload: (required) object defining psr-4 namespace object</li>
+<li>require: (required) object defining bundle dependencies</li>
+<li>extra: (required) the zikula object with required keys
+<ul>
+<li>zikula: (required)</li>
+<li>core-compatibility: (required) a <a href="https://getcomposer.org/doc/01-basic-usage.html#package-versions">version compatibility string</a> defining core compatibility</li>
+<li>class: (required) the fully qualified name of the Bundle class</li>
+<li>displayname: (required) the common name for the bundle (translatable)</li>
+<li>capabilities: (required if controllers are used) an object of objects defining capabilities of the extension
+<ul>
+<li>user:</li>
+<li>theme: true|false</li>
+<li>admin:</li>
+<li>theme: true|false</li>
+<li>icon: full fontawesome css class</li>
+</ul></li>
+</ul></li>
+</ul>
                 </section>
             </div>
         </main>

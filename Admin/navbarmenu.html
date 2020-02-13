@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,38 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="bootstrap-navbar-menus">Bootstrap NavBar Menus</h1>
+<ol>
+<li>Standard NavBar (list-style) Menu</li>
+<li>Drop Menu</li>
+</ol>
+<h2 id="standard-navbar-list-style-menu">Standard NavBar (list-style) Menu</h2>
+<p>A normal menu as created in the <a href="menus.html">Dynamic menus</a> document can be easily converted to a list-style
+NavBar menu by editing the <em>menu root</em> and adding one option: &quot;childrenAttributes&quot; and give it
+a value of <code>{"class":"nav navbar-nav"}</code> (include the braces <code>{}</code> and use double-qutoes.)</p>
+<p>Then, in the BlocksModule create a (or move the existing) block to the 'navbar' position
+(hopefully obviously, your theme needs to support this - the core's Bootstrap theme does so).</p>
+<p>Your menu should now work as expected in the navbar.</p>
+<h2 id="drop-menu">Drop Menu</h2>
+<p>This menu is slightly less intuitive. You must create a structure like so:</p>
+<pre><code>Menu Root ("MyDropMenu")
+    |
+    |
+    ––– Displayed "Parent" (first child) ("Click Here")
+            |
+            -- Child 1 (link)
+            -- Child 2 (link)
+            -- etc...</code></pre>
+<p>As above for the standard NavBar, you must set the <code>childrenAttributes</code> as
+<code>{"class":"nav navbar-nav"}</code> on the Menu root.</p>
+<p>On the displayed parent (the actual first child)
+you must set an option for <code>attributes</code> with a value of <em>at least</em> <code>{"dropdown":true}</code>. You can
+add an icon or other attributes as you need like so: <code>{"icon":"fas fa-list","dropdown":true}</code></p>
+<p>For each grand-child, no special options are required. options like <em>route</em> or <em>URI</em> and
+<em>attributes</em> are still functional.</p>
+<p><strong>PLEASE NOTE:</strong> Bootstrap <em>does not support</em> multi-level menus (great-grand-children, etc)
+and therefore neither does this method in Zikula. While there may be methods to implement
+something to this effect, it is currently not implemented here.</p>
                 </section>
             </div>
         </main>

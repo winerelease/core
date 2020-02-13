@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,22 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="using-the-php-and-symfonys-intl-classes">Using the PHP and Symfony's Intl classes</h1>
+<p>Zikula expects PHP's <a href="http://www.php.net/manual/en/book.intl.php">intl extension</a> to be installed to facilitate internationalization functions within the code.</p>
+<p>If it is installed properly in your PHP build, you can search your <code>phpinfo</code> output and you should find something like
+<code>—enable-intl</code> in the Configure Command and <code>Internationalization support =&gt; enabled</code> in the output.</p>
+<p>If these are NOT found, then the <a href="https://symfony.com/doc/current/components/intl.html">Intl component</a> from Symfony
+will be used instead as a polyfill. These will enable the functions to work without error, but the functions will only work for the <code>en</code> locale.</p>
+<p>Support in enabling this PHP extension should be obtained through your web provider. This is not something Zikula can help with. </p>
+<p>Symfony's <code>Intl</code> class is used as a wrapper to access</p>
+<ul>
+<li>Country Names</li>
+<li>Currencies</li>
+<li>Language and Script Names</li>
+<li>Locales</li>
+<li>Timezones</li>
+</ul>
+<p>For further information read <a href="https://symfony.com/doc/current/components/intl.html#accessing-icu-data">Accessing ICU Data</a>.</p>
                 </section>
             </div>
         </main>

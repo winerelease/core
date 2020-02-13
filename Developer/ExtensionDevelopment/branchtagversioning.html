@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -147,7 +147,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/ExtensionDevelopment/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/ExtensionDevelopment/index.html" class="nav-link active">
                                             Extension Development
                                         </a>
                                     </li>
@@ -209,10 +209,28 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="branch-tag-and-versioning">Branch, tag and versioning</h1>
+<p>Modules must be released with versioning that represents the a.b.c <a href="https://semver.org/">Semantic Versioning</a>. For example 2.3.0, 2.3.1 … 2.3.12 and so on. Where the c is the maintenance (bugfix) version.</p>
+<p>If you maintain just one version series, then you should have just the master branch. e.g.</p>
+<pre><code>master - Your development branch</code></pre>
+<p>If you maintain more than one bugfix branch (e.g. 2.3 and 2.4 series) as well as a current new version, you must name them like this:</p>
+<pre><code>2.3 - maintenance branch of 2.3.x series
+2.4 - maintenance branch of 2.4.x series
+master - latest development branch (could be 2.5, 2.6 or even 3.0 doesn’t matter)</code></pre>
+<p>When tagging releases you must tag them as the final release version. So 2.3.1 would be tagged 2.3.1, 2.4.0 would be tagged 2.4.0. You can optionally prefix it with a ‘v’, e.g. v2.3.0 but that is entirely optional. Remember Semantic Versioning allows a.b.c-d so you can also tag beta/rc releases if you wish, e.g. 2.3.0-beta1.</p>
+<p>When making bug fixes you’d always commit to the lowest branch where the fix should be applied, and then merge up. For example.</p>
+<pre><code>git checkout 2.3
+# commit a set of fixes
+
+git checkout 2.4
+git merge 2.3 # merges the 2.3 branch to current checkout (2.4)
+git checkout master
+git merge 2.4 # merges the 2.3 branch to current checkout (master)</code></pre>
+<p>Renaming branches is as simple as follows. Let’s rename release-3 to 3.4:</p>
+<pre><code>git checkout -b 3.4 release-3
+git push origin 3.4
+git branch -D release-3
+git push origin :release-3</code></pre>
                 </section>
             </div>
         </main>

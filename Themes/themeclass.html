@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -167,7 +167,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link active">
                                             Themes
                                         </a>
                                     </li>
@@ -209,10 +209,13 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="theme-class">Theme class</h1>
+<p>Filename: <code>&lt;Vendor&gt;&lt;Name&gt;Theme.php</code></p>
+<p>Status: Required</p>
+<p>Must: <code>extends Zikula\ExtensionsModule\AbstractTheme</code></p>
+<p>Description: This class establishes the extension in the Symfony ecosystem as a <strong>Bundle</strong>.
+See the parent classes for more information. This class does not require any content, though overriding certain
+parent methods can provide for additional customization.</p>
                 </section>
             </div>
         </main>

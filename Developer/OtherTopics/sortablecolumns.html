@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -142,7 +142,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link active">
                                             Other topics
                                         </a>
                                     </li>
@@ -209,10 +209,44 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="sortable-columns">Sortable Columns</h1>
+<p>SortableColumns is a zikula component to help manage data table column headings that can be clicked to sort the data.</p>
+<h2 id="controller">Controller</h2>
+<pre><code class="language-php">use Zikula\Component\SortableColumns\SortableColumns;
+
+// in controller method
+$orderBy = $request-&gt;query-&gt;get('orderby', 'pageid');
+$currentSortDirection = $request-&gt;query-&gt;get('sdir', Column::DIRECTION_DESCENDING);
+
+$sortableColumns = new SortableColumns($this-&gt;get('router'), 'zikulapagesmodule_admin_index', 'orderby', 'sdir');
+$sortableColumns-&gt;addColumn(new Column('pageid')); // first added is automatically the default
+$sortableColumns-&gt;addColumn(new Column('title'));
+$sortableColumns-&gt;addColumn(new Column('cr_date'));
+$sortableColumns-&gt;setOrderBy($sortableColumns-&gt;getColumn($orderBy), $currentSortDirection);
+$sortableColumns-&gt;setAdditionalUrlParameters(array(---
+currentMenu: developer-overview
+---
+
+    'language' =&gt; isset($filterData['language']) ? $filterData['language'] : null,
+));
+
+$templateParameters['sort'] = $sortableColumns-&gt;generateSortableColumns();</code></pre>
+<h2 id="twig-template">Twig template</h2>
+<pre><code class="language-twig">&lt;tr&gt;
+    &lt;th&gt;&lt;a class="{{ sort.pageid.class }}" href="{{ sort.pageid.url }}"&gt;{% trans %}ID{% endtrans %}&lt;/a&gt;&lt;/th&gt;
+    &lt;th&gt;&lt;a class="{{ sort.title.class }}" href="{{ sort.title.url }}"&gt;{% trans %}Title{% endtrans %}&lt;/a&gt;&lt;/th&gt;
+    &lt;th&gt;&lt;a class="{{ sort.cr_date.class }}" href="{{ sort.cr_date.url }}"&gt;{% trans %}Created{% endtrans %}&lt;/a&gt;&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+<p>Additional shortcut methods are available:</p>
+<ul>
+<li><code>$sortableColumns-&gt;addColumns()</code></li>
+<li><code>$sortableColumns-&gt;setOrderByFromRequest()</code></li>
+</ul>
+<pre><code class="language-php">$sortableColumns-&gt;addColumns([new Column('pageid'), new Column('title'), new Column('cr_date')]);
+$sortableColumns-&gt;setOrderByFromRequest($request);</code></pre>
+<p>If needed, you can obtain the values of the orderByFields (e.g. for a DB query) using:</p>
+<pre><code>$sortableColumns-&gt;getSortColumn()-&gt;getName()
+$sortableColumns-&gt;getSortDirection()</code></pre>
                 </section>
             </div>
         </main>

@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,20 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="ui-based-translations">UI-based translations</h1>
+<p>Zikula 3 introduces two new abilities for creating and changing translations.</p>
+<p>Both can be accessed in the Settings module at the localisation settings if the environment is set to <code>dev</code>.</p>
+<h2 id="edit-in-place-functionality">Edit in place functionality</h2>
+<p>Allows to edit translations directly in the context of a page (<a href="https://php-translation.readthedocs.io/en/latest/_images/edit-in-place-demo.gif">demo</a>).</p>
+<p>Edit in place has some limitations you should be aware of:</p>
+<ul>
+<li>It always works for the current locale only; so in order to update translation for multiple languages you need to switch your site's language.</li>
+<li>It can only work with one single configuration. By default this is set to <code>zikula</code>, so it works for the core. If you want to use it for a module or a theme, you need to lookup the corresponding configuration name (e.g. <code>zikulabootstraptheme</code>) in <code>/config/dynamic/generated.yml</code> and use this in <code>/config/packages/dev/php_translation.yaml</code> at <code>translation.edit_in_place.config_name</code>.</li>
+</ul>
+<p>You can utilise HTML formatting options when your translation keys end with the <code>.html</code> suffix (<a href="https://php-translation.readthedocs.io/en/latest/_images/demo-html-editor.png">screenshot</a>).</p>
+<h2 id="web-ui-provides-a-web-interface-to-add-edit-and-remove-translations">Web UI: provides a web interface to add, edit and remove translations</h2>
+<p>It features a dashboard page (<a href="https://php-translation.readthedocs.io/en/latest/_images/webui-dashboard.png">screenshot</a>) for the overall progress. When you dive into a translation domain you can use a form to change the translation messages (<a href="https://php-translation.readthedocs.io/en/latest/_images/webui-page.png">screenshot</a>).</p>
+<p>The web UI is able to handle multiple configurations and target languages.</p>
                 </section>
             </div>
         </main>

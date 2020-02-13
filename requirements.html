@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -57,7 +57,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/requirements.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/requirements.html" class="nav-link active">
                                             Requirements
                                         </a>
                                     </li>
@@ -209,10 +209,20 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="requirements">Requirements</h1>
+<ul>
+<li>Zikula Core requires PHP &gt;= 7.2.5 (same as Symfony 5)</li>
+<li>Additional server considerations can be found on <a href="https://symfony.com/doc/current/setup.html#technical-requirements">the Symfony site</a>.</li>
+<li>Zikula requires more memory than typical to install. You should set your memory limit in <code>php.ini</code>
+to 128 MB for the installation process.</li>
+<li>Zikula requires that <code>date.timezone</code> be set in the <code>php.ini</code> configuration file (or <code>.htaccess</code>).</li>
+<li>Zikula requires <code>AllowOverride All</code> and the <code>mod_rewrite</code> module (be aware the Apache 2.3.9+ has changed
+the default setting for <code>AllowOverride</code> to <code>None</code>).</li>
+<li>Zikula also requires other php extensions and configurations. These are checked during the installation
+process and if there are problems, you will be notified. If you discover errors, check with your hosting
+provider on how to rectify these issues. Typically, they will require changing the <code>php.ini</code> file or
+possibly reconfiguring the php installation by your provider.</li>
+</ul>
                 </section>
             </div>
         </main>

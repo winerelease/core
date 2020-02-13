@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link active">
                                             APIs
                                         </a>
                                     </li>
@@ -209,10 +209,59 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="capabilityapi">CapabilityApi</h1>
+<p>classname: <code>\Zikula\ExtensionsModule\Api\CapabilityApi</code>.</p>
+<p>This class defines and tests for the capabilities of an extension.</p>
+<p>The class makes the following methods available:</p>
+<pre><code class="language-php">/**
+ * Get all the Extensions with a requested capability.
+ *
+ * @return ExtensionEntity[]
+ */
+public function getExtensionsCapableOf(string $capability): iterable;
+
+/**
+ * Determine if extension is capable of requested capability.
+ * Returns capability array if capability is true.
+ *
+ * @return array|bool capability definition or false
+ */
+public function isCapable(string $extensionName, string $requestedCapability);
+
+/**
+ * Get the capabilities array of an extension.
+ */
+public function getCapabilitiesOf(string $extensionName): array;</code></pre>
+<p>The class is fully tested.</p>
+<h2 id="capabilityapiinterface">CapabilityApiInterface</h2>
+<p>classname: <code>\Zikula\ExtensionsModule\Api\ApiInterface\CapabilityApiInterface</code>.</p>
+<p>This interface defines several constants for use in the Core and Extensions. The <strong>strings</strong> should be used
+when defining the capabilities array in an extension's <code>composer.json</code> file.</p>
+<pre><code class="language-php">CapabilityApiInterface::CATEGORIZABLE = 'categorizable';
+CapabilityApiInterface::USER = 'user';
+CapabilityApiInterface::ADMIN = 'admin';</code></pre>
+<p>See the interface class for more details.</p>
+<h2 id="defining-capabilities-in-an-extension">Defining capabilities in an extension</h2>
+<p>The capabilities array is defined in an extension's <code>composer.json</code> file as an &quot;array of arrays&quot;.
+Although no extension would implement every capability, here is a full example of capabilities tested within the Core.</p>
+<pre><code class="language-yaml">extra": {
+    "zikula": {
+        "url": "
+        "capabilities": {
+            "admin": {
+                "route": "acmefoomodule_admin_index",
+                "icon": "fas fa-rocket"
+            },
+            "user": {
+                "route": "acmefoomodule_user_index"
+            },
+            "categorizable": {
+                "entities": ["Acme\\FooModule\\Entity\\FooEntity", "Acme\\FooModule\\Entity\\BarEntity"]
+            }
+        }
+    }
+}</code></pre>
+<p>Third party extensions are welcome to add custom capabilities and test for those as required.</p>
                 </section>
             </div>
         </main>

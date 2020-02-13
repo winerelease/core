@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link active">
                                             APIs
                                         </a>
                                     </li>
@@ -209,10 +209,34 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="blockapi">BlockApi</h1>
+<p>classname: <code>\Zikula\BlocksModule\Api\BlockApi</code>.</p>
+<p>The BlockApi helps with the management of Blocks.</p>
+<p>The class makes the following methods available:</p>
+<pre><code class="language-php">/**
+ * Get an unfiltered array of block entities that have been assigned to a block position.
+ */
+public function getBlocksByPosition(string $positionName): array;
+
+/**
+ * Create an instance of a the block Object given a 'bKey' string like AcmeFooModule:Acme\FooModule\Block\FooBlock
+ * which is the common module name and the FullyQualifiedClassName of the block.
+ */
+public function createInstanceFromBKey(string $bKey): BlockHandlerInterface;
+
+/**
+ * Get an array of BlockTypes that are available by scanning the filesystem.
+ * Optionally only retrieve the blocks of one module.
+ *
+ * @return array [[ModuleName:FqBlockClassName =&gt; ModuleDisplayName/BlockDisplayName]]
+ */
+public function getAvailableBlockTypes(ExtensionEntity $moduleEntity = null): array;
+
+/**
+ * Get an alphabetically sorted array of module names indexed by id that provide blocks.
+ */
+public function getModulesContainingBlocks(): array;</code></pre>
+<p>The class is fully tested.</p>
                 </section>
             </div>
         </main>

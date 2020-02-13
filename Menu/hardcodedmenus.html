@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -162,7 +162,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Menu/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Menu/index.html" class="nav-link active">
                                             Menus
                                         </a>
                                     </li>
@@ -209,10 +209,16 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="hard-coded-menus">Hard coded menus</h1>
+<p>If your custom module uses a menu that never changes or you would like to programatically create
+a menu and you would like to make it available within your templates or via a block, you can create
+your own as a PHP class.</p>
+<p>The <a href="https://symfony.com/doc/master/bundles/KnpMenuBundle/index.html#method-a-the-easy-way-yay">KnpMenuBundle Docs</a>
+outline the basic method and there is no need to repeat that here.</p>
+<p>If you wish to load the menu from a Zikula Menu block, set the <em>Menu Name</em> to
+<code>MyCustomModule:ClassName:methodName</code>. Or you can load the menu from within a template as the
+docs above state <code>{{ knp_menu_render('MyCustomModule:ClassName:methodName') }}</code></p>
+<p>Your menu class must be located in the <code>/Menu</code> directory at the root of the module.</p>
                 </section>
             </div>
         </main>

@@ -37,12 +37,12 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/features.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/features.html" class="nav-link active">
                                             Features
                                         </a>
                                     </li>
@@ -209,10 +209,105 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="features-of-zikula">Features of Zikula</h1>
+<h2 id="core-system">Core system</h2>
+<h3 id="foundation">Foundation</h3>
+<ul>
+<li>Based on Symfony 5.x which provides stability, continuity and extensibility</li>
+<li>Uses Doctrine for persisting data</li>
+<li>Uses Twig as template engine</li>
+<li>Uses SwiftMailer for email handling</li>
+</ul>
+<h3 id="extensions-and-bundles">Extensions and bundles</h3>
+<ul>
+<li>Modular development system
+<ul>
+<li>Modules are bundles which can be installed/uninstalled during runtime</li>
+</ul></li>
+<li>Hook system for connecting module features with each other
+<ul>
+<li>Hooks are a dynamic event dispatcher, allowing the administrator to choose which listeners respond to events.</li>
+</ul></li>
+</ul>
+<h3 id="themes-and-templating">Themes and templating</h3>
+<ul>
+<li>Twig-based theme engine for site-wide theming
+<ul>
+<li>Themes are bundles which can be installed/uninstalled during runtime</li>
+</ul></li>
+<li>Integration of de-facto frontend technologies
+<ul>
+<li>Twitter Bootstrap</li>
+<li>Font Awesome</li>
+<li>jQuery</li>
+</ul></li>
+</ul>
+<h3 id="users-and-security">Users and security</h3>
+<ul>
+<li>Users and Groups management
+<ul>
+<li>OAuth integration</li>
+<li>Extensible/customizable User authorization API</li>
+</ul></li>
+<li>Dynamic user rights/permissions management by group</li>
+<li>Included add-ons
+<ul>
+<li>OAuth module (allows login via Facebook, Github, Google or LinkedIn Credentials)</li>
+<li>Profile module (user profile information)</li>
+<li>Legal module (TOS, Age Check, etc)</li>
+</ul></li>
+</ul>
+<h3 id="administration">Administration</h3>
+<ul>
+<li>Centralized site administration interface</li>
+<li>Multi-language &amp; translation support</li>
+<li>Centralized category management</li>
+<li>Dynamic and flexible content block creation</li>
+<li>Centralized search functionality</li>
+<li>Menu system based on KnpMenu</li>
+</ul>
+<h3 id="developer-gems">Developer gems</h3>
+<ul>
+<li>Centralized category assignments by entity</li>
+<li>Several distinct APIs for feature utilization</li>
+<li>Imagine image manipulation library integration</li>
+<li>CLI based module skeleton generator</li>
+<li>Multi-Sites capability (one core-base, multiple custom DB)</li>
+</ul>
+<h2 id="further-components">Further components</h2>
+<h3 id="modulestudio-most">ModuleStudio (MOST)</h3>
+<ul>
+<li>Model-Driven Software Development tool
+<ul>
+<li>rapid prototyping</li>
+<li>easy customization</li>
+<li>quick updating</li>
+</ul></li>
+<li>Creates models describing your extensions</li>
+<li>Generates the Zikula module implementation</li>
+<li>Read more at the <a href="https://modulestudio.de/en">project's website</a></li>
+</ul>
+<h3 id="community-driven-modules">Community Driven Modules</h3>
+<ul>
+<li><a href="https://github.com/zikula-modules/Pages">Pages</a> (Basic content pages)</li>
+<li><a href="https://github.com/zikula-modules/Content">Content</a> (Advanced content pages)</li>
+<li><a href="https://github.com/zikula-modules/Scribite">Scribite</a> (Integration of various WYSIWYG editors)</li>
+<li><a href="https://github.com/zikula-modules/MediaModule">MediaModule</a> (Media management)</li>
+<li><a href="https://github.com/Portugao/News">News</a> (Blog system)</li>
+<li><a href="https://github.com/zikula-modules/MultiHook">MultiHook</a> (Abbreviations, acronyms, autolinks, censor)</li>
+<li><a href="https://github.com/zikula-modules/DizkusModule">Dizkus</a> (Forum)</li>
+<li><a href="https://github.com/zikula-ev/Formicula">Formicula</a> (Contact form generator)</li>
+<li><a href="https://github.com/Guite/Piwik">Piwik</a> (Piwik/Matomo integration)</li>
+</ul>
+<h4 id="legacy-modules-not-yet-converted-but-intended-to-be-done">Legacy Modules not yet converted but intended to be done</h4>
+<ul>
+<li><a href="https://github.com/zikula-modules/Multisites">Multisites</a> (Multisites system)</li>
+<li><a href="https://github.com/craigh/PostCalendar">PostCalendar</a> (Calendar and event system)</li>
+<li><a href="https://github.com/craigh/Tag">Tag</a> (Tagging hook)</li>
+<li><a href="https://github.com/zikula-modules/EZComments">EZComments</a> (Comments hook)</li>
+<li>Captcha (Anti-spam hook)</li>
+<li>Several others...</li>
+</ul>
                 </section>
             </div>
         </main>

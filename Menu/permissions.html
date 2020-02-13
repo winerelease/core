@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -162,7 +162,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Menu/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Menu/index.html" class="nav-link active">
                                             Menus
                                         </a>
                                     </li>
@@ -209,10 +209,18 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="permissions">Permissions</h1>
+<p>The permission schema for <strong>dynamic</strong> menu items is <code>ZikulaMenuModule::id</code>.</p>
+<p>In order to hide menu items from user groups, you must create a new permission rule like:</p>
+<pre><code>Unregistered    ZikulaMenuModule::id    ::9     No access</code></pre>
+<p>you can add multiple ids to the same rule like so:</p>
+<pre><code>Unregistered    ZikulaMenuModule::id    ::(9|11)     No access</code></pre>
+<p>The <code>ID</code> of any given menu item is available in the MenuModule where the item was created.</p>
+<p>All children of the menu item are affected by the same permission rule.</p>
+<p>The permission is not based on its placement in a <strong>block</strong> but rather its placement <strong>anywhere</strong>.</p>
+<p>The rule checks for access to <code>ACCESS_READ</code> level permissions.</p>
+<p>As always, the effectiveness of a permission rule is affected by its order in the rules list. Higher placement has
+higher priority. Be sure to place this rule above other rules granting general access to items.</p>
                 </section>
             </div>
         </main>

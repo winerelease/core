@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,21 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="translation-terminology">Translation terminology</h1>
+<p>The technology for translations used in this guide is simple - anywhere in project we use English strings and English descriptions.
+These are translated to other language stored in files or database and loaded on demand instead of English strings. </p>
+<h2 id="terminology">Terminology</h2>
+<ul>
+<li><strong>Symfony Translator</strong> - Symfony gettext technology used for translations </li>
+<li><strong>message</strong> -  in basic it is an translation array element; for example: 'English string' =&gt; 'Translated string'</li>
+<li><strong>domain</strong> - An optional way to organize messages into groups (e.g. <code>admin</code>, <code>navigation</code>, <code>validators</code>; default value is <code>messages</code>)</li>
+<li><strong>catalogue</strong> - Gettext way to organize messages into groups (LC_MESSAGES, LC_TYPE, LC_ALL) </li>
+<li><strong>locale</strong> - The locale that the translations are for (e.g. <code>en_GB</code>, <code>en</code>, etc);</li>
+<li><strong>loader</strong> - How Symfony/Zikula should load and parse the file (e.g. <code>xlf</code>, <code>php</code>, <code>yml</code>, <code>po</code>, <code>mo</code>, etc.). </li>
+</ul>
+<p>For more information please refer to <a href="https://symfony.com/doc/current/translation.html">Symfony docs</a>.</p>
+<h2 id="translation-domains">Translation domains</h2>
+<p>Earlier we used the bundle name as translation domain. The new translation system uses different configurations for different bundles though. You are encouraged to use multiple translation domains now. They should cover different semantical topics and act as a context for translators, like for example <code>mail</code>, <code>messages</code>, <code>navigation</code>, <code>validators</code> and <code>admin</code>).</p>
                 </section>
             </div>
         </main>

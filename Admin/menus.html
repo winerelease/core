@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,44 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="dynamic-menus">Dynamic menus</h1>
+<p>A Dynamic menu is a menu that is created via the User Interface in the MenuModule. There is
+great flexibility with this system, such that menu of any type can be created and placed in your
+site anywhere you choose.</p>
+<h2 id="create-a-menu">Create a menu</h2>
+<p>In order to create a menu, you must first create a <em>menu root</em>. From the main MenuModule admin
+page, select &quot;New Menu&quot; from the menu bar. Choose a unique <strong>title</strong> - this title will never be
+displayed but is used to reference your menu within the application. For now, leave the options
+blank and we will return to this later. Submit your new root. Your are returned to the menu list
+and your new root is listed therein with three action choices: Edit Children, Edit Menu Root
+and Delete.</p>
+<h3 id="edit-children">Edit Children</h3>
+<p>You will notice that a 'dummy child' has been auto-created for you. This is simply to allow
+you to easily add more children via the context menu (right-click on the dummy child to view
+the context menu). First <em>edit</em> the dummy child to create your first item. Rename it to &quot;Google&quot;
+and <em>add</em> an <strong>URI</strong> option - enter <code>https://www.google.com/</code> as the value. Add another option
+and select <strong>attributes</strong>. Set the value to <code>{"icon": "fas fa-google"}</code> (include the braces <code>{}</code>
+and also notice that double-quotes are used).</p>
+<p>Note: The value of <strong>attributes</strong> as well as several other options (indicated with an asterisk *)
+must be a json_encoded string of option key-value pairs. Other options (indicated by a plus +)
+must have a string-boolean e.g. &quot;true&quot; or &quot;false&quot; (without the quotes). This will be converted
+to true boolean.</p>
+<p>As many options as needed can be added via this interface. Most common will be URI or route.</p>
+<p>Now you can add additional menu children by right clicking your <em>Google</em> child and selecting
+&quot;Add sibling item (after selected)&quot; from the context menu and repeating the process above. Add
+at least two more children.</p>
+<p>You now have a &quot;standard&quot; menu that you can utilize anywhere on your site via the BlocksModule.</p>
+<h3 id="create-a-menu-block">Create a menu block</h3>
+<p>Visit the BlocksModule admin interface and select &quot;Create new block&quot; from the admin menu. Select
+&quot;MenuModule/Menu&quot; from the choices. Give your block the title &quot;Test Menu&quot; and leave the
+description blank. For Menu Name, you must enter the <em>unique title</em> you created as your menu
+root above. For &quot;options&quot; enter
+<code>{"template": "@ZikulaMenuModule/Override/bootstrap_fontawesome.html.twig"}</code>.</p>
+<p>Setting the template as this value allows automatically uses all the bootstrap and fontawesome
+goodness that is pre-installed with Zikula. You are allowed to create and utilize your own
+templates as needed in your custom situation. More on that later. Select the &quot;Left&quot; or &quot;Right&quot;
+Positions for now as appropriate for your theme (navbar modules will be discussed later).</p>
+<p>You new menu should be seen in the location you created it.</p>
                 </section>
             </div>
         </main>

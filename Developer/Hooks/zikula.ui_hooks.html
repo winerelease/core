@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -122,7 +122,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Hooks/index.html" class="nav-link active">
                                             Hooks
                                         </a>
                                     </li>
@@ -209,10 +209,53 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="ui-hooks--display-hooks">UI hooks / display hooks</h1>
+<p>The following is a list of valid hook types.</p>
+<h2 id="ui_hooks-category">'ui_hooks' category</h2>
+<p>See <code>\Zikula\Bundle\HookBundle\Category\UiHooksCategory</code>.</p>
+<pre><code class="language-php">public const NAME = 'ui_hooks';
+
+/**
+ * Display hook for view/display templates
+ * dispatches \Zikula\Bundle\HookBundle\Hook\DisplayHook
+ */
+public const TYPE_DISPLAY_VIEW = 'display_view';
+
+/**
+ * Display hook for create/edit forms
+ * dispatches \Zikula\Bundle\HookBundle\Hook\DisplayHook
+ */
+public const TYPE_FORM_EDIT = 'form_edit';
+
+/**
+ * Display hook for delete dialogues
+ * dispatches \Zikula\Bundle\HookBundle\Hook\DisplayHook
+ */
+public const TYPE_FORM_DELETE = 'form_delete';
+
+/**
+ * Used to validate input from a create/edit form
+ * dispatches \Zikula\Bundle\HookBundle\Hook\ValidationHook
+ */
+public const TYPE_VALIDATE_EDIT = 'validate_edit';
+
+/**
+ * Used to validate input from a delete form
+ * dispatches \Zikula\Bundle\HookBundle\Hook\ValidationHook
+ */
+public const TYPE_VALIDATE_DELETE = 'validate_delete';
+
+/**
+ * Perform the final update actions for a create/edit form
+ * dispatches \Zikula\Bundle\HookBundle\Hook\ProcessHook
+ */
+public const TYPE_PROCESS_EDIT = 'process_edit';
+
+/**
+ * Perform the final delete actions for a delete form
+ * dispatches \Zikula\Bundle\HookBundle\Hook\ProcessHook
+ */
+public const TYPE_PROCESS_DELETE = 'process_delete';</code></pre>
                 </section>
             </div>
         </main>

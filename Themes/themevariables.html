@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -167,7 +167,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link active">
                                             Themes
                                         </a>
                                     </li>
@@ -209,10 +209,25 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="theme-variables">Theme variables</h1>
+<p>File path: <code>/Resources/config/variables.yaml</code></p>
+<p>The contents of this file can vary. At the very least, it can be a list of variables and values
+that will be passed along to the theme engine as global variables within your theme, e.g.:</p>
+<pre><code class="language-twig">{{ themevars.&lt;variablename&gt; }}</code></pre>
+<p>Additionally, dynamically created forms (using the symfony form engine) can be used by creating a yml definition like so:</p>
+<pre><code class="language-yaml">home_template:
+    default_value: 3col_w_centerblock
+    type: 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+    options:
+      label: 'Template for home page'
+      choices:
+        'One column': 1col
+        'Two columns': 2col
+        'Two columns with centerblock': 2col_w_centerblock
+        'Three columns': 3col
+        'Three columns with centerblock': 3col_w_centerblock</code></pre>
+<p>These pseudo-forms are created an available to the site admin through the Theme Module UI. The selected value then
+becomes available to templates as referenced above.</p>
                 </section>
             </div>
         </main>

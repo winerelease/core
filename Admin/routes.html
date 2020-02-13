@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,24 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="routes-and-custom-urls">Routes and custom urls</h1>
+<h2 id="changing-module-urls">Changing module urls</h2>
+<p>The urls of a module can be customized by the site admin. For this example we will use the following sample route:</p>
+<p><code>/theme/admin/config/</code></p>
+<p>The first part of this route (<code>/theme</code>) is called the prefix and is configurable from within the Extensions module.
+Click on the wrench icon in the module's row and change the value of the <strong>Module URL</strong> to your preference. However,
+there are restrictions on this value; you cannot select a value that is the same as any subdirectory within your
+Zikula installation. So, at least the following names are not allowed: <code>app</code>, <code>bin</code>, <code>docs</code>, <code>lib</code>, <code>modules</code>,
+<code>system</code>, <code>themes</code>, <code>var</code>, <code>vendor</code>, <code>web</code>.</p>
+<h2 id="adding-custom-routes">Adding custom routes</h2>
+<p>The route module allows to add arbitrary rules to the system which are persisted in the database.
+This can be useful for example to:</p>
+<ul>
+<li>define redirects for obsolete urls</li>
+<li>add short urls pointing to more complex ones</li>
+</ul>
+<p>Note for managing custom routes it is recommended to read the <a href="https://symfony.com/doc/current/routing.html">Routing docs</a>
+of Symfony.</p>
                 </section>
             </div>
         </main>

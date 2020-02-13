@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -167,7 +167,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Themes/index.html" class="nav-link active">
                                             Themes
                                         </a>
                                     </li>
@@ -209,10 +209,33 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="theme-configuration">Theme configuration</h1>
+<p>File: <code>/Resources/config/theme.yaml</code></p>
+<p>Status: Required</p>
+<p>Must: define a 'master' realm</p>
+<p>Description: define various 'realms' within a theme. Within a realm, a pattern is defined that is used by regex
+to match the (1) path, (2) route id, or (3) the module name. The realms are matched from top to bottom returning the
+first match (case-insensitive). Therefore, more specific definitions must be higher than general definitions.</p>
+<p>Two additional 'alias' realms may be defined and neither requires a pattern:
+1) Defining an 'admin' realm will be used when <code>@Theme('admin')</code> controller method annotation is detected in the method
+2) Defining a 'home' realm will be used when the path = <code>/</code></p>
+<p>Any block positions in the page's template must be defined here.</p>
+<p>Do not duplicate realm names or later entries will override previous entries</p>
+<h2 id="optional-values">Optional Values</h2>
+<ul>
+<li>bootstrapPath: set a zasset-type path to override the core bootstrap.css - the file is then
+stored in your Theme's <code>Resources/public/css/</code> directory
+<ul>
+<li>e.g.: <code>bootstrapPath: "@ZikulaBootstrapTheme:css/cerulean.min.css"</code></li>
+</ul></li>
+<li>blockWrapping: set a boolean value to indicate whether ALL blocks will be wrapped with a unique
+container <code>&lt;div&gt;</code>
+<ul>
+<li>e.g. <code>blockWrapping: false</code></li>
+<li>default: <code>true</code> (if no parameter is set)</li>
+<li>WARNING: certain core functionalities (e.g. collapseable blocks) require this <code>&lt;div&gt;</code> and break without it.</li>
+</ul></li>
+</ul>
                 </section>
             </div>
         </main>

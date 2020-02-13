@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,31 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="image-manipulation-with-imagine">Image manipulation with Imagine</h1>
+<p>Imagine is implemented in Zikula Core by the installation and pre-configuration of the <a href="https://github.com/liip/LiipImagineBundle">LiipImagineBundle</a>.</p>
+<p>Documentation: <a href="https://symfony.com/doc/current/bundles/LiipImagineBundle/index.html">https://symfony.com/doc/current/bundles/LiipImagineBundle/index.html</a></p>
+<p>Configuration is located at <code>/config/packages/imagine.yaml</code></p>
+<p>In order for the developer to create their own filter(s), one must edit this config file directly.</p>
+<p>Once this is done, use the provided Twig filter to create the images you require.</p>
+<pre><code class="language-twig">&lt;img src="{{ 'images/flowers.jpg'|imagine_filter('my_thumb') }}" /&gt;
+&lt;img src="{{ 'images/logo_with_title.png'|imagine_filter('z100x100') }}" /&gt;</code></pre>
+<p>Zikula Core provides a default cache resolver. By default images are cached to <code>/public/imagine/cache/&lt;filterName&gt;</code>.</p>
+<p>Zikula Core provides a <code>zikula_root</code> loader if it is required to load images from locations other than <code>/public/</code>.</p>
+<p>Use this loader to locate images from the <code>/public/uploads</code> directory:</p>
+<pre><code class="language-yaml"># /config/packages/imagine.yaml
+filter_sets:
+    my_uploads_filter:
+        data_loader: zikula_root
+        jpeg_quality: 75
+        filters:
+            thumbnail: { size: [100, 100], mode: inset }</code></pre>
+<pre><code class="language-twig"># my template
+&lt;img src="{{ 'public/uploads/flowers.jpg'|imagine_filter('my_uploads_filter') }}" /&gt;</code></pre>
+<h2 id="external-resources">External resources</h2>
+<ul>
+<li><a href="https://imagine.readthedocs.io/en/stable/">Imagine docs</a></li>
+<li><a href="https://symfony.com/doc/current/bundles/LiipImagineBundle/index.html">LiipImagineBundle docs</a></li>
+</ul>
                 </section>
             </div>
         </main>

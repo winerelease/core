@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link active">
                                             APIs
                                         </a>
                                     </li>
@@ -209,10 +209,38 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="searchapi">SearchApi</h1>
+<p>classname: <code>\Zikula\SearchModule\Api\SearchApi</code>.</p>
+<p>This class is used to perform a global search.</p>
+<p>The class makes the following methods available:</p>
+<pre><code class="language-php">/**
+ * Perform the search.
+ *
+ * @param string $q             query string to search
+ * @param bool   $firstPage     (optional) is this first search attempt? is so - basic search is performed
+ * @param string $searchType    (optional) search type (default='AND')
+ * @param string $searchOrder   (optional) search order (default='newest')
+ * @param int    $limit         (optional) number of items to return (default value based on Search settings, -1 for no limit)
+ * @param int    $page          (optional) page number (default=1)
+ * @param array  $moduleData    (optional) array of module-provided data from Zikula\SearchModule\SearchableInterface::amendForm
+ *
+ * @return array array of items array and result count
+ */
+public function search(
+    string $q,
+    bool $firstPage = false,
+    string $searchType = 'AND',
+    string $searchOrder = 'newest',
+    int $limit = -1,
+    int $page = 1,
+    array $moduleData = []
+): array;
+
+/**
+ * Log search query for search statistics.
+ */
+public function log(string $q = null): void;</code></pre>
+<p>The class is fully tested.</p>
                 </section>
             </div>
         </main>

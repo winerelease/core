@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -142,7 +142,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link active">
                                             Other topics
                                         </a>
                                     </li>
@@ -209,10 +209,200 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="refactoring-for-30">Refactoring for 3.0</h1>
+<h2 id="modules">Modules</h2>
+<h3 id="composer-file">Composer file</h3>
+<p>Add the following capability for defining the (default) admin icon:</p>
+<pre><code class="language-json">    ...
+    "extra": {
+        "zikula": {
+            ...
+            "capabilities": {
+                ...
+                "admin": {
+                    ...
+                    "icon": "fas fa-star"
+                },
+                ...
+            },
+        },
+    },
+</code></pre>
+<p>You can remove the old <code>admin.png</code> file afterwards.</p>
+<h3 id="interfaces">Interfaces</h3>
+<p>In general, interfaces and apis implement argument type-hinting in all methods. This can break an implementation of said
+interfaces, etc. Extensions must update their implementation of any core/system interface to adhere to the new signature.</p>
+<h3 id="service-registration">Service registration</h3>
+<p>Please use <code>autowire</code> and <code>autoconfigure</code> as this will magically solve most issues.
+Further information can be found <a href="https://symfony.com/doc/current/service_container/3.3-di-changes.html#step-1-adding-defaults">in Symfony docs</a>.</p>
+<p>Module services should be registered by their classname (automatically as above) and not with old-fashioned
+<code>service.class.dot.notation</code>.</p>
+<h3 id="blocks">Blocks</h3>
+<p>BlockHandler classes must implement <code>Zikula\BlocksModule\BlockHandlerInterface</code> as in Core-2.0 but there is no longer
+a need to tag these classes in your services file as they are auto-tagged. Also - as above, the classname should be
+used as the service name.</p>
+<h3 id="extension-menus">Extension menus</h3>
+<p><code>Zikula\Core\LinkContainer\LinkContainerCollector</code> and <code>Zikula\Core\LinkContainer\LinkContainerInterface</code> have been
+removed. Extension menus are not implemented using Knp Menu instead. See docs and system modules for further
+information and examples.</p>
+<h2 id="translations">Translations</h2>
+<p>All custom Zikula translation mechanisms have been removed in favour of Symfony's native translation system.</p>
+<p>For more information please refer to the documents in <code>docs/Translation/</code>.</p>
+<h2 id="twig">Twig</h2>
+<h3 id="classes">Classes</h3>
+<p>Use namespaced classes because the non-namespaced classes have been removed.</p>
+<p>For example:</p>
+<table>
+<thead>
+<tr>
+<th>Old</th>
+<th>New</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\Twig_Extension</code></td>
+<td><code>Twig\Extension\AbstractExtension</code></td>
+</tr>
+<tr>
+<td><code>\Twig_SimpleFunction</code></td>
+<td><code>Twig\TwigFunction</code></td>
+</tr>
+<tr>
+<td><code>\Twig_SimpleFilter</code></td>
+<td><code>Twig\TwigFilter</code></td>
+</tr>
+<tr>
+<td><code>\Twig_SimpleTest</code></td>
+<td><code>Twig\TwigTest</code></td>
+</tr>
+</tbody>
+</table>
+<p>and so on…</p>
+<h3 id="template-paths">Template paths</h3>
+<ul>
+<li>change all template names from e.g. <code>Bundle:Controller:Action.html.twig</code> to <code>@Bundle/Controller/Action.html.twig</code></li>
+<li>Modules and themes retain the <code>Module</code> or <code>Theme</code> suffix but bundles do not.</li>
+</ul>
+<h3 id="templates">Templates</h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Old</th>
+<th>New</th>
+<th>Further information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filtering loops</td>
+<td><code>{% for item in items if item.active %}</code></td>
+<td><code>{% for item in items\|filter(i =&gt; i.active) %}</code></td>
+<td><a href="https://symfony.com/blog/twig-adds-filter-map-and-reduce-features">blog post</a> with more examples</td>
+</tr>
+<tr>
+<td>Filtering loops (alternative)</td>
+<td><code>{% for item in items if item.active %}</code></td>
+<td><code>{% for item in items %}{% if item.active %}</code></td>
+<td></td>
+</tr>
+<tr>
+<td>apply tag</td>
+<td><code>{% filter upper %}…{% endfilter %}</code></td>
+<td><code>{% apply upper %}…{% endapply %}</code></td>
+<td><a href="https://symfony.com/blog/twig-adds-filter-map-and-reduce-features#the-apply-tag">blog post</a></td>
+</tr>
+<tr>
+<td>spaceless filter</td>
+<td><code>{% spaceless %}…{% endspaceless %}</code></td>
+<td><code>{% apply spaceless %}…{% endapply %}</code></td>
+<td><a href="https://symfony.com/blog/better-white-space-control-in-twig-templates#added-a-spaceless-filter">blog post</a></td>
+</tr>
+<tr>
+<td>Old array extension</td>
+<td><code>shuffle</code> filter</td>
+<td>no equivalent</td>
+</tr>
+<tr>
+<td>Old date extension</td>
+<td><code>time_diff</code> filter</td>
+<td>no equivalent</td>
+</tr>
+<tr>
+<td>Old i18n extension</td>
+<td><code>trans</code> filter</td>
+<td>use the <code>trans</code> filter from Symfony</td>
+<td><a href="https://symfony.com/doc/current/reference/twig_reference.html#trans">trans</a> reference</td>
+</tr>
+<tr>
+<td>Old intl extension</td>
+<td><code>localizeddate</code></td>
+<td>use <code>format_date</code>, <code>format_datetime</code>, <code>format_time</code></td>
+<td><a href="https://twig.symfony.com/doc/3.x/filters/format_date.html">format_date</a> reference, <a href="https://twig.symfony.com/format_datetime">format_datetime</a> reference, <a href="https://twig.symfony.com/format_time">format_time</a> reference</td>
+</tr>
+<tr>
+<td>Old intl extension</td>
+<td><code>{{ myNumber\|localizednumber }}</code></td>
+<td><code>{{ myNumber\|format_number }}</code></td>
+<td><a href="https://twig.symfony.com/doc/3.x/filters/format_number.html">format_number</a> reference</td>
+</tr>
+<tr>
+<td>Old intl extension</td>
+<td><code>{{ myAmount\|localizedcurrency('EUR') }}</code></td>
+<td><code>{{ myAmount\|format_currency('EUR') }}</code></td>
+<td><a href="https://twig.symfony.com/doc/3.x/filters/format_currency.html">format_currency</a> reference</td>
+</tr>
+<tr>
+<td>Old text extension</td>
+<td><code>{{ title\|truncate(200, true, '…') }}</code></td>
+<td><code>{{ title\|u.truncate(200, '…') }}</code></td>
+<td><a href="https://twig.symfony.com/doc/3.x/filters/u.html">u filter</a> reference</td>
+</tr>
+<tr>
+<td>Old text extension</td>
+<td><code>wordwrap</code></td>
+<td><code>u</code></td>
+<td><a href="https://twig.symfony.com/doc/3.x/filters/u.html">u filter</a> reference</td>
+</tr>
+<tr>
+<td>Country name</td>
+<td>unavailable</td>
+<td><code>{{ myCountry\|country_name }}</code></td>
+<td><a href="https://twig.symfony.com/country_name">country_name</a> reference</td>
+</tr>
+<tr>
+<td>Currency name</td>
+<td>unavailable</td>
+<td><code>{{ myCurrency\|currency_name }}</code></td>
+<td><a href="https://twig.symfony.com/currency_name">currency_name</a> reference</td>
+</tr>
+<tr>
+<td>Currency symbol</td>
+<td>unavailable</td>
+<td><code>{{ 'EUR'\|currency_symbol }}</code></td>
+<td><a href="https://twig.symfony.com/currency_symbol">currency_symbol</a> reference</td>
+</tr>
+<tr>
+<td>Language name</td>
+<td><code>{{ myLanguage\|languagename }}</code></td>
+<td><code>{{ myLanguage\|language_name }}</code></td>
+<td><a href="https://twig.symfony.com/language_name">language_name</a> reference</td>
+</tr>
+<tr>
+<td>Locale name</td>
+<td>unavailable</td>
+<td><code>{{ myLocale\|locale_name }}</code></td>
+<td><a href="https://twig.symfony.com/locale_name">locale_name</a> reference</td>
+</tr>
+<tr>
+<td>Timezone name</td>
+<td>unavailable</td>
+<td><code>{{ myTimezone\|timezone_name }}</code></td>
+<td><a href="https://twig.symfony.com/timezone_name">timezone_name</a> reference</td>
+</tr>
+</tbody>
+</table>
                 </section>
             </div>
         </main>

@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,45 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="zikula-cli-commands">Zikula CLI Commands</h1>
+<h2 id="extension-management">Extension management</h2>
+<h3 id="zikulaextensioninstall">zikula:extension:install</h3>
+<p>Quickly installs a zikula extension from the CLI.</p>
+<p>Usage: <code>bin/console zikula:extension:install AcmeFooModule</code>
+Shortcut: <code>bin/console z:e:i AcmeFooModule</code></p>
+<p>Options:</p>
+<ul>
+<li><code>--ignore_deps</code> Force install the extension ignoring all dependencies</li>
+</ul>
+<h3 id="zikulaextensionuninstall">zikula:extension:uninstall</h3>
+<p>Quickly uninstalls a zikula extension from the CLI.</p>
+<p>Usage: <code>bin/console zikula:extension:uninstall AcmeFooModule</code>
+Shortcut: <code>bin/console z:e:un AcmeFooModule</code></p>
+<h3 id="zikulaextensionupgrade">zikula:extension:upgrade</h3>
+<p>Quickly upgrades a zikula extension from the CLI.</p>
+<p>Usage: <code>bin/console zikula:extension:upgrade AcmeFooModule</code>
+Shortcut: <code>bin/console z:e:up AcmeFooModule</code></p>
+<h3 id="zikulaextensionstatus">zikula:extension:status</h3>
+<p>Provides some basic information about the module and its status.</p>
+<p>Usage: <code>bin/console zikula:extension:status AcmeFooModule</code>
+Shortcut: <code>bin/console z:e:st AcmeFooModule</code></p>
+<p>It is also possible to fetch individual properties like 'status', or 'version'
+by doing something like:</p>
+<p><code>bin/console z:e:s AcmeFooModule --get=version</code></p>
+<p>All the properties of the ExtensionEntity are available.</p>
+<h3 id="zikulaextensionsync">zikula:extension:sync</h3>
+<p>Sync extensions in the filesystem to the <code>bundles</code> and <code>extensions</code> database tables from the CLI.</p>
+<p>This command defaults to only syncing the <code>extensions</code> directory. See below to also sync Core extensions.
+&quot;Sync&quot; means to scan <code>composer.json</code> files and persist information there (e.g. version, etc.) as well as <em>autoload</em>
+paths to the <code>bundles</code> and <code>extensions</code> database tables. This is sometimes needed in development when iterating the
+extension's configuration. It is <strong>not</strong> required when using the commands above to install, etc.</p>
+<p>Usage: <code>bin/console zikula:extension:sync</code>
+Shortcut: <code>bin/console z:e:sy</code></p>
+<p>Options:</p>
+<ul>
+<li><code>--include_core</code> Force the system extensions to re-sync as well. Core data is <em>only</em> stored in the <code>extensions</code> table.</li>
+</ul>
+<p>Usage: <code>bin/console z:e:sy --include_core</code></p>
                 </section>
             </div>
         </main>

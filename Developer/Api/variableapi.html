@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/Api/index.html" class="nav-link active">
                                             APIs
                                         </a>
                                     </li>
@@ -209,10 +209,115 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="variableapi">VariableApi</h1>
+<p>classname: <code>\Zikula\ExtensionsModule\Api\VariableApi</code>.</p>
+<p>This class manages the storage and retrieval of extension variables and is the intended replacement
+for ModUtil::* methods (getVar, setVar, etc) as well as similar functionality in System:: and ThemeUtil::</p>
+<p>The class makes the following methods available:</p>
+<pre><code class="language-php">/**
+ * Replace specified variable values with their localized value
+ * @see \Zikula\SettingsModule\Listener\LocalizedVariableListener
+ */
+public function localizeVariables(string $lang): void;
+
+/**
+ * Checks to see if an extension variable is set.
+ * @api Core-2.0
+ */
+public function has(string $extensionName, string $variableName): bool;
+
+/**
+ * Get an extension variable.
+ * @api Core-2.0
+ *
+ * @param mixed $default The value to return if the requested var is not set
+ * @return mixed - extension variable value
+ */
+public function get(string $extensionName, string $variableName, $default = false);
+
+/**
+ * Get a system variable.
+ * @api Core-2.0
+ *
+ * @param mixed $default The value to return if the requested var is not set
+ * @return mixed - extension variable value
+ */
+public function getSystemVar(string $variableName, $default = false);
+
+/**
+ * Get all the variables for an extension.
+ * @api Core-2.0
+ *
+ * @param $extensionName
+ * @return array
+ */
+public function getAll(string $extensionName): array;
+
+/**
+ * Set an extension variable.
+ * @api Core-2.0
+ *
+ * @param mixed $value The value of the variable
+ * @return boolean True if successful, false otherwise
+ */
+public function set(string $extensionName, string $variableName, $value = ''): bool;
+
+/**
+ * The setAll method sets multiple extension variables.
+ * @api Core-2.0
+ */
+public function setAll(string $extensionName, array $variables = []): bool;
+
+/**
+ * Delete an extension variable.
+ * @api Core-2.0
+ */
+public function del(string $extensionName, string $variableName): bool;
+
+/**
+ * Delete all variables for one extension.
+ * @api Core-2.0
+ */
+public function delAll(string $extensionName): bool;</code></pre>
+<p>The class is fully tested.</p>
+<p>In classes extending <code>\Zikula\Bundle\CoreBundle\Controller\AbstractController</code> several convenience methods are available:</p>
+<pre><code class="language-php">/**
+ * Convenience shortcut to get extension variable.
+ *
+ * @param mixed $default
+ * @return mixed
+ */
+public function getVar(string $variableName, $default = false);
+
+/**
+ * Convenience shortcut to get all extension variables.
+ */
+public function getVars(): array;
+
+/**
+ * Convenience shortcut to set extension variable.
+ *
+ * @param string|integer|boolean $value
+ */
+public function setVar(string $variableName, $value = ''): bool;
+
+/**
+ * Convenience shortcut to set many extension variables.
+ */
+public function setVars(array $variables = []): bool;
+
+/**
+ * Convenience shortcut to delete an extension variable.
+ */
+public function delVar(string $variableName): bool;
+
+/**
+ * Convenience shortcut to delete all extension variables.
+ */
+public function delVars(): bool;
+
+public function getVariableApi(): VariableApiInterface;</code></pre>
+<p>The class is fully tested.</p>
                 </section>
             </div>
         </main>

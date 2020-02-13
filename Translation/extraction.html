@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Translation/index.html" class="nav-link active">
                                             Translation
                                         </a>
                                     </li>
@@ -209,10 +209,84 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="translation-extraction">Translation extraction</h1>
+<p>To extract translations use the console command <code>translation:extract</code>.</p>
+<p>To see all of it's option, do this:</p>
+<pre><code>php bin/console translation:extract -h
+# or
+php bin/console translation:extract --help</code></pre>
+<p>Example for Zikula core:</p>
+<pre><code># extract for all configured locales
+php bin/console translation:extract zikula
+# extract only for English
+php bin/console translation:extract zikula en</code></pre>
+<p>Note <code>zikula</code> is the name of our configuration.</p>
+<p>Examples for a module or a theme:</p>
+<pre><code>php bin/console translation:extract -b AcmeFooModule extension
+php bin/console translation:extract --bundle AcmeFooModule extension en
+php bin/console translation:extract -b AcmeFooModule acmefoomodule
+php bin/console translation:extract --bundle AcmeFooModule acmefoomodule en
+
+# or with more memory:
+php -dmemory_limit=2G bin/console translation:extract --bundle AcmeFooModule extension
+php -dmemory_limit=2G bin/console translation:extract --bundle AcmeFooModule acmefoomodule en</code></pre>
+<p>You can always check the status of your translation using the <code>translation:status</code> command.
+Check the available options using <code>-h</code> or <code>--help</code> like shown above.</p>
+<h2 id="translation-annotations">Translation annotations</h2>
+<p>To influence the extraction behaviour you can utilise some annotations from the <code>Translation\Extractor\Annotation</code> namespace.
+Import them like any other php class:</p>
+<pre><code class="language-php">use Translation\Extractor\Annotation\Desc;
+use Translation\Extractor\Annotation\Ignore;
+use Translation\Extractor\Annotation\Translate;</code></pre>
+<h3><code>@Desc</code></h3>
+<p>The <code>@Desc</code> annotation allows specifying a default translation for a key.</p>
+<p>Examples:</p>
+<pre><code class="language-php">$builder-&gt;add('title', 'text', [
+    /** @Desc("Title:") */
+    'label' =&gt; 'post.form.title',
+]);
+
+/** @Desc("We have changed the permalink because the post '%slug%' already exists.") */
+$errors[] = $this-&gt;translator-&gt;trans(
+    'post.form.permalink.error.exists', ['%slug%' =&gt; $slug]
+);</code></pre>
+<h3 id="desc-filter-in-twig">desc filter in Twig</h3>
+<p>There is also a <code>desc</code> filter for specifying a default translation for a key in Twig.</p>
+<p>Use it like this:</p>
+<pre><code class="language-twig">{{ 'post.form.title'|trans|desc('Title:') }}
+{{ 'welcome.message'|trans({'%userName%': 'John Smith'})|desc('Welcome %userName%!') }}</code></pre>
+<h3><code>@Ignore</code></h3>
+<p>The <code>@Ignore</code> annotation allows ignoring extracting translation subjects which are not a string, but a variable.
+You can use it for example for <code>trans()</code> calls, form labels and form choices.</p>
+<p>Examples:</p>
+<pre><code class="language-php">echo $this-&gt;translator-&gt;trans(/** @Ignore */$description);
+
+$builder-&gt;add('modulecategory' . $module['name'], ChoiceType::class, [
+    /** @Ignore */
+    'label' =&gt; $module['displayname'],
+    'empty_data' =&gt; null,
+    'choices' =&gt; /** @Ignore */$options['categories']
+]);</code></pre>
+<h3><code>@Translate</code></h3>
+<p>With the <code>/** @Translate */</code> you can explicitly add phrases to the dictionary. This helps to extract strings
+which would have been skipped otherwise.</p>
+<p>Examples:</p>
+<pre><code class="language-php">$placeholder = /** @Translate */'delivery.user.not_chosen';</code></pre>
+<p>It can be also used to force specific domain:</p>
+<pre><code class="language-php">$errorMessage = /** @Translate(domain="validators") */'error.user_email.not_unique';</code></pre>
+<h3 id="combined-example">Combined example</h3>
+<p>If you have a form class which uses a help array with multiple help messages strings you need to prepare it like this:</p>
+<pre><code class="language-php">$builder-&gt;add('myField', [
+    // ...
+    /** @Ignore */
+    'help' =&gt; [
+        /** @Translate */'This is the first help message.',
+        /** @Translate */'This is the second help message.'
+    ]
+]);</code></pre>
+<h2 id="extracting-from-javascript-files">Extracting from JavaScript files</h2>
+<p><strong>Note:</strong> currently it is not possible to automatically extract translation messages from JavaScript files.
+This functionality is being worked on <a href="https://github.com/willdurand/BazingaJsTranslationBundle/pull/238">here</a>.</p>
                 </section>
             </div>
         </main>

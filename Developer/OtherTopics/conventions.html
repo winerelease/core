@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -142,7 +142,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link active">
                                             Other topics
                                         </a>
                                     </li>
@@ -209,10 +209,26 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="conventions">Conventions</h1>
+<h2 id="service-names">Service names</h2>
+<p>Zikula Core uses classes for service definitions where appropriate. Otherwise service names must adhere to this naming scheme.</p>
+<pre><code>zikula_core.internal.service_name
+zikula_core.legacy.service_name
+zikula_core.common.service_name</code></pre>
+<p>All extensions must prefix their service names with the full extension name, replacing camel-case with underscores.</p>
+<pre><code>vendor_extensionname_module.service_name</code></pre>
+<p>For example:</p>
+<pre><code>zikula_search_module.front_controller_listener</code></pre>
+<h2 id="dependency-management">Dependency Management</h2>
+<p>Extensions are responsible to provide/include their own dependencies or create companion modules/bundles to do so.</p>
+<h2 id="translation-provision-responsibility">Translation Provision Responsibility</h2>
+<h3 id="core">Core</h3>
+<p>The core will be released with only English. Translations will be provided as secondary downloads.</p>
+<h3 id="third-party-extensions">Third Party Extensions</h3>
+<p>Third party extensions should endeavor to include all available translations within their release. A quick release
+cycle should be used in order to quickly make available new translations and small bug fixes as they become available.
+While a contributor may make an extension translation available as an additional download, this is discouraged and
+should be included in the main package as soon as the next release.</p>
                 </section>
             </div>
         </main>

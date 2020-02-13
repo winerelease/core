@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -82,7 +82,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Admin/index.html" class="nav-link active">
                                             Overview
                                         </a>
                                     </li>
@@ -209,10 +209,15 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="collapseable-blocks">Collapseable blocks</h1>
+<p>In the BlocksModule settings, an admin may <strong>enable block collapse icons</strong>. This feature adds a small icon next to each
+block title that when clicked will 'minimize' (collapse) the block. The icon can be clicked again to maximize or restore
+the block.</p>
+<p>The state of the collapse is maintained through javascript local storage and is only available on &quot;modern&quot; browsers.</p>
+<p>Block developers should enclose <strong>all</strong> the block content in a block-level element (<code>&lt;div&gt;</code>, <code>&lt;ul&gt;</code> or similar) in order
+to take full advantage of the feature.</p>
+<p>Block developers can disable the &quot;collapsibility&quot; of a block by adding the <code>nonCollapsible</code> class to the Html element
+that immediately follows the title element (likely the block-level element referenced above).</p>
                 </section>
             </div>
         </main>

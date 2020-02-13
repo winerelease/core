@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -177,7 +177,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Twig/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Twig/index.html" class="nav-link active">
                                             Twig
                                         </a>
                                     </li>
@@ -209,10 +209,33 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="twig-template-global-variables">Twig template global variables</h1>
+<p>In addition to the global variables that are provided by Symfony, Zikula provides the following global variables.</p>
+<h2 id="pagevars">pagevars</h2>
+<p>The <code>pagevars</code> variable makes registered variables available in the template.</p>
+<pre><code class="language-twig">{{ pagevars.homepath }}
+{{ pagevars.title }}
+{{ pagevars.meta.description }}
+{{ pagevars.meta.charset }}</code></pre>
+<p>When creating a template, variables can be created, modified or retrieved using the template tags:</p>
+<pre><code class="language-twig">{{ pageSetVar('title', __('My Custom Page Title')) }}
+{{ pageGetVar('title', 'my default value') }}</code></pre>
+<p>Note: do NOT use <code>pagevars.homepath</code> for an asset path! The constructed url is <strong>locale</strong> sensitive and will include the
+locale in the path!</p>
+<h2 id="themevars">themevars</h2>
+<p>The <code>themevars</code> variable makes the theme's variables available in the template. These are assigned in the
+<code>variables.yaml</code> file for the theme and editable in the theme's config UI.</p>
+<pre><code class="language-twig">{{ themevars.&lt;variablename&gt; }}</code></pre>
+<h2 id="currentuser">currentUser</h2>
+<p>The <code>currentUser</code> variable makes various other properties available in the template. Any property of the UserEntity
+plus an additional <code>loggedIn</code> property (boolean).</p>
+<pre><code class="language-twig">{{ currentUser.loggedIn }}
+{{ currentUser.uname }}
+{{ currentUser.uid }}
+{{ currentUser.email }}
+{{ currentUser.&lt;propertyname&gt; }}</code></pre>
+<h2 id="symfony-global-variables">Symfony global variables</h2>
+<p>For more information about the global variables provided by symfony, please see <a href="https://symfony.com/doc/current/templates.html#the-app-global-variable">this doc</a>.</p>
                 </section>
             </div>
         </main>

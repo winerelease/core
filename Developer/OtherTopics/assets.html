@@ -37,7 +37,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/index.html" class="nav-link active">
+                                        <a href="http://zikula.github.io/core/index.html" class="nav-link">
                                             Home page
                                         </a>
                                     </li>
@@ -142,7 +142,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link">
+                                        <a href="http://zikula.github.io/core/Developer/OtherTopics/index.html" class="nav-link active">
                                             Other topics
                                         </a>
                                     </li>
@@ -209,10 +209,59 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="zikula-documentation">Zikula Documentation</h1>
-<p>Please see the various documents in this directory for more information.</p>
-<h2 id="work-in-progress">Work in progress</h2>
-<p><strong>Note: Currently some categories are not yet fully developed and divided. Moreover, some issues are currently still unfavourably spread over several areas. But we are constantly working on the further development of a suitable documentation structure.</strong></p>
+                    <h1 id="page-assets">Page assets</h1>
+<p>Assets are publicly visible resources that are used to construct a web page. These include javascripts, stylesheets,
+fonts, images and so forth. Zikula manages javascript and css assets with two services:</p>
+<ul>
+<li><code>zikula_core.common.theme.assets_js</code></li>
+<li><code>zikula_core.common.theme.assets_css</code></li>
+</ul>
+<p>There is also one twig function that is used to add items to those same services:</p>
+<ul>
+<li><code>{{ pageAddAsset() }}</code></li>
+</ul>
+<p>Assets can be <strong>combined</strong> in order to speed up page loading by taking advantage of browser caching. Please see the
+<code>AssetCombination.md</code> file for more information on this subject.</p>
+<p>In a Controller or Listener, you can access either of the services and add an asset like so:</p>
+<pre><code class="language-php">$this-&gt;get('zikula_core.common.theme.assets_js')
+    -&gt;add($request-&gt;getBasePath() . '/modules/acmefoo/mysript.js')
+;</code></pre>
+<p>In a template, it would be done like this:</p>
+<pre><code class="language-twig">{{ pageAddAsset('javascript', zasset('@AcmeFooModule:js/myscript.js')) }}</code></pre>
+<h2 id="weights">Weights</h2>
+<p>If the load order of the scripts or stylesheets is important (and it often is), you can set a <strong>weight</strong> for each asset.
+The 'heavier' the weight the later it will load. The <em>default</em> weight is 100 and is what would be used in the examples
+above since no weight is set. To set the weight for an asset, add it like this:</p>
+<pre><code class="language-php">$this-&gt;get('zikula_core.common.theme.assets_js')-&gt;add([
+    $request-&gt;getBasePath() . '/modules/acmefoo/mysript.js' =&gt; 200
+]);</code></pre>
+<pre><code class="language-twig">{{ pageAddAsset('javascript', zasset('@AcmeFooModule:js/myscript.js'), 200) }}</code></pre>
+<p>Weights utilized by core assets are listed below.</p>
+<pre><code class="language-php">public const WEIGHT_JQUERY = 19;
+public const WEIGHT_JQUERY_UI = 20;
+public const WEIGHT_BOOTSTRAP_JS = 21;
+public const WEIGHT_BOOTSTRAP_ZIKULA = 22;
+public const WEIGHT_ROUTER_JS = 24;
+public const WEIGHT_ROUTES_JS = 25;
+public const WEIGHT_JS_TRANSLATOR = 26;
+public const WEIGHT_ZIKULA_JS_TRANSLATOR = 27;
+public const WEIGHT_JS_TRANSLATIONS = 28;
+public const WEIGHT_DEFAULT = 100;
+public const WEIGHT_THEME_STYLESHEET = 120;</code></pre>
+<h2 id="non-local-assets-and-asset-combination">Non-local assets and asset combination</h2>
+<p>Sometimes you wish to use non-local assets like CDN for a common library or Google font assets, etc. This is fully
+supported and can be done in the same manner:</p>
+<pre><code class="language-twig">{{ pageAddAsset('javascript', 'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js') }}</code></pre>
+<p>When local assets are combined, all non-local assets will be loaded after the local assets (in order by weight)
+if the weight is positive (&gt;=0).</p>
+<p>Sometimes a non-local asset must be loaded before other assets even when asset combination is enabled. This is
+accomplished with <strong>negative weights</strong>.</p>
+<pre><code class="language-twig">{{ pageAddAsset('stylesheet', '//fonts.googleapis.com/css?family=Montserrat:400,700', -10) }}</code></pre>
+<p>Assigning a <em>negative weight</em> will have an important effect: The non-local asset will be loaded <strong>before</strong> the
+combined assets. Positively weighted non-local assets will be loaded <strong>after</strong> the combined assets.</p>
+<p>If asset combination is <strong>disabled</strong>, then all assets will be loaded in order as one would expect with negatively
+weighted assets loading before positively loaded assets.</p>
+<p><em>Local</em> assets with a negative weight will still be combined in order by weight.</p>
                 </section>
             </div>
         </main>
