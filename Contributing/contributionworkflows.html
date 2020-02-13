@@ -67,7 +67,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Contributing/index.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/Contributing/index.html" class="nav-link active">
                                             Contributing
                                         </a>
                                     </li>
@@ -162,7 +162,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Translation/index.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/Translation/index.html" class="nav-link">
                                             Translation
                                         </a>
                                     </li>
@@ -214,24 +214,86 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="plural-forms">Plural forms</h1>
-<p>Note: before reading this you should have read the <a href="extraction.html">extraction chapter</a> first.</p>
-<h2 id="php-files">PHP files</h2>
-<p>PHP example using plural forms:</p>
-<pre><code class="language-php">// 4. With plural forms and advanced substitution
-$this-&gt;_fn('User deleted!', '%n users deleted!', count($deletedUsers), ['%n' =&gt; count($deletedUsers)]);
-/** @Desc("{count, plural,\n  one   {User deleted!}\n  other {# users deleted!}\n}") */
-$this-&gt;getTranslator()-&gt;trans('plural_n.users.deleted', ['%count%' =&gt; count($deletedUsers)]);</code></pre>
-<h2 id="twig-template-files">Twig template files</h2>
-<p>Here is an example using plural forms, advanced substitution and the <code>desc</code> filter:</p>
-<pre><code class="language-twig">Old: {% set amountOfUsers = _fn('%amount% registered user', '%amount% registered users', users|length, {'%amount%': users|length}) %}
-New: {% set amountOfUsers = 'plural_n.registered.user'|trans({count: users|length})|desc('{count, plural,\n  one   {one registered user}\n  other {# registered users}\n}') %}</code></pre>
-<p>The <code>plural_n</code> portion of the translation key is simply a convention established to note that this key requires plural translation.</p>
-<p>The translation of this would look something like:</p>
-<pre><code class="language-yaml">#messages+intl-icu.en.yaml
-plural_n.registered.user: "{count, plural,\n  one   {one registered user}\n  other {# registered users}\n}"</code></pre>
-<h2 id="note-about-icu">Note about ICU</h2>
-<p>More advanced translation like plurals and other substitutions require using the Symfony ICU MessageFormatter. See <a href="https://symfony.com/doc/current/translation/message_format.html">How to Translate Messages using the ICU MessageFormat</a>. This requires a specific name format on the translation file and other adjustments.</p>
+                    <h1 id="contribution-workflows">Contribution workflows</h1>
+<h2 id="how-to-do-patches">How to do patches</h2>
+<p>To contribute a patch simply <code>git fetch</code> to synchronise the remotes. Note <code>git fetch</code> does not update any checked out repositories, it just sychronises the upstream repos locally as <code>&lt;remote_name&gt;/&lt;branch_name&gt;</code>.</p>
+<p>Make a branch from the upstream remote you want to update. In the example below we'll submit a bug-fix to the <code>2.0</code> branch:</p>
+<pre><code class="language-shell">git branch ticket_1234 zikula/2.0
+git checkout ticket_1234</code></pre>
+<p>Or as a shortcut:</p>
+<pre><code class="language-shell">git checkout -b ticket_1234 zikula/2.0</code></pre>
+<p>Make any changes you need and commit as often as you need:</p>
+<pre><code class="language-shell">git commit &lt;file-list&gt;</code></pre>
+<p>or:</p>
+<pre><code class="language-shell">git commit -a</code></pre>
+<p>When you are ready please push your branch to <em>your</em> GitHub repository:</p>
+<pre><code class="language-shell">git push &lt;your_username&gt; &lt;branchname&gt;</code></pre>
+<p>for example:</p>
+<pre><code class="language-shell">git push bob ticket_1234</code></pre>
+<p>If the topic branch you are working on takes a long time and in the meantime others have committed changes which you might need to rely on (and only if), you can periodically rebase your local topic branch checkout like this:</p>
+<pre><code class="language-shell">git fetch
+git checkout ticket_1234
+git rebase zikula/2.0</code></pre>
+<h2 id="submitting-a-pull-request">Submitting a Pull Request</h2>
+<p>When you are ready to submit the branch to the main project simply visit your fork URL, e.g. <a href="https://github.com/bob/core">https://github.com/bob/core</a>, select the branch you want and then press the <code>PULL REQUEST</code> button. <strong>MAKE VERY SURE</strong> you tell Github the correct branch you intend your patch for. Typically, you will want to merge to the <em>lowest</em> possible branch where the bug may exist. This fix will then be &quot;merged up&quot; into higher branches.</p>
+<p>Above the PULL REQUEST dialog you will see something like:</p>
+<pre><code class="language-shell">**You are asking core to pull 3 commits into core:2.0 from bob:ticket_1234**</code></pre>
+<p>Github does not/cannot detect which branch you intend your patch for, so if this is wrong, press the <code>[change commits]</code> button then on the left where is says <code>Base branch · tag · commit</code>, you want to select the target branch for your patch.</p>
+<p>The collaborator who reviews your contribution may ask you some questions or ask you to modify some stuff before completing the merge. You can simply continue to push your branch to your fork and it will be tracked in the same <code>PULL REQUEST</code> at Github.</p>
+<p>When your branch has been merged, you can remove it from your public fork with <code>git push your_repo :ticket_1234</code> and of course you can delete it locally with <code>git branch -d ticket_1234</code> (note you need to checkout another branch before GIT will allow you to delete the branch).</p>
+<h2 id="pull-request-template">Pull Request Template</h2>
+<p>The title field may include a bracketed component name:</p>
+<pre><code class="language-shell">[component name] &lt;description&gt;</code></pre>
+<p>For example:</p>
+<pre><code class="language-shell">[HookDispatcher] Added fluid interface to dispatcher method</code></pre>
+<p>If the PR is not ready to be merged, you may prefix with <code>[WIP]</code>. This allows feedback to come in while perfecting the PR and let's the maintainers know the PR is not ready for merge. If the PR is simply in RFC stage, prefix with <code>[RFC]</code>:</p>
+<pre><code class="language-shell">[WIP][AdminModule] Added js drag and drop to menus</code></pre>
+<p>All pull requests must have the following template in the description dialog box:</p>
+<pre><code class="language-markdown">| Q                 | A
+| ----------------- | ---
+| Bug fix?          | [yes/no]
+| New feature?      | [yes/no]
+| BC breaks?        | no
+| Deprecations?     | no
+| Fixed tickets     | -
+| Refs tickets      | -
+| License           | MIT
+| Changelog updated | [yes/no]
+
+## Description
+A few sentences describing the overall goals of the pull request's commits.
+
+## Todos
+- [ ] Tests
+- [ ] Documentation
+- [ ] Changelog</code></pre>
+<p>For example:</p>
+<pre><code class="language-markdown">| Q                 | A
+| ----------------- | ---
+| Bug fix?          | yes
+| New feature?      | no
+| BC breaks?        | no
+| Deprecations?     | no
+| Fixed tickets     | #1234
+| Refs tickets      | -
+| License           | MIT
+| Changelog updated | yes
+
+## Description
+This PR corrects issue #1234 by improving the logic of the loop.
+
+## Todos
+- [x] Tests
+- [x] Documentation
+- [x] Changelog</code></pre>
+<p>Below this, you may add any extra information and description text required. Please be as descriptive and informative as possible.</p>
+<h2 id="feature-request-workflow">Feature Request Workflow</h2>
+<p>If you want to contribute a feature, you can open a ticket or start a proof of concept PR. Before doing this you might want to discuss the feature in our Slack channels before to refine the idea.</p>
+<p>Once the feature has been submitted to the tracker it will be assigned to a milestone by the project lead and you can begin work on the ticket as above.</p>
+<p>New Features will not be included in &quot;point&quot; releases (e.g. 2.0.2). Features are only included in minor (or major) releases (e.g. 2.1.0).</p>
+<h2 id="bugs-fix-workflow">Bugs Fix Workflow</h2>
+<p>Either submit a ticket or choose a ticket you wish to contribute to. Fix the bug in a topic branch and make a pull request.</p>
+<p>Sometimes bug fixes are trivial enough to not require a ticket, but a detailed commit message is enough.</p>
                 </section>
             </div>
         </main>

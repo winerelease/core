@@ -153,7 +153,7 @@
                                     </li>
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Developer/ExtensionDevelopment/index.html" class="nav-link">
-                                            Extension Development
+                                            Extension development
                                         </a>
                                     </li>
                                                             </ul>
@@ -215,7 +215,24 @@
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
                     <h1 id="setting-up-a-core-development-environment">Setting up a core development environment</h1>
-<p>This document is intended to be a place to collect useful techniques for developing the Zikula Core. It is required that you have set up the basic git repository like described <a href="introduction.html#setup">here</a>.</p>
+<p>This document is intended to be a place to collect useful techniques for developing the Zikula Core.</p>
+<p>First, it is required that you set up the basic git repository.</p>
+<h2 id="setup">Setup</h2>
+<p>This is only done once for each project you wish to contribute to.</p>
+<p>In this example we'll fork the <em>github.com/zikula/core</em> repository. 'zikula' is the Github username, and 'core' is the repository name. We're using 'zikula/core' to refer to this repository. If you are contributing to another repository, say <em>github.com/foo/bar</em> then simply replace the username and repository accordingly, e.g 'foo/bar'.</p>
+<p>Simply fork the project repository <a href="https://github.com/zikula/core">https://github.com/zikula/core</a> by pressing the <code>fork</code> button on the website.</p>
+<p>Now setup the local repository:</p>
+<pre><code class="language-shell">git clone -o zikula git://github.com/zikula/core.git</code></pre>
+<p>Add your fork as a remote:</p>
+<pre><code class="language-shell">cd core
+git remote add &lt;your_username&gt; git@github.com:/&lt;your_username&gt;/core.git</code></pre>
+<p>'core' points to the main Zikula repository.  The remote called 'your_username' points to your fork. Using this naming makes it easier for you to know which repository you are referring to. If you are already fluent with GIT you may choose any remote naming schema you prefer.</p>
+<p>Keeping your code up to date with rebase:</p>
+<pre><code class="language-shell">git fetch
+git rebase master zikula/master
+git rebase 2.0 zikula/2.0</code></pre>
+<p>Your public fork's only purpose is to public your patches, there is absolutely no reason to push your local <code>master</code> branch (or other branches present in the central repository you have forked from).</p>
+<p>We use rebase to prevent unnecessary merge commits when synchronising with the upstream repositories. It rewinds your work, updates from the central repository, then replays your work on top. This keeps a linear, logical history.</p>
 <h2 id="enable">Enable <code>debug</code> and set kernel environment to <code>dev</code></h2>
 <p>If not already configured, it is recommend to set the kernel environment to <code>dev</code> and set <code>debug</code> to true. To do so, adjust the parameters in your <code>.env.local</code> file.</p>
 <h2 id="email-sending">Email sending</h2>

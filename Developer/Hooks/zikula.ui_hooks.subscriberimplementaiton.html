@@ -153,7 +153,7 @@
                                     </li>
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Developer/ExtensionDevelopment/index.html" class="nav-link">
-                                            Extension Development
+                                            Extension development
                                         </a>
                                     </li>
                                                             </ul>
@@ -242,7 +242,7 @@ the administration settings. By default, the return is a string.</p>
 <p>When we come to validate a new create form, this means we have received a submit command
 in the form.  We can then validate our form and then trigger a <code>validate_edit</code> hook with</p>
 <pre><code class="language-php">$hook = new \Zikula\Bundle\HookBundle\Hook\ValidationHook(new \Zikula\Bundle\HookBundle\Hook\ValidationProviders());
-$this-&gt;dispatchHooks('...validate_edit', $hook);
+$this-&gt;dispatchHooks('…validate_edit', $hook);
 $validators = $hook-&gt;getValidators();</code></pre>
 <p>The validator collection can then be tested for the presence of validation errors or not
 with <code>$validators-&gt;hasErrors()</code>.  Together with the form submit the method can decide
@@ -266,7 +266,7 @@ Accordingly, we can notify the system of the hook events.</p>
 <p>When we come to validate an edit form, this means we have received a submit command
 in the form.  We can then validate our form and then trigger a <code>validate_edit</code> event with</p>
 <pre><code class="language-php">$hook = new \Zikula\Bundle\HookBundle\Hook\ValidationHook(new Zikula_Hook_ValidationProviders());
-$this-&gt;DispatchHooks('...validate_edit', $hook);
+$this-&gt;DispatchHooks('…validate_edit', $hook);
 $validators = $hook-&gt;getValidators();</code></pre>
 <p>The validator collection can then be tested for the presence of validation errors or not
 with <code>$validators-&gt;hasErrors()</code>.  Together with the form submit the method can decide

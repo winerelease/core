@@ -153,7 +153,7 @@
                                     </li>
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Developer/ExtensionDevelopment/index.html" class="nav-link">
-                                            Extension Development
+                                            Extension development
                                         </a>
                                     </li>
                                                             </ul>
@@ -219,16 +219,16 @@
 <h2 id="controller-edit-method">Controller edit method</h2>
 <pre><code class="language-php">public function edit()
 {
-    // ...
-    $form = $this-&gt;createForm(...);
+    // …
+    $form = $this-&gt;createForm(…);
     $formHook = new FormAwareHook($form);
-    $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name...', $formHook);
+    $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name…', $formHook);
     $form-&gt;handleRequest($request);
     if ($form-&gt;isValid()) { // FormAwareHook validates here automatically
-        // ... persist e.g. $page object, etc
+        // … persist e.g. $page object, etc
         $routeUrl = new RouteUrl('acmefoomodule_user_display', ['urltitle' =&gt; $page-&gt;getUrltitle()]);
-        $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name...', new FormAwareResponse($form, $page, $routeUrl));
-        // return redirect...
+        $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name…', new FormAwareResponse($form, $page, $routeUrl));
+        // return redirect…
     }
 
     return $this-&gt;render('AcmeFooModule:Foo:modify.html.twig', [
@@ -239,16 +239,16 @@
 <h2 id="controller-delete-method">Controller delete method</h2>
 <pre><code class="language-php">public function delete()
 {
-    // ...
-    $form = $this-&gt;createForm(...);
+    // …
+    $form = $this-&gt;createForm(…);
     $formHook = new FormAwareHook($form);
-    $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name...', $formHook);
+    $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name…', $formHook);
     $form-&gt;handleRequest($request);
     if ($form-&gt;isValid()) { // FormAwareHook validates here automatically
         $pageId = $page-&gt;getId();
-        // ... delete e.g. $page object, etc
-        $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name...', new FormAwareResponse($form, $pageId));
-        // return redirect...
+        // … delete e.g. $page object, etc
+        $this-&gt;get('hook_dispatcher')-&gt;dispatch('hook name…', new FormAwareResponse($form, $pageId));
+        // return redirect…
     }
 
     return $this-&gt;render('AcmeFooModule:Foo:delete.html.twig', [
@@ -259,11 +259,11 @@
 <h2 id="template-for-either-method">Template for either method</h2>
 <pre><code class="language-twig">{{ form_start(form) }}
 {{ form_errors(form) }}
-...
+…
 {% for hook_template in hook_templates %}
     {{ include(hook_template.0, hook_template.1, ignore_missing = true) }}
 {% endfor %}
-... submit/cancel buttons
+… submit/cancel buttons
 {{ form_end(form) }}</code></pre>
                 </section>
             </div>

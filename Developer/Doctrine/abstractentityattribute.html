@@ -153,7 +153,7 @@
                                     </li>
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Developer/ExtensionDevelopment/index.html" class="nav-link">
-                                            Extension Development
+                                            Extension development
                                         </a>
                                     </li>
                                                             </ul>
@@ -294,7 +294,7 @@ The column name &quot;entityId&quot; in <code>@JoinColumn</code> and <code>@Uniq
 <pre><code class="language-php">use Acme\YourModule\Entity\UserAttributeEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 
-// ...
+// …
 
 /**
  * @ORM\OneToMany(targetEntity="Acme\YourModule\Entity\UserAttributeEntity", 
@@ -332,17 +332,17 @@ the <code>AbstractEntityAttribute</code> subclass.</p>
 <p>List your <code>AbstractEntityAttribute</code> subclass in the <code>$this-&gt;schemaTool-&gt;create()</code> method call.</p>
 <h2 id="working-with-the-entities">Working with the entities</h2>
 <p>Set/change an attribute:</p>
-<pre><code class="language-php">$user = // ...
+<pre><code class="language-php">$user = // …
 $user-&gt;setAttribute('url', 'https://www.example.com');
 
 $entityManager-&gt;persist($user);</code></pre>
 <p>Remove an attribute:</p>
-<pre><code class="language-php">$user = // ...
+<pre><code class="language-php">$user = // …
 $user-&gt;setAttribute('url', null);
 
 $entityManager-&gt;persist($user);</code></pre>
 <p>Access all attributes:</p>
-<pre><code class="language-php">$user = // ...
+<pre><code class="language-php">$user = // …
 $urlValue = $user-&gt;getAttributes()-&gt;get('url')-&gt;getValue();</code></pre>
                 </section>
             </div>

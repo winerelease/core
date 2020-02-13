@@ -67,7 +67,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Contributing/index.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/Contributing/index.html" class="nav-link active">
                                             Contributing
                                         </a>
                                     </li>
@@ -162,7 +162,7 @@
                             </p>
                             <ul class="nav flex-column">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Translation/index.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/Translation/index.html" class="nav-link">
                                             Translation
                                         </a>
                                     </li>
@@ -214,24 +214,36 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="plural-forms">Plural forms</h1>
-<p>Note: before reading this you should have read the <a href="extraction.html">extraction chapter</a> first.</p>
-<h2 id="php-files">PHP files</h2>
-<p>PHP example using plural forms:</p>
-<pre><code class="language-php">// 4. With plural forms and advanced substitution
-$this-&gt;_fn('User deleted!', '%n users deleted!', count($deletedUsers), ['%n' =&gt; count($deletedUsers)]);
-/** @Desc("{count, plural,\n  one   {User deleted!}\n  other {# users deleted!}\n}") */
-$this-&gt;getTranslator()-&gt;trans('plural_n.users.deleted', ['%count%' =&gt; count($deletedUsers)]);</code></pre>
-<h2 id="twig-template-files">Twig template files</h2>
-<p>Here is an example using plural forms, advanced substitution and the <code>desc</code> filter:</p>
-<pre><code class="language-twig">Old: {% set amountOfUsers = _fn('%amount% registered user', '%amount% registered users', users|length, {'%amount%': users|length}) %}
-New: {% set amountOfUsers = 'plural_n.registered.user'|trans({count: users|length})|desc('{count, plural,\n  one   {one registered user}\n  other {# registered users}\n}') %}</code></pre>
-<p>The <code>plural_n</code> portion of the translation key is simply a convention established to note that this key requires plural translation.</p>
-<p>The translation of this would look something like:</p>
-<pre><code class="language-yaml">#messages+intl-icu.en.yaml
-plural_n.registered.user: "{count, plural,\n  one   {one registered user}\n  other {# registered users}\n}"</code></pre>
-<h2 id="note-about-icu">Note about ICU</h2>
-<p>More advanced translation like plurals and other substitutions require using the Symfony ICU MessageFormatter. See <a href="https://symfony.com/doc/current/translation/message_format.html">How to Translate Messages using the ICU MessageFormat</a>. This requires a specific name format on the translation file and other adjustments.</p>
+                    <h1 id="rules-governing-developers">Rules governing developers</h1>
+<p>These are the rules and guidelines governing all Zikula projects.</p>
+<ul>
+<li>Before we can accept any contributions you must sign the <a href="cla.html">Contributor License Agreement</a>.</li>
+<li>Please follow the <a href="codingstandards.html">code style guidelines</a>.</li>
+<li>All contributions must be committed against approved tickets in the project tracker. Ad hoc contributions are not allowed. Feature requests are marked with status 'approved' and assigned to milestones by the project lead. Developers may use their discretion with bug tickets and assign the ticket to most appropriate milestone.</li>
+<li>You are encouraged to discuss ideas and providing challenging and stimulating relevent debate.</li>
+<li>Developers should work in a team, or with a team spirit.</li>
+<li>All issues (features, bugs and tasks) must be logged in the issue tracker. Tasks and Features will be either accepted and assigned to a milestone or rejected by the project lead or appointee. Developer can begin working on bugs generally without any approval including assigning them to a milestone at their discretion.</li>
+<li>The project lead developer will have the final say in any matter.</li>
+<li>Developers are expected to follow the QA processes set out.
+<ul>
+<li>Test your work before you commit;</li>
+<li>Write unit tests for your work;</li>
+<li>Perform a diff before you commit;</li>
+<li>Commit your work regularly and in small increments;</li>
+<li>Commit against a ticket number;</li>
+<li>Merge work to other branches as required immediately;</li>
+<li>Please update the changelogs with each completed feature/task/bugfix;</li>
+<li>Do not break the codebase between commits (unless by agreement).</li>
+</ul></li>
+<li>Developers should all keep an eye on commits to the codebase looking for any obvious mistakes and errors from others - doing so helps the whole QA process. Everyone makes mistakes at some point, regardless of their experience or how careful they are. If someone makes a mistake just point it out in private, it's no big deal.</li>
+<li>Please do not drink and code - the ideas are never as good as you thought the next morning.</li>
+<li>As a general rule, if you feel unsure about anything, please ask.</li>
+<li>All developers should be willing to help eachother and willing to receive mentoring.</li>
+<li>Developers are expected to do their fair share of not-so-fun things like fixing bugs.</li>
+<li>If you are assigned a bug or task please do your best to complete it. If you dont know how, ask for help or see if someone else can take it.</li>
+<li>Please try to communicate your availability and be mindful of when you are unable to devote time to the project so other arrangements can be made to cover any commitments you have.</li>
+<li>Being a developer is a privilege and not a right. Developers who are unable to follow the guidelines or are continually disruptive may lose their privilege at the discretion of the project lead.</li>
+</ul>
                 </section>
             </div>
         </main>

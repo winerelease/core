@@ -153,7 +153,7 @@
                                     </li>
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Developer/ExtensionDevelopment/index.html" class="nav-link">
-                                            Extension Development
+                                            Extension development
                                         </a>
                                     </li>
                                                             </ul>
@@ -217,17 +217,17 @@
                     <h1 id="translation-extraction">Translation extraction</h1>
 <p>To extract translations use the console command <code>translation:extract</code>.</p>
 <p>To see all of it's option, do this:</p>
-<pre><code>php bin/console translation:extract -h
+<pre><code class="language-shell">php bin/console translation:extract -h
 # or
 php bin/console translation:extract --help</code></pre>
 <p>Example for Zikula core:</p>
-<pre><code># extract for all configured locales
+<pre><code class="language-shell"># extract for all configured locales
 php bin/console translation:extract zikula
 # extract only for English
 php bin/console translation:extract zikula en</code></pre>
 <p>Note <code>zikula</code> is the name of our configuration.</p>
 <p>Examples for a module or a theme:</p>
-<pre><code>php bin/console translation:extract -b AcmeFooModule extension
+<pre><code class="language-shell">php bin/console translation:extract -b AcmeFooModule extension
 php bin/console translation:extract --bundle AcmeFooModule extension en
 php bin/console translation:extract -b AcmeFooModule acmefoomodule
 php bin/console translation:extract --bundle AcmeFooModule acmefoomodule en
@@ -282,7 +282,7 @@ which would have been skipped otherwise.</p>
 <h3 id="combined-example">Combined example</h3>
 <p>If you have a form class which uses a help array with multiple help messages strings you need to prepare it like this:</p>
 <pre><code class="language-php">$builder-&gt;add('myField', [
-    // ...
+    // …
     /** @Ignore */
     'help' =&gt; [
         /** @Translate */'This is the first help message.',
