@@ -33,9 +33,11 @@
             <div class="row">
                                     <nav id="sidebar" class="col-md-3 col-xl-2" role="navigation">
                                                     <p class="text-muted">
-                                General
+                                <a href="#section1" data-toggle="collapse">
+                                    General
+                                </a>
                             </p>
-                            <ul class="nav flex-column">
+                            <ul id="section1" class="nav flex-column collapse show">
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/index.html" class="nav-link">
                                             Home page
@@ -83,9 +85,11 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
-                                Administrators
+                                <a href="#section2" data-toggle="collapse">
+                                    Administrators
+                                </a>
                             </p>
-                            <ul class="nav flex-column">
+                            <ul id="section2" class="nav flex-column collapse">
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Admin/index.html" class="nav-link">
                                             Overview
@@ -93,9 +97,11 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
-                                Developers
+                                <a href="#section3" data-toggle="collapse">
+                                    Developers
+                                </a>
                             </p>
-                            <ul class="nav flex-column">
+                            <ul id="section3" class="nav flex-column collapse">
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Developer/index.html" class="nav-link">
                                             Overview
@@ -158,9 +164,11 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
-                                Further topics
+                                <a href="#section4" data-toggle="collapse">
+                                    Further topics
+                                </a>
                             </p>
-                            <ul class="nav flex-column">
+                            <ul id="section4" class="nav flex-column collapse">
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Translation/index.html" class="nav-link">
                                             Translation
@@ -193,9 +201,11 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
-                                Resources
+                                <a href="#section5" data-toggle="collapse">
+                                    Resources
+                                </a>
                             </p>
-                            <ul class="nav flex-column">
+                            <ul id="section5" class="nav flex-column collapse">
                                                                     <li class="nav-item">
                                         <a href="https://ziku.la" class="nav-link">
                                             Zikula website
@@ -258,12 +268,6 @@ class PendingContentListener implements EventSubscriberInterface
         <script src="https://docs.ziku.la/js/jquery.min.js"></script>
         <script src="https://docs.ziku.la/js/bootstrap.bundle.min.js"></script>
         <script src="https://docs.ziku.la/js/highlight.pack.js"></script>
-        <script>
-            $(function() {
-                $('section > h1').wrap('<div class="page-header" />');
-                                hljs.initHighlightingOnLoad();
-                $("a[href^='http']:not([href*='docs.ziku.la'])").attr('target', '_blank');
-            });
-        </script>
+        <script src="https://docs.ziku.la/js/site.js"></script>
     </body>
 </html>
