@@ -136,22 +136,22 @@
                             </p>
                             <ul id="section4" class="nav flex-column collapse">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/groups.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Groups/index.html" class="nav-link">
                                             Groups
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/users.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/AccessControl/Users/index.html" class="nav-link active">
                                             Users
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/authentication.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Authentication/index.html" class="nav-link">
                                             Authentication
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/permissions.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Permissions/index.html" class="nav-link">
                                             Permissions
                                         </a>
                                     </li>
@@ -295,22 +295,42 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="access-user-and-registration-events">Access, User and Registration events</h1>
-<p>The following classes provide different events:</p>
-<ul>
-<li><code>\Zikula\UsersModule\AccessEvents</code></li>
-<li><code>\Zikula\UsersModule\RegistrationEvents</code></li>
-<li><code>\Zikula\UsersModule\UserEvents</code></li>
-</ul>
-<p>There are MANY events throughout the UsersModule. These have been divided amongst three classes to better organize them.
-Because there are so many, they are not documented here. Please see the respective classes for further information.</p>
-<ul>
-<li>Access Events: Events concerning login/logout/authentication</li>
-<li>Registration Events: Events concerning user registration</li>
-<li>User Events: Events concerning user account creation/display/manipulation.</li>
-</ul>
-<p>In addition, Hooks are used extensively within the UsersModule. There are also 'hook-like' events that are used
-within the UsersModule.</p>
+                    <h1 id="message-interface">Message interface</h1>
+<p>Modules that want the Core to identify the module as Message-capable must provide a class which implements
+<code>\Zikula\UsersModule\MessageModule\MessageModuleInterface</code>.</p>
+<p>This interface requires:</p>
+<pre><code class="language-php">/**
+ * Get the url to a user's inbox.
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getInboxUrl($userId = null): string;
+
+/**
+ * Get the count of all or only unread messages owned by the uid.
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getMessageCount($userId = null, bool $unreadOnly = false): int;
+
+/**
+ * Get the url to send a message to the identified uid.
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getSendMessageUrl($userId = null): string;
+
+/**
+ * Return the name of the providing bundle.
+ */
+public function getBundleName(): string;</code></pre>
+<p>These methods are used in the Core's twig filters - <code>messageSendLink</code>, <code>messageInboxLink</code> and <code>messageCount</code>.</p>
                 </section>
             </div>
         </main>

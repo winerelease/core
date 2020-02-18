@@ -136,22 +136,22 @@
                             </p>
                             <ul id="section4" class="nav flex-column collapse">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/groups.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Groups/index.html" class="nav-link">
                                             Groups
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/users.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Users/index.html" class="nav-link active">
                                             Users
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/authentication.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/AccessControl/Authentication/index.html" class="nav-link">
                                             Authentication
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/permissions.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Permissions/index.html" class="nav-link">
                                             Permissions
                                         </a>
                                     </li>
@@ -295,41 +295,42 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="user-authentication">User authentication</h1>
-<h2 id="introduction">Introduction</h2>
-<p>It is important to consider what <em>authentication</em> means. Authentication is a method where a trusted relationship is
-established to indicate that a user <em>is who they say they are</em>.</p>
-<p>But users can be created within Zikula, but this is no requirement because there may be multiple and different authentiation methods!</p>
-<h2 id="existing-authentication-methods">Existing authentication methods</h2>
-<h3 id="zauth">ZAuth</h3>
-<p>While the UsersModule is about the management of general user accounts, a separate module, ZAuthModule is responsible
-for the <em>authentication</em> of each user. This means that ZAuth is responsible for authentication credentials: username,
-email and password, for users that are created <em>within zikula</em>.</p>
-<p>ZAuth therefore maintains the password and provides admin and user interfaces for the management of the credentials.<br />
-In contrast to external authentication methods ZAuth does that simply local instead of using remote data.</p>
-<h3 id="oauth">OAuth</h3>
-<p>The OAuthModule provides the ability to use OAuth for authentication with common services, like:</p>
-<dl>
-<dt>Facebook</dt>
-<dd>Based on <a href="https://github.com/thephpleague/oauth2-facebook">thephpleague/oauth2-facebook</a>.</dd>
-<dt>GitHub</dt>
-<dd>Based on <a href="https://github.com/thephpleague/oauth2-github">thephpleague/oauth2-github</a>.</dd>
-<dt>Google</dt>
-<dd>Based on <a href="https://github.com/thephpleague/oauth2-google">thephpleague/oauth2-google</a>.</dd>
-<dt>Instagram</dt>
-<dd>Based on <a href="https://github.com/thephpleague/oauth2-instagram">thephpleague/oauth2-instagram</a>.</dd>
-<dt>LinkedIn</dt>
-<dd>Based on <a href="https://github.com/thephpleague/oauth2-linkedin">thephpleague/oauth2-linkedin</a>.</dd>
-</dl>
-<h3 id="others">Others</h3>
-<p>There are many other method possible to do authentication (e.g. LDAP, OpenID, etc.)</p>
-<p>TBD</p>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/authenticationmethodinterface.html">AuthenticationMethodInterface</a></li>
-<li><a href="Dev/authenticationrelatedevents.html">Authentication related events</a></li>
-<li><a href="Dev/passwordapi.html">PasswordApi</a></li>
-</ul>
+                    <h1 id="profile-interface">Profile interface</h1>
+<p>Modules that want the Core to identify the module as Profile-capable must provide a class which implements
+<code>\Zikula\UsersModule\ProfileModule\ProfileModuleInterface</code>.</p>
+<p>This interface requires:</p>
+<pre><code class="language-php">/**
+ * Display a module-defined user display name (e.g. set by the user) or display the uname as defined by the UserModule
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getDisplayName($userId = null): string;
+
+/**
+ * Get the url to a user's profile.
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getProfileUrl($userId = null): string;
+
+/**
+ * Get the avatar image for a given user.
+ * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
+ *
+ * @param int|string $userId The user's id or name
+ * @throws InvalidArgumentException if provided $userId is not null and invalid
+ */
+public function getAvatar($userId = null, array $parameters = []): string;
+
+/**
+ * Return the name of the providing bundle.
+ */
+public function getBundleName(): string;</code></pre>
+<p>These methods are used in the Core's twig filters - <code>userAvatar</code>, <code>profileLinkByUserId</code> and <code>profileLinkByUserName</code>.</p>
                 </section>
             </div>
         </main>

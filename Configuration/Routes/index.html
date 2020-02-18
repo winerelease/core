@@ -136,22 +136,22 @@
                             </p>
                             <ul id="section4" class="nav flex-column collapse">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/groups.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Groups/index.html" class="nav-link">
                                             Groups
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/users.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Users/index.html" class="nav-link">
                                             Users
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/authentication.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Authentication/index.html" class="nav-link">
                                             Authentication
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/permissions.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Permissions/index.html" class="nav-link">
                                             Permissions
                                         </a>
                                     </li>
@@ -295,11 +295,11 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="routes-and-custom-urls">Routes and custom urls</h1>
-<h2 id="changing-extension-urls">Changing extension urls</h2>
-<p>The urls of a module can be customized by the site admin. For this example we will use the following sample route:</p>
+                    <h1 id="routes-and-custom-urls">Routes and custom URLs</h1>
+<h2 id="changing-extension-urls">Changing extension URLs</h2>
+<p>The URLs of an extension can be customized by the site admin. For this example we will use the following sample route:</p>
 <p><code>/groups/admin/list</code></p>
-<p>The first part of this route (<code>/groups</code>) is called the prefix and is configurable from within the Extensions module.
+<p>The first part of this route (<code>/groups</code>) is called the prefix and is configurable from within the <a href="../Extensions/index.html">Extensions management</a>.
 Click on the wrench icon in the extension's row and change the value of the <strong>URL</strong> to your preference. However,
 there are restrictions on this value; you cannot select a value that is the same as any subdirectory within the
 <code>public</code> folder of your Zikula installation.</p>
@@ -307,8 +307,8 @@ there are restrictions on this value; you cannot select a value that is the same
 <p>The route module allows to add arbitrary rules to the system which are persisted in the database.
 This can be useful for example to:</p>
 <ul>
-<li>define redirects for obsolete urls</li>
-<li>add short urls pointing to more complex ones</li>
+<li>define redirects for obsolete URLs</li>
+<li>add short URLs pointing to more complex ones</li>
 </ul>
 <p>Note for managing custom routes it is recommended to read the <a href="https://symfony.com/doc/current/routing.html">Routing docs</a>
 of Symfony.</p>

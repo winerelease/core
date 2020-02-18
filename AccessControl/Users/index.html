@@ -136,22 +136,22 @@
                             </p>
                             <ul id="section4" class="nav flex-column collapse">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/groups.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Groups/index.html" class="nav-link">
                                             Groups
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/users.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/AccessControl/Users/index.html" class="nav-link active">
                                             Users
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/authentication.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Authentication/index.html" class="nav-link">
                                             Authentication
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/AccessControl/permissions.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/AccessControl/Permissions/index.html" class="nav-link">
                                             Permissions
                                         </a>
                                     </li>
@@ -295,42 +295,40 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="profile-interface">Profile interface</h1>
-<p>Modules that want the Core to identify the module as Profile-capable must provide a class which implements
-<code>\Zikula\UsersModule\ProfileModule\ProfileModuleInterface</code>.</p>
-<p>This interface requires:</p>
-<pre><code class="language-php">/**
- * Display a module-defined user display name (e.g. set by the user) or display the uname as defined by the UserModule
- * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
- *
- * @param int|string $userId The user's id or name
- * @throws InvalidArgumentException if provided $userId is not null and invalid
- */
-public function getDisplayName($userId = null): string;
-
-/**
- * Get the url to a user's profile.
- * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
- *
- * @param int|string $userId The user's id or name
- * @throws InvalidArgumentException if provided $userId is not null and invalid
- */
-public function getProfileUrl($userId = null): string;
-
-/**
- * Get the avatar image for a given user.
- * If uid is undefined, use CurrentUserApi to check loggedIn status and obtain and use the current user's uid
- *
- * @param int|string $userId The user's id or name
- * @throws InvalidArgumentException if provided $userId is not null and invalid
- */
-public function getAvatar($userId = null, array $parameters = []): string;
-
-/**
- * Return the name of the providing bundle.
- */
-public function getBundleName(): string;</code></pre>
-<p>These methods are used in the Core's twig filters - <code>userAvatar</code>, <code>profileLinkByUserId</code> and <code>profileLinkByUserName</code>.</p>
+                    <h1 id="user-accounts">User accounts</h1>
+<h2 id="users-and-user-management">Users and user management</h2>
+<p>In old Zikula versions the UsersModule was very large and responsible for too many roles in the project.
+Because of this, these roles have been split. Now, the UsersModule is only responsible for user management
+and maintenance of the single entity definition of a 'user' within the Zikula ecosystem. The UserModule
+determines the status (active/pending/inactive) of a user, various statistics like registration date and others,
+and a simple means of contacting users.</p>
+<h3 id="user-types">User types</h3>
+<p>Zikula will consider all users to be within two categories: &quot;logged in&quot; and &quot;not logged in&quot; users. Logged in users can
+be granted additional rights and roles with the Permissions Module. All users utilize sessions. It is not possible to
+visit any zikula page without beginning a session. Users that are not logged in are all considered UserId = 1. Other
+users are assigned a UID as they are created.</p>
+<h3 id="settings">Settings</h3>
+<ul>
+<li><a href="usersconfiguration.html">Users configuration</a></li>
+</ul>
+<h3 id="tbd">TBD</h3>
+<p>add more details about Users module</p>
+<h2 id="authentication">Authentication</h2>
+<p>A separate module, ZAuthModule is responsible for the <em>authentication</em> of each user. For further details refer to <a href="authentication.html">Authentication</a>.</p>
+<h3 id="security">Security</h3>
+<p>With passwords, security should be an immediate concern of any site admin. The proper storage of passwords is a difficult
+process and many systems have been provided to block attacks attempting to gain access to user data. The advantage of
+the separation between UsersModule and authentication methods is that ALL of this can be provided by external systems
+like Google or Facebook (via OAuth) and therefore relieve the Zikula site admin of the responsibility of password security.</p>
+<h2 id="user-profiles">User profiles</h2>
+<p>TBD</p>
+<h2 id="for-developers">For developers</h2>
+<ul>
+<li><a href="Dev/currentuserapi.html">CurrentUserApi</a></li>
+<li><a href="Dev/accessuserandregistrationevents.html">Access, User and Registration events</a></li>
+<li><a href="Dev/profileinterface.html">Profile interface</a></li>
+<li><a href="Dev/messageinterface.html">Message interface</a></li>
+</ul>
                 </section>
             </div>
         </main>
