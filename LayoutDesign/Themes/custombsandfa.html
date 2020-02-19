@@ -295,17 +295,20 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="using-a-customized-bootstrap-css-file">Using a customized Bootstrap CSS file</h1>
+                    <h1 id="using-custom-bootstrap-and-font-awesome-files">Using custom Bootstrap and Font Awesome files</h1>
 <h2 id="theme">Theme</h2>
 <p>A <strong>theme</strong> can force the core to use a customized build of Bootstrap CSS file by setting the
 <code>bootstrapPath</code> parameter value in its <code>theme.yaml</code> file:</p>
-<pre><code class="language-yaml">bootstrapPath: "@ZikulaBootstrapTheme:css/cerulean.min.css"</code></pre>
+<pre><code class="language-yaml">bootstrapPath: "@AcmeFooTheme:css/bootstrap.min.css"</code></pre>
 <h2 id="full-site">Full site</h2>
-<p>A <strong>site administrator</strong> can force the core to use a customized build of Bootstrap CSS file by setting a parameter
-value in <code>/config/services_custom.yaml</code>:</p>
-<pre><code class="language-yaml">zikula.stylesheet.bootstrap.min.path: "@AcmeFooModule:css/bootstrap.min.css"</code></pre>
-<p>The recommended location is in <code>/public</code>.</p>
-<pre><code class="language-yaml">zikula.stylesheet.bootstrap.min.path: "/bootstrap.min.css"</code></pre>
+<p>A <strong>site administrator</strong> can force the core to use a customized assets setting parameter values
+in <code>/config/services_custom.yaml</code>:</p>
+<pre><code class="language-yaml">zikula.javascript.bootstrap.min.path: '@AcmeFooModule:js/bootstrap.min.js' 
+zikula.stylesheet.bootstrap.min.path: '@AcmeFooModule:css/bootstrap.min.css'
+zikula.stylesheet.fontawesome.min.path: '@AcmeFooModule:css/font-awesome.min.css'</code></pre>
+<p>Note these resolve to <code>public/</code> subfolders (see <a href="../Templating/templateandassetlocations.html">Locations of Templates and Assets</a>).</p>
+<p>Instead of putting it into an extension you can also have it inside <code>public</code> directly:</p>
+<pre><code class="language-yaml">zikula.stylesheet.bootstrap.min.path: /custom-bootstrap.min.css</code></pre>
 <p><strong>Warning:</strong> setting the value in <code>/config/services_custom.yaml</code> will affect <em>every</em> theme on the site.</p>
                 </section>
             </div>
