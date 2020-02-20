@@ -302,12 +302,12 @@ a method to do so as a sub-menu to a 'Connections' parent menu item.</p>
 <h2 id="connections-menu">Connections Menu</h2>
 <p>Related classes:</p>
 <ul>
-<li>\Zikula\ExtensionsModule\Event\ConnectionsMenuEvent</li>
-<li>\Zikula\ExtensionsModule\Listener\ExtensionConnectionsListener</li>
+<li><code>\Zikula\ExtensionsModule\Event\ConnectionsMenuEvent</code></li>
+<li><code>\Zikula\ExtensionsModule\Listener\ExtensionConnectionsListener</code></li>
 </ul>
 <h3 id="how-to-add-a-child-menu-item-to-the-connections-menu">How to add a child menu item to the Connections Menu</h3>
 <p>Create a subscriber class for the <code>ConnectionsMenuEvent::class</code> event</p>
-<pre><code>use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+<pre><code class="language-php">use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Zikula\ExtensionsModule\Event\ConnectionsMenuEvent;
 use Zikula\PermissionsModule\Api\ApiInterface\PermissionApiInterface;
@@ -344,8 +344,9 @@ class ExampleFooSubscriber implements EventSubscriberInterface
         if (!$this-&gt;permissionApi-&gt;hasPermission($event-&gt;getExtensionName() . '::', '::', ACCESS_ADMIN)) {
             return;
         }
-        if ('ZikulaUserModule' == $event-&gt;getExtensionName()) {
-            // only add to menu for the User module
+
+        if ('ZikulaUsersModule' === $event-&gt;getExtensionName()) {
+            // only add to menu for the Users module
             $event-&gt;addChild($this-&gt;translator-&gt;trans('MyFooExtension Connection'), [
                 'route' =&gt; 'acmefoomodule_admin_foo',
                 'routeParameters' =&gt; ['moduleName' =&gt; $event-&gt;getExtensionName()]
