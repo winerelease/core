@@ -295,27 +295,63 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="permissions-system">Permissions system</h1>
-<p>The permission system of Zikula is very flexible and powerful: it allows a very fine-grained control over who is allowed to do what. This power also contains a certain complexity though. In this section permission rules are explained. It also discusses how permissions management works and what developers need to consider.</p>
-<h2 id="permission-rules-are-for-user-groups">Permission rules are for user groups</h2>
-<p>First of all, permission rules are always applied to <a href="../Groups/index.html">user groups</a>. Many years ago permission rules were also possible for single users, but this this had been waived for performance reasons. So if it should ever become necessary to regulate things differently for a certain user, a separate user group must be created for this.</p>
-<h2 id="basics">Basics</h2>
+                    <h1 id="powerful-permission-rules-with-regular-expressions">Powerful permission rules with regular expressions</h1>
+<h2 id="a-look-a-little-deeper">A look a little deeper</h2>
+<p>Both components and instances can be described using regular expressions. Here lies part of the flexibility and power of the permission system.</p>
+<p>First, it is possible to use a period with asterisk as a wildcard to designate a section as <em>everything</em> - so <code>.*</code> just means <em>all instances</em>.</p>
+<p>Furthermore, colons are used for both components and instances to separate three sections or divisions, as written above. Each section can be described by a term. If one term is specific enough, the rest are also assumed to mean <em>everything</em>, though the wildcard is not required.</p>
+<p>So there are two shorthand notations: asterisks can be omitted in specific references and colons can be omitted for global references.</p>
+<p>Here are concrete examples to make that clear:</p>
 <ul>
-<li><a href="elements.html">Fundamental elements of a permission rule</a></li>
-<li><a href="management.html">Further aspects for managing permissions</a></li>
+<li><code>.*</code> is equal to <code>.*:.*:.*</code></li>
+<li><code>MyComponent::</code> is equal to <code>MyComponent:.*:.*</code></li>
 </ul>
-<h2 id="advanced-topics">Advanced topics</h2>
+<p>For a first impression of how flexible this notation can be used consider a fictional <code>AcmeRecipesModule</code> which allows to manage recipes, ingredients and reviews. Here are some possible applications for different components (each with instance set to <code>.*</code>):</p>
 <ul>
-<li><a href="individualrules.html">Using individual / additional components</a></li>
-<li><a href="regularexpressions.html">Powerful permission rules with regular expressions</a></li>
+<li><code>AcmeRecipesModule::</code> applies for all entities in the recipes database.</li>
+<li><code>AcmeRecipesModule:Recipe:</code> applies for all recipe entities, but not for ingredients or reviews.</li>
+<li><code>AcmeRecipesModule:(Recipe|Ingredient):</code> applies for all recipe and ingredient entities, but not for reviews.</li>
 </ul>
-<h2 id="for-developers">For developers</h2>
+<p>A first simple example for a specific instance would be:</p>
 <ul>
-<li><a href="Dev/implementation.html">How to implement permissions</a></li>
-<li><a href="Dev/permissionapi.html">PermissionApi</a></li>
-<li><a href="Dev/permissioncheckannotation.html">PermissionCheck Annotation</a></li>
-<li><a href="../Integration/Categories/Dev/categorypermissionapi.html">CategoryPermissionApi</a></li>
+<li><code>AcmeRecipesModule:Recipe:</code> with <code>1::</code> applies only for the recipe entity with ID <code>1</code>.</li>
+<li><code>AcmeRecipesModule:Recipe:</code> with <code>Delicious cookie::</code> applies only for the recipe entity with title <code>Delicious cookie</code>.</li>
 </ul>
+<p>Which of them or if both are applicable depends on how <code>AcmeRecipesModule</code> uses and interprets the permission rules.</p>
+<h2 id="advanced-examples">Advanced examples</h2>
+<p>Let's venture into slightly more complex applications. The following more sophisticated examples will not be used in daily business, but could become handy if needed.</p>
+<h3 id="using-multiple-divisions">Using multiple divisions</h3>
+<p>As shown in the previous section it is quite common to have a component consisting of multiple levels which helps to target not an entire extension as a whole, but only specific sub components or content types within that extension.</p>
+<p>Using multiple levels in the instance part is a less common scenario because it makes only sense for use cases when instances may occur in different constellations.</p>
+<p>Let's assume that some users must neither see nor read the ingredient page of <em>Sugar</em>, but they should be able to see everything related to <em>Sugar</em> within the recipe for the delicious cookies from above.</p>
+<p>One possible realisation for that requirement could look like this:</p>
+<ul>
+<li><code>AcmeRecipesModule:Recipe:RecipeIngredient</code> with <code>Delicious cookie:Sugar:</code> and <code>ACCESS_READ</code></li>
+</ul>
+<p>Nested instances therefore could make sense if different contexts need to be differentiated for the same data.</p>
+<p>Of course it would also be possible to use multiple different components and/or combinations of components. Again, how a specific extension applies this in its implementation is individual.</p>
+<h3 id="hook-providers">Hook providers</h3>
+<p>Extensions offering <a href="../../Development/Hooks/index.html">hook providers</a> have extended requirements. Because they could want to support different permission schemes depending on the extensions that are connected as hook subscribers. The idea is that it is possible to define permissions for attached comments / reviews / files / etc. based on the objects where these are attached to.</p>
+<p>Hence, it makes sense to use the subscriber's name as first level for the instance part.</p>
+<p>The following examples are for a <code>AcmeFileManagerModule</code> that allows to attach uploads and files to other extensions.</p>
+<p>The three instance levels could be used like this:</p>
+<ol>
+<li>the subscriber extension</li>
+<li>the object identifier, that is the ID of the connected object, like a news article, a forum topic, a recipe etc.</li>
+<li>the file identifier, that is the ID of an uploaded and/or attached file</li>
+</ol>
+<p>This scheme would lead to the following possible examples for the instance part of corresponding permission rules:</p>
+<ul>
+<li><code>AcmeForumModule:6:</code> targets all files attached to the forum topic with ID 6</li>
+<li><code>AcmeForumModule:6:(3|5)</code> targets only files 3 and 5 in topic 6</li>
+<li><code>AcmeNewsModule:(3|4|5):</code> targets all files in articles 3, 4 and 5</li>
+<li><code>AcmeRecipesModule::</code> targets all files in the recipes database</li>
+<li><code>AcmeNewsModule:[^34]:</code> targets all files in all articles except 3 und 4</li>
+<li><code>AcmeRecipesModule:\d*[^34]\d*</code> all except those which IDs contain 3 or 4</li>
+</ul>
+<h3 id="the-any-instance">The ANY instance</h3>
+<p>If the instance part is set to <code>ANY</code> this causes a special processing. The permissions system interprets this as the user has ANY access to the given component, without the need to determine the exact instance. In practice this results in that the permission levels of all permission rules for that component are collected <em>until</em> the first one whose instance matches <code>::</code> (or <code>''</code> or <code>:::::</code>, doesn't matter). Afterwards the highest permission level that has been collected is granted.</p>
+<p>This special syntax may be useful in rare cases but should always be used with care.</p>
                 </section>
             </div>
         </main>

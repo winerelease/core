@@ -295,27 +295,51 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="permissions-system">Permissions system</h1>
-<p>The permission system of Zikula is very flexible and powerful: it allows a very fine-grained control over who is allowed to do what. This power also contains a certain complexity though. In this section permission rules are explained. It also discusses how permissions management works and what developers need to consider.</p>
-<h2 id="permission-rules-are-for-user-groups">Permission rules are for user groups</h2>
-<p>First of all, permission rules are always applied to <a href="../Groups/index.html">user groups</a>. Many years ago permission rules were also possible for single users, but this this had been waived for performance reasons. So if it should ever become necessary to regulate things differently for a certain user, a separate user group must be created for this.</p>
-<h2 id="basics">Basics</h2>
-<ul>
-<li><a href="elements.html">Fundamental elements of a permission rule</a></li>
-<li><a href="management.html">Further aspects for managing permissions</a></li>
-</ul>
-<h2 id="advanced-topics">Advanced topics</h2>
-<ul>
-<li><a href="individualrules.html">Using individual / additional components</a></li>
-<li><a href="regularexpressions.html">Powerful permission rules with regular expressions</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/implementation.html">How to implement permissions</a></li>
-<li><a href="Dev/permissionapi.html">PermissionApi</a></li>
-<li><a href="Dev/permissioncheckannotation.html">PermissionCheck Annotation</a></li>
-<li><a href="../Integration/Categories/Dev/categorypermissionapi.html">CategoryPermissionApi</a></li>
-</ul>
+                    <h1 id="fundamental-elements-of-a-permission-rule">Fundamental elements of a permission rule</h1>
+<p>Each permission rule consists of the following parts:</p>
+<dl>
+<dt>Group</dt>
+<dd>The user group to which the rule applies.</dd>
+<dt>Component</dt>
+<dd>The type(s) of content to which the rule applies.</dd>
+<dt>Instance</dt>
+<dd>The concrete instance(s) of the component to which the rule applies.</dd>
+<dt>Permission level</dt>
+<dd>The level of authorisation granted.</dd>
+</dl>
+<h2 id="permission-levels">Permission levels</h2>
+<p>Zikula uses the following nine permission levels:</p>
+<dl>
+<dt>No access (<code>ACCESS_NONE</code>)</dt>
+<dd>Users must not access the requested content and won't see affected instances at all.</dd>
+<dt>Overview access (<code>ACCESS_OVERVIEW</code>)</dt>
+<dd>Users may see requested content, but have no access to it for reading its details.</dd>
+<dt>Read access (<code>ACCESS_READ</code>)</dt>
+<dd>Users may see and read affected instances.</dd>
+<dt>Comment access (<code>ACCESS_COMMENT</code>)</dt>
+<dd>Users may read requested content and they can add commenting additions to it.</dd>
+<dt>Moderate access (<code>ACCESS_MODERATE</code>)</dt>
+<dd>Users may moderate affected instances in case some kind of a moderation exists.</dd>
+<dt>Edit access (<code>ACCESS_EDIT</code>)</dt>
+<dd>Users may edit affected content instances. They may not add new instances though. For example a news system reviewer is allowed to edit articles to correct typos, but may not submit new content.</dd>
+<dt>Add access (<code>ACCESS_ADD</code>)</dt>
+<dd>Users may add new content instances for the affected component types. Possibly they may also approve pending content instances.</dd>
+<dt>Delete access (<code>ACCESS_DELETE</code>)</dt>
+<dd>Users may delete existing content instances of the affected component types.</dd>
+<dt>Admin access (<code>ACCESS_ADMIN</code>)</dt>
+<dd>Users have full administrative rights for the affected content instances.</dd>
+</dl>
+<p>Important notes:</p>
+<ol>
+<li>Higher permission levels include lower ones. For example delete access means that also moderate, edit and add access are available.</li>
+<li>Any Zikula extension is free to decide how it interprets the permission levels. So what comment or moderate access specifically means can be different across multiple extensions and workflows.</li>
+</ol>
+<h2 id="about-components">About components</h2>
+<p>The component specifies the type(s) of content to which a specific rule applies.</p>
+<p>Any component consists of up to three levels that are separated by colons. The first level typically represents the extension or an extension's block within which the corresponding content types are processed.</p>
+<h2 id="about-instances">About instances</h2>
+<p>The instance part describes to which concrete instance(s) of the component a specific rule applies. If for example an extension allows creating recipes then each recipe record represents one instance of the corresponding permission component. Another example are blocks: it is possible to create several blocks of the same type, each of them is a dedicated instance of that block type.</p>
+<p>The instance part of permission rules may also consists of up to three levels (again separated by colons), which allows nested contexts to be specified if required.</p>
                 </section>
             </div>
         </main>

@@ -295,27 +295,12 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="permissions-system">Permissions system</h1>
-<p>The permission system of Zikula is very flexible and powerful: it allows a very fine-grained control over who is allowed to do what. This power also contains a certain complexity though. In this section permission rules are explained. It also discusses how permissions management works and what developers need to consider.</p>
-<h2 id="permission-rules-are-for-user-groups">Permission rules are for user groups</h2>
-<p>First of all, permission rules are always applied to <a href="../Groups/index.html">user groups</a>. Many years ago permission rules were also possible for single users, but this this had been waived for performance reasons. So if it should ever become necessary to regulate things differently for a certain user, a separate user group must be created for this.</p>
-<h2 id="basics">Basics</h2>
-<ul>
-<li><a href="elements.html">Fundamental elements of a permission rule</a></li>
-<li><a href="management.html">Further aspects for managing permissions</a></li>
-</ul>
-<h2 id="advanced-topics">Advanced topics</h2>
-<ul>
-<li><a href="individualrules.html">Using individual / additional components</a></li>
-<li><a href="regularexpressions.html">Powerful permission rules with regular expressions</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/implementation.html">How to implement permissions</a></li>
-<li><a href="Dev/permissionapi.html">PermissionApi</a></li>
-<li><a href="Dev/permissioncheckannotation.html">PermissionCheck Annotation</a></li>
-<li><a href="../Integration/Categories/Dev/categorypermissionapi.html">CategoryPermissionApi</a></li>
-</ul>
+                    <h1 id="using-individual--additional-components">Using individual / additional components</h1>
+<p>Should it become necessary to perform individual checks - for example in a custom <a href="../../LayoutDesign/Themes/index.html">theme</a> - individual components can be used at any time. The permissions system is not limited to those components that have been announced by extensions.</p>
+<p>So it is possible any time to create rules for a <code>MySpecial:Individual:Check</code> component and check for that in a template like this:</p>
+<pre><code class="language-twig">{% if hasPermission('MySpecial:Individual:Check', '::', 'ACCESS_READ') %}
+    &lt;h3&gt;This is only for some VIP&lt;/h3&gt;
+{% endif %}</code></pre>
                 </section>
             </div>
         </main>

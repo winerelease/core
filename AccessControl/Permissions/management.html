@@ -295,26 +295,20 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="permissions-system">Permissions system</h1>
-<p>The permission system of Zikula is very flexible and powerful: it allows a very fine-grained control over who is allowed to do what. This power also contains a certain complexity though. In this section permission rules are explained. It also discusses how permissions management works and what developers need to consider.</p>
-<h2 id="permission-rules-are-for-user-groups">Permission rules are for user groups</h2>
-<p>First of all, permission rules are always applied to <a href="../Groups/index.html">user groups</a>. Many years ago permission rules were also possible for single users, but this this had been waived for performance reasons. So if it should ever become necessary to regulate things differently for a certain user, a separate user group must be created for this.</p>
-<h2 id="basics">Basics</h2>
+                    <h1 id="further-aspects-for-managing-permissions">Further aspects for managing permissions</h1>
+<h2 id="why-the-order-matters">Why the order matters</h2>
+<p>An important thing to know is that the order of rules is important. As all rules are part of an ordered table the permissions system as a whole can be imagined as a hierarchy: the system evaluates permissions from top to bottom whereby the first match for a given request is used. Background is the performance, so that not with each check for access rights unnecessarily many rules must be evaluated.</p>
+<p>This is especially important to remember with regards to that any user may be a member of multiple user groups. As a rule of thumb it is a good approach to have rules for groups with higher permissions above rules for other groups which should have less abilities.</p>
+<p>If for example a moderators group should be able to add posts and other users may only read posts, then the rule for moderators should come before the rule for users to ensure that moderators get their permission also if they are part of the users group additionally.</p>
+<h2 id="looking-up-components-and-instances">Looking up components and instances</h2>
+<p>The permissions administration page allows to open an overview of all registered components along with a template for possible instances by clicking on the <em>&quot;Permission rules information&quot;</em> link. Note this overview includes all currently available components, depending on which extensions are installed and activated.</p>
+<h2 id="testing-permission-rules">Testing permission rules</h2>
+<p>Whenever there is an uncertainty about whether a specific permission is correctly configured or not it is possible to test permissions for any user name. Below the permission rules table there is a form which shows if a user has a given permission level for a given component and instance or not.</p>
+<h2 id="keeping-the-overview">Keeping the overview</h2>
+<p>A permission rule has two more fields that are only for assisting the site administrator and have not been mentioned yet above:</p>
 <ul>
-<li><a href="elements.html">Fundamental elements of a permission rule</a></li>
-<li><a href="management.html">Further aspects for managing permissions</a></li>
-</ul>
-<h2 id="advanced-topics">Advanced topics</h2>
-<ul>
-<li><a href="individualrules.html">Using individual / additional components</a></li>
-<li><a href="regularexpressions.html">Powerful permission rules with regular expressions</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/implementation.html">How to implement permissions</a></li>
-<li><a href="Dev/permissionapi.html">PermissionApi</a></li>
-<li><a href="Dev/permissioncheckannotation.html">PermissionCheck Annotation</a></li>
-<li><a href="../Integration/Categories/Dev/categorypermissionapi.html">CategoryPermissionApi</a></li>
+<li>An optional comment which can store explanations for the rule that are displayed as a tooltip when hovering over the corresponding table row.</li>
+<li>A Bootstrap colour class which can be used for building visual groups to mark multiple related rules.</li>
 </ul>
                 </section>
             </div>
