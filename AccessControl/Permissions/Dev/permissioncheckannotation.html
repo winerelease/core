@@ -300,7 +300,7 @@
 <li>Class: <code>\Zikula\PermissionsModule\Annotation\PermissionCheck</code></li>
 <li>Also see: <code>\Zikula\PermissionsModule\Listener\ControllerPermissionCheckAnnotationReaderListener</code></li>
 </ul>
-<p>This annotation is used in a Controller Action Method OR CLASS in one of two ways.</p>
+<p>This annotation is used in a Controller Action Method OR Controller Class in one of two ways.</p>
 <ol>
 <li>
 <p>Like so: <code>@PermissionCheck("admin")</code>
@@ -324,18 +324,13 @@ Possible alias values are:</p>
 <p>Also allowed: <code>@PermissionCheck("ACCESS_ADMIN")</code></p>
 </li>
 <li>
-<p>You can also pass any valid permission schema (e.g. <code>@PermissionCheck({"ZikulaCategoriesModule::category", "ID::5", "ACCESS_EDIT"})</code></p>
+<p>You can also pass any valid permission schema (e.g. <code>@PermissionCheck({"ZikulaCategoriesModule::category", "ID::5", "ACCESS_EDIT"})</code>.</p>
 <ul>
-<li>note the use of curly brackets <code>{}</code> within for this type of value</li>
+<li>Note the use of curly brackets <code>{}</code> within for this type of value.</li>
 </ul>
-<p>The listener will attempt to replace any variable with a route attribute value. For example if this is the annotation:</p>
-<ul>
-<li><code>@PermissionCheck({"ZikulaGroupsModule::", "$gid::", "ACCESS_EDIT"})</code></li>
-</ul>
-<p>Then, the listener will look for an 'gid' attribute in the <code>Request</code> object and replace the variable name with its value
-when testing for permissions.
-You can also use <code>$_zkModule</code> as the Extension name if preferred, e.g. <code>@PermissionCheck({"$_zkModule::", "$gid::", "ACCESS_EDIT"})</code>
-You can also use the access alias if preferred, e.g. <code>@PermissionCheck({"$_zkModule::", "$gid::", "edit"})</code></p>
+<p>The listener will attempt to replace any variable with a route attribute value. For example if the annotation is <code>@PermissionCheck({"ZikulaGroupsModule::", "$gid::", "ACCESS_EDIT"})</code> then the listener will look for an 'gid' attribute in the <code>Request</code> object and replace the variable name with its value when testing for permissions.<br />
+You can also use <code>$_zkModule</code> as the extension name if preferred, e.g. <code>@PermissionCheck({"$_zkModule::", "$gid::", "ACCESS_EDIT"})</code>.<br />
+You can also use the access alias if preferred, e.g. <code>@PermissionCheck({"$_zkModule::", "$gid::", "edit"})</code>.</p>
 </li>
 </ol>
 <h3 id="please-note-you-cannot-use-permissioncheck-in">Please note: You cannot use @PermissionCheck() in <em>both</em> the Class and the Method. This will produce an AnnotationException.</h3>
