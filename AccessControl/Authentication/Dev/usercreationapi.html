@@ -329,8 +329,7 @@ public function clearCreated(): void;</code></pre>
      groups (a list of int gid separated by |, defaults to Users group)
          does not fail on non-existent groups</code></pre>
 <p>Here is an example of how the class might be used:</p>
-<pre><code class="language-php">
-$api = $container-&gt;get(UserCreationApi::class); // Do not fetch the service from the container, use Dependency Injection.
+<pre><code class="language-php">$api = $container-&gt;get(UserCreationApi::class); // Do not fetch the service from the container, use Dependency Injection.
 
 $userArrays = [/*...my array of user arrays...*/];
 
