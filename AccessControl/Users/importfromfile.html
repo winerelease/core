@@ -295,44 +295,34 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="user-accounts">User accounts</h1>
-<h2 id="users-and-user-management">Users and user management</h2>
-<p>In old Zikula versions the UsersModule was very large and responsible for too many roles in the project.
-Because of this, these roles have been split. Now, the UsersModule is only responsible for user management
-and maintenance of the single entity definition of a 'user' within the Zikula ecosystem. The UserModule
-determines the status (active/pending/inactive) of a user, various statistics like registration date and others,
-and a simple means of contacting users.</p>
-<h3 id="user-types">User types</h3>
-<p>Zikula will consider all users to be within two categories: &quot;logged in&quot; and &quot;not logged in&quot; users. Logged in users can
-be granted additional rights and roles with the Permissions Module. All users utilize sessions. It is not possible to
-visit any zikula page without beginning a session. Users that are not logged in are all considered UserId = 1. Other
-users are assigned a UID as they are created.</p>
-<h3 id="settings">Settings</h3>
+                    <h1 id="importing-users-from-a-csv-file">Importing users from a CSV file</h1>
+<p>You can import a CSV file to create many users quickly. <strong>The CLI method is recommended</strong>.
+For both methods, you must create a CSV file:</p>
+<p>The first row of the CSV file must contain the field names. It must be like this:</p>
+<pre><code>uname,pass,email,activated,sendmail,groups</code></pre>
+<p>where:</p>
 <ul>
-<li><a href="usersconfiguration.html">Users configuration</a></li>
+<li>uname(mandatory) - The user name. This value must be unique.</li>
+<li>pass(mandatory) - The user password. It must have 8 characters or more. Preferentially containing letters and numbers.</li>
+<li>email(mandatory) - The user email. If the validation method is based on the user email this value must be unique.</li>
+<li>activated- Type 0 if user is not active, 1 if the user must be active. The default value is 1.</li>
+<li>sendmail- Type 1 if the system must send the password to the user via email and 0 otherwise. The default value is 1. The module Mailer must be active and correctly configured. The email is sent only if user activated value is upper than 0.</li>
+<li>groups- The identities of the groups where the user must belong separated by the character |. If you do not specify any group, the default group is Users. Undefined groups will be ignored.</li>
 </ul>
-<h3 id="tbd">TBD</h3>
-<p>add more details about Users module</p>
-<h2 id="authentication">Authentication</h2>
-<p>A separate module, ZAuthModule is responsible for the <em>authentication</em> of each user. For further details refer to <a href="authentication.html">Authentication</a>.</p>
-<h3 id="security">Security</h3>
-<p>With passwords, security should be an immediate concern of any site admin. The proper storage of passwords is a difficult
-process and many systems have been provided to block attacks attempting to gain access to user data. The advantage of
-the separation between UsersModule and authentication methods is that ALL of this can be provided by external systems
-like Google or Facebook (via OAuth) and therefore relieve the Zikula site admin of the responsibility of password security.</p>
-<h2 id="user-profiles">User profiles</h2>
-<p>TBD</p>
-<h2 id="importing-users-from-a-csv-file">Importing users from a CSV file</h2>
-<ul>
-<li><a href="importfromfile.html">Importing Users</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/currentuserapi.html">CurrentUserApi</a></li>
-<li><a href="Dev/accessuserandregistrationevents.html">Access, User and Registration events</a></li>
-<li><a href="Dev/profileinterface.html">Profile interface</a></li>
-<li><a href="Dev/messageinterface.html">Message interface</a></li>
-</ul>
+<p>An example of a valid CSV file</p>
+<pre><code>uname,pass,email,activated,sendmail,groups
+albert,12secure09,albert@example.org,1,1,2
+george,lesssecure,george@example.org,1,0,1|5
+robert,hispassword,robert@example.org,,,</code></pre>
+<p>Another example of a valid CSV file</p>
+<pre><code>uname,pass,email
+albert,12secure09,albert@example.org
+george,lesssecure,george@example.org
+robert,hispassword,robert@example.org</code></pre>
+<h2 id="via-cli-recommended">Via CLI (recommended)</h2>
+<pre><code>bin/console zikula:users:import path/to/my/file/importUsers.txt</code></pre>
+<h2 id="via-web-interface">Via web interface</h2>
+<pre><code>route: /zauth/fileIO/import</code></pre>
                 </section>
             </div>
         </main>
