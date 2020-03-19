@@ -310,7 +310,7 @@ changes including upgrades are tested on before application to the live site.</p
 All the dependencies and requirements are included in this package.</p>
 <h2 id="upgrading">Upgrading</h2>
 <p>The minimum upgrade version is Zikula Core 1.4.3. Please upgrade to at least this version before attempting to upgrade
-to Core-2.0.x.</p>
+to Core-3.0.x.</p>
 <p>The following process should be followed for all upgrades even small point releases (e.g. <code>2.0.x</code>).</p>
 <ul>
 <li>First: <strong>Backup all your files and database.</strong></li>
@@ -328,15 +328,18 @@ to see potential solutions to this problem when installing from the CLI.</li>
 check your phpinfo.) <code>mod_suexec</code> often is used in shared hosting environments. In this case, the CLI installer is not
 recommended, please use the Web Installer.</li>
 </ul></li>
-<li>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.
+<li>
+<p>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.</p>
 <ul>
 <li><strong>Add an entry named <code>core_installed_version: a.b.c</code></strong> whereby <code>a.b.c</code> should be your old version if it does not exist yet.</li>
+<li><strong>Remove</strong> the key/value pairs for <code>core_installed_version</code> and <code>installed</code>.</li>
 <li><strong>Change the value of <code>datadir</code> to <code>public/uploads</code></strong></li>
 <li>Do not change any other values.</li>
-</ul></li>
+<li>From the new installation, copy the <code>.env</code> file to <code>.env.local</code></li>
+<li><strong>Add</strong> <code>ZIKULA_INSTALLED='a.b.c'</code> to the end of the file. Change <code>a.b.c</code> to the exact version of your existing install (e.g. <code>2.0.11</code>).
+<h3 id="continue">Continue</h3></li>
 </ul>
-<h3 id="continue">Continue</h3>
-<ul>
+</li>
 <li>Copy your custom theme to your new installation. The folders of your theme should be in the exact same place as your backup.</li>
 <li>Return compatible extensions to the <code>/src/extensions</code> directory.
 <ul>
@@ -344,7 +347,7 @@ recommended, please use the Web Installer.</li>
 </ul></li>
 <li>Copy your backup contents of <code>/userdata</code> into <code>/public/uploads</code></li>
 <li>
-<p>Then <strong>start the upgrade (do one or the other)</strong></p>
+<p>Then <strong>start the upgrade (do one or the other, CLI is recommended)</strong></p>
 <ul>
 <li>Via Web: launch <code>http://yoursiteurl/</code> (you will be redirected to <code>/upgrade</code>) and follow any on-screen prompts.</li>
 <li>Via CLI:</li>
