@@ -296,7 +296,8 @@
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
                     <h1 id="errors">Errors</h1>
-<p>Zikula will catch and render all exceptions as an error page. Very much like <a href="https://symfony.com/doc/current/controller/error_pages.html">Symfony</a>,
+<p>When the environment variable <code>APP_DEBUG</code> is set to <code>0</code>, Zikula will catch and render all exceptions as an error page.
+Very much like <a href="https://symfony.com/doc/current/controller/error_pages.html">Symfony</a>,
 the developer can override the templates to customize the user experience.</p>
 <p>The original template is <code>@ZikulaThemeModule/Exception/error.html.twig</code></p>
 <p>This template can be overridden in the usual manner - both in the theme and in the <code>/templates</code> directories.</p>
@@ -305,6 +306,7 @@ the developer can override the templates to customize the user experience.</p>
 
 e.g. `@ZikulaThemeModule/Exception/error404.html.twig`</code></pre>
 <p>This should also be located in the theme or <code>/templates</code> directories as desired.</p>
+<p>note: When <code>APP_DEBUG=1</code>, Symfony's own error handler will display the full trace on the error instead.</p>
                 </section>
             </div>
         </main>
