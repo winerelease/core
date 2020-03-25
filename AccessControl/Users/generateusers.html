@@ -301,20 +301,27 @@
 <pre><code>bin/console zikula:users:generate</code></pre>
 <h3 id="options">Options</h3>
 <ul>
-<li><code>--active=[0|1|2]</code>
+<li><code>--active=[A|I|P|M|R]</code>
 <ul>
-<li><code>0</code> all users inactive</li>
-<li><code>1</code> all users active</li>
+<li><code>A</code> all users active (default)</li>
+<li><code>I</code> all users inactive</li>
+<li><code>P</code> all users pending</li>
+<li><code>M</code> all users marked for deletion</li>
+<li><code>R</code> random assignment per user (<code>A|I|P|M</code>)</li>
+</ul></li>
+<li><code>--verified=[0|1|2]</code>
+<ul>
+<li><code>0</code> all user emails unverified</li>
+<li><code>1</code> all user emails verified (default)</li>
 <li><code>2</code> random assignment per user (<code>0|1</code>)</li>
 </ul></li>
 <li>
-<p><code>--verified=[0|1|2]</code></p>
+<p><code>--regdate='(&gt;)YYYYMMDD'</code></p>
 <ul>
-<li><code>0</code> all user emails unverified</li>
-<li><code>1</code> all user emails verified</li>
-<li><code>2</code> random assignment per user (<code>0|1</code>)</li>
+<li>setting just a date like <code>20000101</code> will set that as regdate for all created users.</li>
+<li>adding <code>&gt;</code> before the date will make each regdate a random date between the provided date and now.</li>
 </ul>
-<p>bin/console zikula:users:generate --active=0 --verified=2</p>
+<p>bin/console zikula:users:generate --active=I --verified=2 --regdate='&gt;20000101'</p>
 </li>
 </ul>
                 </section>
