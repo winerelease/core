@@ -99,6 +99,11 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
+                                        <a href="https://docs.ziku.la/Configuration/Mailer/index.html" class="nav-link">
+                                            Mailer
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
                                         <a href="https://docs.ziku.la/Configuration/AdminPanel/index.html" class="nav-link">
                                             Admin panel
                                         </a>
@@ -326,6 +331,56 @@ used as the service name.</p>
 <p><code>Zikula\Core\LinkContainer\LinkContainerCollector</code> and <code>Zikula\Core\LinkContainer\LinkContainerInterface</code> have been
 removed. Extension menus are not implemented using Knp Menu instead. See docs and system modules for further
 information and examples.</p>
+<h2 id="sending-mails">Sending mails</h2>
+<p>The <code>MailerApi</code> and <code>SwiftMailer</code> have been removed in favour of the Symfony Mailer component.</p>
+<p>You will see the new interface is more intuitive. Start by injecting <code>Symfony\Component\Mailer\MailerInterface</code> and reading through the docs linked further below.</p>
+<p>Here is a first example of how to migrate the code for sending mails:</p>
+<pre><code class="language-php">// OLD
+
+use Swift_Message;
+use Zikula\MailerModule\Api\ApiInterface\MailerApiInterface;
+
+class MyService
+{
+    // ...
+
+    public function send()
+    {
+        // ...
+        $message = new Swift_Message();
+        $message-&gt;setFrom([$adminMail =&gt; $siteName]);
+        $message-&gt;setTo([$user-&gt;getEmail() =&gt; $user-&gt;getUname()]);
+        $this-&gt;mailer-&gt;sendMessage($message, $title, $htmlBody, '', true);
+    }
+}
+
+// NEW
+
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
+
+class MyService
+{
+    // ...
+
+    public function send()
+    {
+        // ...
+        try {
+            $email = (new Email())
+                -&gt;from(new Address($adminMail, $siteName))
+                -&gt;to(new Address($user-&gt;getEmail(), $user-&gt;getUname()))
+                -&gt;subject($title)
+                -&gt;html($htmlBody)
+            ;
+            $this-&gt;mailer-&gt;send($email);
+        } catch (TransportExceptionInterface $exception) {
+            // ...
+        }
+}</code></pre>
+<p>For more information please refer to <a href="../../Configuration/Mailer/index.html">Mailer docs</a>.</p>
 <h2 id="translations">Translations</h2>
 <p>All custom Zikula translation mechanisms have been removed in favour of Symfony's native translation system.</p>
 <p>For more information please refer to <a href="../../Translation/index.html">Translation docs</a>.</p>
