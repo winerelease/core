@@ -295,42 +295,25 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="templating">Templating</h1>
-<p>Zikula uses the Twig template engine, like Symfony does.</p>
-<h2 id="basic-topics">Basic topics</h2>
-<h3 id="general-information-about-template-and-asset-handling">General information about template and asset handling</h3>
-<ul>
-<li><a href="templateandassetlocations.html">Locations of Templates and Assets</a></li>
-<li><a href="pageassets.html">Page assets</a></li>
-<li><a href="assetcombination.html">Asset combination</a></li>
-</ul>
-<h3 id="twig-extensions">Twig extensions</h3>
-<ul>
-<li><a href="functions.html">Twig functions provided by Zikula Core</a></li>
-<li><a href="filters.html">Twig filters provided by Zikula Core</a></li>
-<li><a href="tags.html">Twig tags provided by Zikula Core</a></li>
-</ul>
-<h3 id="additional-topics">Additional topics</h3>
-<ul>
-<li><a href="globalvariables.html">Twig template global variables</a></li>
-<li><a href="debuggingtwig.html">Debugging Twig templates</a></li>
-<li><a href="imagine.html">Image manipulation with Imagine</a></li>
-<li><a href="errors.html">Errors</a></li>
-</ul>
-<h2 id="external-resources">External resources</h2>
-<ul>
-<li><a href="https://twig.symfony.com/doc/3.x/">Twig docs</a></li>
-<li><a href="https://twig.symfony.com/doc/3.x/#reference">Twig extensions provided by Twig</a></li>
-<li><a href="https://symfony.com/doc/current/reference/twig_reference.html">Twig extensions provided by Symfony</a></li>
-<li><a href="https://getbootstrap.com/">Bootstrap 4</a></li>
-<li><a href="https://fontawesome.com/">Font Awesome 5</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/pageassetapi.html">PageAssetApi</a></li>
-<li><a href="Dev/pagination.html">Pagination of large result sets</a></li>
-<li><a href="Dev/alphafilter.html">Display an Alpha filter</a></li>
-</ul>
+                    <h1 id="alphafilter">AlphaFilter</h1>
+<p>In large result sets that are alphanumerically based, it is often helpful to display a filter selector that can
+quickly link to results beginning with that letter or number. Zikula provides a quick method to do so.
+In order to utilize Zikula's AlphaFilter, the following steps should be followed:</p>
+<h3 id="in-the-controller">In the controller</h3>
+<pre><code class="language-php">use Zikula\Bundle\CoreBundle\Filter\AlphaFilter;
+// ...
+
+return [
+    'templateParam' =&gt; $value,
+    'alpha' =&gt; new AlphaFilter('mycustomroute', $routeParameters, $currentLetter),
+];</code></pre>
+<h3 id="in-the-template">In the template</h3>
+<pre><code class="language-twig">{{ include(alpha.template) }}</code></pre>
+<h3 id="options">Options</h3>
+<p>By default, the filter does not display digits. In order to enable them, add a fourth argument to the constructor:</p>
+<pre><code class="language-php">new AlphaFilter('mycustomroute', $routeParameters, $currentLetter, true);</code></pre>
+<p>The template can be customized by overriding <code>@Core/Filter/AlphaFilter.html.twig</code> in all the normal ways.
+You can also simply set your own custom template in the controller <code>$myAlphaFilter-&gt;setTemplate('@MyBundle/Custom/Template.html.twig');</code></p>
                 </section>
             </div>
         </main>
