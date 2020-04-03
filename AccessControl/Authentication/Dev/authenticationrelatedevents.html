@@ -296,23 +296,23 @@
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
                     <h1 id="authentication-related-events">Authentication related events</h1>
-<p><code>Zikula\UsersModule\RegistrationEvents::FULL_USER_CREATE_VETO</code></p>
+<p><code>Zikula\UsersModule\Event\ActiveUserPreCreatedEvent</code></p>
 <ul>
 <li>Force the registration to create a 'pending' user instead of a full user.</li>
 </ul>
-<p><code>Zikula\UsersModule\RegistrationEvents::REGISTRATION_SUCCEEDED</code></p>
+<p><code>Zikula\UsersModule\Event\RegistrationPostSuccessEvent</code></p>
 <ul>
 <li>React to a successfully completed registration</li>
 </ul>
-<p><code>Zikula\UsersModule\RegistrationEvents::FORCE_REGISTRATION_APPROVAL</code></p>
+<p><code>Zikula\UsersModule\Event\RegistrationPostApprovedEvent</code></p>
 <ul>
 <li>React to an administrator's wish to force a user to become a 'full' user.</li>
 </ul>
-<p><code>Zikula\UsersModule\UserEvents::DELETE_ACCOUNT</code></p>
+<p><code>Zikula\UsersModule\Event\ActiveUserPostDeletedEvent</code></p>
 <ul>
 <li>React to the deletion of a user.</li>
 </ul>
-<p><code>Zikula\UsersModule\RegistrationEvents::DELETE_REGISTRATION</code></p>
+<p><code>Zikula\UsersModule\Event\RegistrationPostDeletedEvent</code></p>
 <ul>
 <li>React to the deletion of a pending user.</li>
 </ul>
