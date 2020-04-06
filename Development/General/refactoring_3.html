@@ -420,7 +420,16 @@ class MyService
 <li>Core bundles
 <ul>
 <li><code>Zikula\Bundle\FormExtensionBundle\Event\FormTypeChoiceEvent</code> no longer extends <code>Symfony\Contracts\EventDispatcher\Event</code>.</li>
+<li>Also, listeners should respond to the form <em>class</em>, the static property <code>NAME</code> is removed.</li>
 <li><code>Zikula\Bundle\HookBundle\Hook\Hook</code> (and all its subclasses) no longer extends <code>Symfony\Contracts\EventDispatcher\Event</code>.</li>
+</ul></li>
+<li>Blocks module
+<ul>
+<li><code>get.pending_content</code> which was formerly in CoreBundle is removed in favor of <code>Zikula\BlocksModule\Event\PendingContentEvent</code></li>
+<li><code>Zikula\Bundle\CoreBundle\Collection\Collectible\PendingContentCollectible</code> has changed its namespace to
+<ul>
+<li><code>Zikula\BlocksModule\Collectible\PendingContentCollectible</code></li>
+</ul></li>
 </ul></li>
 <li>Extensions module
 <ul>
@@ -454,6 +463,10 @@ class MyService
 <li>Routes module
 <ul>
 <li><code>new.routes.avail</code> event is replaced by <code>Zikula\RoutesModule\Event\RoutesNewlyAvailableEvent</code></li>
+</ul></li>
+<li>SecurityCenter module
+<ul>
+<li><code>Zikula\SecurityCenterModule\Api\ApiInterface\HtmlFilterApiInterface::HTML_STRING_FILTER</code> is removed in favor of <code>Zikula\SecurityCenterModule\Event\FilterHtmlEvent</code></li>
 </ul></li>
 <li>Theme module
 <ul>
