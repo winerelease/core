@@ -295,25 +295,49 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="extensions">Extensions</h1>
-<h2 id="generating-from-scratch">Generating from scratch</h2>
-<ul>
-<li><a href="extensionmaker.html">ExtensionMaker command</a></li>
-</ul>
-<h2 id="extension-variables">Extension variables</h2>
-<ul>
-<li><a href="variableapi.html">VariableApi</a></li>
-<li><a href="extensionvariablestrait.html">ExtensionVariablesTrait</a></li>
-</ul>
-<h2 id="capabilities">Capabilities</h2>
-<ul>
-<li><a href="capabilityapi.html">CapabilityApi</a></li>
-</ul>
-<h2 id="misc">Misc</h2>
-<ul>
-<li><a href="extensiondocs.html">Provide help docs</a></li>
-<li><a href="extensionconnections.html">Extension Connections</a></li>
-</ul>
+                    <h1 id="extension-maker">Extension Maker</h1>
+<p>&quot;Thank the Maker!&quot; - C3P0</p>
+<p>The CoreBundle provides a CLI function which takes advantage of the Symfony MakerBundle ecosystem.
+This easy to use function will quickly generate the skeleton of a fully functional and installable
+Zikula Extension (Module or Theme). To use it, you must have a fully functional Zikula installation (this should
+be done locally of course). Put your installation into <code>dev</code> mode by altering the <code>APP_ENV</code> value in the <code>.env.local</code>
+file and change it from <code>prod</code> to <code>dev</code>. Then decide on a 'namespace' - this will be how your extension is named.
+For example, if you are generating a Blog module and your name is Fabien, you could select <code>Fabien/Blog</code>. The first
+part is called the <em>vendor</em> (in this case 'Fabien') and the second part is going to be the name of the extension.
+The full extension name combines these into FabienBlogModule.</p>
+<p>Now call the function with your namespace and choose and extension type (Module or Theme). In this case, we are
+generating a <em>Module</em>.</p>
+<p>```shell script
+php bin/console make:zikula-extension Fabien/Blog Module</p>
+<pre><code>
+The Extension is fully generated in the `src/extensions` directory.
+When that is complete, you will be reminded to execute two more commands:
+
+```shell script
+php bin/console cache:clear</code></pre>
+<p>```shell script
+php bin/console zikula:extension:install FabienBlogModule</p>
+<pre><code>
+After that is complete, you can take full advantage of the rest of the Symfony/MakerBundle commands to create the
+rest of your extension. For a full list of Makers, execute this command:
+
+```shell script
+php bin/console list make</code></pre>
+<p>Use the Makers to create Controllers, Commands, Crud operations, Forms and so much more. And of course, if you prefer,
+you can always manually create anything you like. You are not restricted by the the makers!</p>
+<h2 id="makeset-namespace">make:set-namespace</h2>
+<p>You can use Symfony's MakerBundle to create new classes and files for any existing Extension, but to do so, you must
+set the config up properly to use the namespace of the Extension you are working on. To do so, execute this command:</p>
+<p>```shell script
+php bin/console make:set-namespace Acme/FooTheme</p>
+<pre><code>
+
+Please note that the namespace in this command differs slightly than the generator above because it includes
+the fully generated namespace with the suffix.
+
+## note:
+For CLI the CLI commands, the arguments including slashes can be either `/` or `\\` (actually meaning one forward slash).
+The command will correct the type used in the various files.</code></pre>
                 </section>
             </div>
         </main>
