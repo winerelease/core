@@ -296,7 +296,9 @@
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
                     <h1 id="extension-maker">Extension Maker</h1>
+<blockquote>
 <p>&quot;Thank the Maker!&quot; - C3P0</p>
+</blockquote>
 <p>The CoreBundle provides a CLI function which takes advantage of the Symfony MakerBundle ecosystem.
 This easy to use function will quickly generate the skeleton of a fully functional and installable
 Zikula Extension (Module or Theme). To use it, you must have a fully functional Zikula installation (this should
@@ -307,37 +309,25 @@ part is called the <em>vendor</em> (in this case 'Fabien') and the second part i
 The full extension name combines these into FabienBlogModule.</p>
 <p>Now call the function with your namespace and choose and extension type (Module or Theme). In this case, we are
 generating a <em>Module</em>.</p>
-<p>```shell script
-php bin/console make:zikula-extension Fabien/Blog Module</p>
-<pre><code>
-The Extension is fully generated in the `src/extensions` directory.
-When that is complete, you will be reminded to execute two more commands:
-
-```shell script
-php bin/console cache:clear</code></pre>
-<p>```shell script
-php bin/console zikula:extension:install FabienBlogModule</p>
-<pre><code>
-After that is complete, you can take full advantage of the rest of the Symfony/MakerBundle commands to create the
-rest of your extension. For a full list of Makers, execute this command:
-
-```shell script
-php bin/console list make</code></pre>
+<pre><code class="language-shell">php bin/console make:zikula-extension Fabien/Blog Module</code></pre>
+<p>The Extension is fully generated in the <code>src/extensions</code> directory.
+When that is complete, you will be reminded to execute two more commands:</p>
+<pre><code class="language-shell">php bin/console cache:clear</code></pre>
+<pre><code class="language-shell">php bin/console zikula:extension:install FabienBlogModule</code></pre>
+<p>After that is complete, you can take full advantage of the rest of the Symfony/MakerBundle commands to create the
+rest of your extension. For a full list of Makers, execute this command:</p>
+<pre><code class="language-shell">php bin/console list make</code></pre>
 <p>Use the Makers to create Controllers, Commands, Crud operations, Forms and so much more. And of course, if you prefer,
 you can always manually create anything you like. You are not restricted by the the makers!</p>
 <h2 id="makeset-namespace">make:set-namespace</h2>
 <p>You can use Symfony's MakerBundle to create new classes and files for any existing Extension, but to do so, you must
 set the config up properly to use the namespace of the Extension you are working on. To do so, execute this command:</p>
-<p>```shell script
-php bin/console make:set-namespace Acme/FooTheme</p>
-<pre><code>
-
-Please note that the namespace in this command differs slightly than the generator above because it includes
-the fully generated namespace with the suffix.
-
-## note:
-For CLI the CLI commands, the arguments including slashes can be either `/` or `\\` (actually meaning one forward slash).
-The command will correct the type used in the various files.</code></pre>
+<pre><code class="language-shell">php bin/console make:set-namespace Acme/FooTheme</code></pre>
+<p>Please note that the namespace in this command differs slightly than the generator above because it includes
+the fully generated namespace with the suffix.</p>
+<h2 id="note">note:</h2>
+<p>For CLI the CLI commands, the arguments including slashes can be either <code>/</code> or <code>\\</code> (actually meaning one forward slash).
+The command will correct the type used in the various files.</p>
                 </section>
             </div>
         </main>
