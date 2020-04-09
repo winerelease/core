@@ -316,13 +316,13 @@ Implementation inside your listener might look similar to this example:</p>
 {
     $choices = $event-&gt;getChoices();
 
-    $groupName = $this-&gt;translator-&gt;__('Other Fields', 'zikula');
+    $groupName = $this-&gt;translator-&gt;trans('Other Fields', 'zikula');
     if (!isset($choices[$groupName])) {
         $choices[$groupName] = [];
     }
 
     $groupChoices = $choices[$groupName];
-    $groupChoices[$this-&gt;translator-&gt;__('Avatar')] = AvatarType::class;
+    $groupChoices[$this-&gt;translator-&gt;trans('Avatar')] = AvatarType::class;
     $choices[$groupName] = $groupChoices;
 
     $event-&gt;setChoices($choices);

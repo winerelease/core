@@ -309,7 +309,7 @@ The composer.json file is also used by composer and packagist to enable package 
 <li>license: (required) License name (string) or an array of license names (array of strings) under which the extension
 is provided. You must use the standardized identifier acronym for the license as defined by
 <a href="http://spdx.org/licenses/">Software Package Data Exchange</a></li>
-<li>authors: (optional but recommended) an array of objects indicating author or group information</li>
+<li>authors: (required) an array of objects indicating author or group information</li>
 <li>autoload: (required) object defining psr-4 namespace object</li>
 <li>require: (required) object defining bundle dependencies</li>
 <li>extra: (required) the zikula object with required keys
@@ -318,13 +318,13 @@ is provided. You must use the standardized identifier acronym for the license as
 <li>core-compatibility: (required) a <a href="https://getcomposer.org/doc/01-basic-usage.html#package-versions">version compatibility string</a> defining core compatibility</li>
 <li>class: (required) the fully qualified name of the Bundle class</li>
 <li>displayname: (required) the common name for the bundle (translatable)</li>
+<li>icon: full fontawesome css class</li>
 <li>capabilities: (required if controllers are used) an object of objects defining capabilities of the extension
 <ul>
 <li>user:</li>
 <li>theme: true|false</li>
 <li>admin:</li>
 <li>theme: true|false</li>
-<li>icon: full fontawesome css class</li>
 </ul></li>
 </ul></li>
 </ul>

@@ -296,18 +296,15 @@
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
                     <h1 id="twig-render-events">Twig render events</h1>
-<p>The <code>\Zikula\ThemeModule\ThemeEvents</code> class provides these events:</p>
-<pre><code class="language-php">/**
- * Occurs immediately before twig theme engine renders a template.
- * subject is \Zikula\ThemeModule\Bridge\Event\TwigPreRenderEvent
- */
-public const PRE_RENDER = 'theme.pre_render';
-
-/**
- * Occurs immediately after twig theme engine renders a template.
- * subject is \Zikula\ThemeModule\Bridge\Event\TwigPostRenderEvent
- */
-public const POST_RENDER = 'theme.post_render';</code></pre>
+<p>The theme engine class provides these events:</p>
+<p>Occurs immediately before twig theme engine renders a template.</p>
+<ul>
+<li><code>Zikula\ThemeModule\Bridge\Event\TwigPreRenderEvent</code></li>
+</ul>
+<p>Occurs immediately after twig theme engine renders a template.</p>
+<ul>
+<li><code>Zikula\ThemeModule\Bridge\Event\TwigPostRenderEvent</code></li>
+</ul>
                 </section>
             </div>
         </main>

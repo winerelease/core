@@ -304,7 +304,7 @@
 {{ pagevars.meta.description }}
 {{ pagevars.meta.charset }}</code></pre>
 <p>When creating a template, variables can be created, modified or retrieved using the template tags:</p>
-<pre><code class="language-twig">{{ pageSetVar('title', __('My Custom Page Title')) }}
+<pre><code class="language-twig">{{ pageSetVar('title', 'My Custom Page Title'|trans ) }}
 {{ pageGetVar('title', 'my default value') }}</code></pre>
 <p>Note: do NOT use <code>pagevars.homepath</code> for an asset path! The constructed url is <strong>locale</strong> sensitive and will include the
 locale in the path!</p>
