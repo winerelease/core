@@ -311,12 +311,13 @@ All the dependencies and requirements are included in this package.</p>
 <h2 id="upgrading">Upgrading</h2>
 <p>The minimum upgrade version is Zikula Core 1.4.3. Please upgrade to at least this version before attempting to upgrade
 to Core-3.0.x.</p>
-<p>The following process should be followed for all upgrades even small point releases (e.g. <code>2.0.x</code>).</p>
+<p>The following process should be followed for all upgrades even small point releases (e.g. <code>3.0.x</code>).</p>
 <ul>
 <li>First: <strong>Backup all your files and database.</strong></li>
 <li>Make a note of your 'startpage' settings as they must be cleared in the upgrade process.</li>
-<li>All blocks using MenuTree, ExtMenu or Menu will be DELETED during the upgrade as these are no longer available in Core-2.0.
+<li>All (1.x.x) blocks using MenuTree, ExtMenu or Menu will be DELETED during the upgrade as these are no longer available.
 You should consider deleting and replacing these with a MenuModule block before upgrading.</li>
+<li>All Hook connections will be deleted and need to be re-connected post-upgrade.</li>
 <li>Before uploading the new files, delete <strong>all files</strong> in your web root (typically <code>public_html</code> or <code>httpdocs</code>).</li>
 <li>Upload the new package and unpack the archive.
 <ul>
@@ -331,7 +332,6 @@ recommended, please use the Web Installer.</li>
 <li>
 <p>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.</p>
 <ul>
-<li><strong>Add an entry named <code>core_installed_version: a.b.c</code></strong> whereby <code>a.b.c</code> should be your old version if it does not exist yet.</li>
 <li><strong>Remove</strong> the key/value pairs for <code>core_installed_version</code> and <code>installed</code>.</li>
 <li><strong>Change the value of <code>datadir</code> to <code>public/uploads</code></strong></li>
 <li>Do not change any other values.</li>
@@ -340,8 +340,8 @@ recommended, please use the Web Installer.</li>
 <h3 id="continue">Continue</h3></li>
 </ul>
 </li>
-<li>Copy your custom theme to your new installation. The folders of your theme should be in the exact same place as your backup.</li>
-<li>Return compatible extensions to the <code>/src/extensions</code> directory.
+<li>Copy your <em>compatible</em> custom theme to your new installation. Themes are now placed in <code>src/extensions</code>.</li>
+<li>Return <em>compatible</em> extensions to the <code>src/extensions</code> directory.
 <ul>
 <li><strong>DO NOT copy the old Profile and Legal module</strong> as new versions of these are provided, and their location may differ.</li>
 </ul></li>
