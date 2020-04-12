@@ -295,35 +295,35 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="theme-system">Theme system</h1>
-<h2 id="basic-topics">Basic topics</h2>
+                    <h1 id="branding">Branding</h1>
+<p>Zikula offers some functions for branding related features.</p>
+<h2 id="site-definition">Site definition</h2>
+<p>First, you can include the following things in Twig templates:</p>
 <ul>
-<li><a href="requestresponsecycle.html">Request / Response cycle</a></li>
-<li><a href="custombsandfa.html">Using custom Bootstrap and Font Awesome files</a></li>
-<li><a href="themechangepermissions.html">Allowing themes to change via permissions</a></li>
-<li>Special themes: Atom, Printer, RSS</li>
+<li>Site name: <code>{{ siteName() }}</code>.</li>
+<li>Site slogan: <code>{{ siteSlogan() }}</code>.</li>
+<li>Logo: <code>{{ siteImagePath('logo') }}</code>.</li>
+<li>Logo for mobile devices: <code>{{ siteImagePath('mobileLogo') }}</code>.</li>
+<li>Icon: <code>{{ siteImagePath('icon') }}</code>.</li>
 </ul>
-<h2 id="creating-a-theme">Creating a theme</h2>
-<ul>
-<li><a href="themecreationexample.html">Creating a theme based on ZikulaBootstrapTheme</a></li>
-<li><a href="structure.html">Theme file structure</a></li>
-<li><a href="templateoverrides.html">Theme template overrides</a></li>
-<li><a href="themeconfiguration.html">Theme configuration</a></li>
-<li><a href="themevariables.html">Theme variables</a></li>
-</ul>
-<h2 id="additional-topics">Additional topics</h2>
-<ul>
-<li><a href="branding.html">Branding</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/themeclass.html">Theme class</a></li>
-<li><a href="Dev/composerfile.html">Theme composer file</a></li>
-<li><a href="Dev/dependencyinjection.html">Dependency injection</a></li>
-<li><a href="Dev/themeannotation.html">Theme annotation</a></li>
-<li><a href="Dev/twigrenderevents.html">Twig render events</a></li>
-<li><a href="../../Configuration/Settings/Dev/sitedefinition.html">Site definition</a></li>
-</ul>
+<p>All these things are determined by the <em>Site definition</em>.</p>
+<p>To customise this you have two options:</p>
+<ol>
+<li>For easy injection of custom images you can just <a href="../Templating/templateandassetlocations.html">override them</a>.</li>
+<li>For more advanced customisation you can subclass the site definition and add your own logic. You can place this wherever you want, including your custom theme. For further information please read the <a href="../../Configuration/Settings/Dev/sitedefinition.html">Site definition docs</a> at the bottom.</li>
+</ol>
+<h2 id="view-images">View images</h2>
+<p>You can see an overview of all currently used images when calling <code>/theme/config/config</code> at your site.</p>
+<h2 id="additional-assets">Additional assets</h2>
+<p>If you add <code>{{ siteBranding() }}</code> to the <code>&lt;head&gt;</code> section in your theme it embeds the <code>system/ThemeModule/Resources/views/Engine/manifest.html.twig</code>. This references a web application manifests and further images for a more sophisticated branding. Of course you can override this template like any other one if you need custom markup.</p>
+<p>Note these assets are located directly in <code>/public</code> which means they cannot be adjusted with overriding, but must be overwritten. Background is that it is recommended to put these things directly into the root folder of a page. To generate your own images it is recommended to use <a href="https://realfavicongenerator.net/">favicon generator</a>.</p>
+<h2 id="branding-vs-themes">Branding vs. Themes</h2>
+<p>The idea behind site definitions and branding functionality is that themes should not make any assumptions about branding. Both topics should not be coupled with each other. This has two benefits:</p>
+<ol>
+<li>A theme can be better reused for several pages.</li>
+<li>A page can centrally provide several themes with the same branding.</li>
+</ol>
+<p>If a site has different themes for spring, summer, autumn and winter, it always uses the same logo, favicon, etc. - and even if it doesn't, it can still map the logic to its own site definition without redundantly adjusting the themes.</p>
                 </section>
             </div>
         </main>
