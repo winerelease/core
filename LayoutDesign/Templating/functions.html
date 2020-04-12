@@ -301,24 +301,31 @@ by the Twig package itself. See <a href="https://twig.symfony.com">Twig document
 Also see <a href="https://symfony.com/doc/current/reference/twig_reference.html">standard Symfony functions</a> for additional
 functions, filters, tags, tests and global variables.</p>
 <h2 id="functions">Functions</h2>
-<h3 id="useful">Useful</h3>
+<h3 id="general">General</h3>
 <ul>
 <li>array_unset(array, key)</li>
 <li>callFunc(callable, params = [])</li>
-<li>defaultPath(extensionName, type = 'user')</li>
-<li>dispatchEvent($name, GenericEvent $providedEvent = null, $subject = null, array $arguments = [], $data = null)</li>
-<li>getModVar(module, name, default = null)</li>
-<li>getSystemVar(name, default = null)</li>
 <li>hasPermission(component, instance, level)</li>
+<li>showflashes(params = [])</li>
+<li>siteName()</li>
+<li>siteSlogan()</li>
+</ul>
+<h3 id="themes-and-assets">Themes and Assets</h3>
+<ul>
 <li>pageAddAsset(type, value, weight = 100)</li>
 <li>pageGetVar(name, default = null)</li>
 <li>pageSetVar(name, value)</li>
-<li>showflashes(params = [])</li>
-<li>stateLabel(extensionEntity, upgradedExtensions = null)</li>
 <li>zasset(path)</li>
 </ul>
-<h3 id="hooks">Hooks</h3>
+<h3 id="extensions-and-variables">Extensions and Variables</h3>
 <ul>
+<li>getModVar(module, name, default = null)</li>
+<li>getSystemVar(name, default = null)</li>
+<li>defaultPath(extensionName, type = 'user')</li>
+</ul>
+<h3 id="events-and-hooks">Events and Hooks</h3>
+<ul>
+<li>dispatchEvent($name, GenericEvent $providedEvent = null, $subject = null, array $arguments = [], $data = null)</li>
 <li>notifyDisplayHooks(eventName, id = null, urlObject = null)</li>
 <li>routeUrl(routeName, routeParameters = [], fragment = null)</li>
 </ul>
@@ -363,6 +370,7 @@ functions, filters, tags, tests and global variables.</p>
 <ul>
 <li>adminPanelMenu()</li>
 <li>extensionActions(extension)</li>
+<li>stateLabel(extensionEntity, upgradedExtensions = null)</li>
 <li>getPreviewImagePath(themeName, size = &quot;medium&quot;)</li>
 </ul>
 <h4 id="blocks">Blocks</h4>
