@@ -420,7 +420,7 @@ class MyService
 <li>Core bundles
 <ul>
 <li><code>Zikula\Bundle\FormExtensionBundle\Event\FormTypeChoiceEvent</code> no longer extends <code>Symfony\Contracts\EventDispatcher\Event</code>.</li>
-<li>Also, listeners should respond to the form <em>class</em>, the static property <code>NAME</code> is removed.</li>
+<li>Also, listeners should respond to the event <em>class</em>, the static property <code>NAME</code> is removed.</li>
 <li><code>Zikula\Bundle\HookBundle\Hook\Hook</code> (and all its subclasses) no longer extends <code>Symfony\Contracts\EventDispatcher\Event</code>.</li>
 </ul></li>
 <li>Blocks module
@@ -459,6 +459,7 @@ class MyService
 <li>Menu module
 <ul>
 <li><code>Zikula\MenuModule\Event\ConfigureMenuEvent</code> no longer extends <code>Symfony\Contracts\EventDispatcher\Event</code>.</li>
+<li>Also, listeners should respond to the event <em>class</em>, the static property <code>POST_CONFIGURE</code> is removed.</li>
 </ul></li>
 <li>Routes module
 <ul>
