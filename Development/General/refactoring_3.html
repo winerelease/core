@@ -544,7 +544,7 @@ class MyService
 <p>and so on…</p>
 <h3 id="template-paths">Template paths</h3>
 <ul>
-<li>change all template names from e.g. <code>Bundle:Controller:Action.html.twig</code> to <code>@Bundle/Controller/Action.html.twig</code></li>
+<li>Change all template names from e.g. <code>Bundle:Controller:Action.html.twig</code> to <code>@Bundle/Controller/Action.html.twig</code>.</li>
 <li>Modules and themes retain the <code>Module</code> or <code>Theme</code> suffix but bundles do not.</li>
 </ul>
 <h3 id="templates">Templates</h3>
@@ -666,6 +666,11 @@ class MyService
 </tr>
 </tbody>
 </table>
+<h3 id="admin-panel-integration">Admin panel integration</h3>
+<ul>
+<li>Remove all calls of <code>adminHeader()</code> and <code>adminFooter()</code> from extension templates.</li>
+<li>Ensure that your admin theme calls them instead at a central place where appropriate.</li>
+</ul>
                 </section>
             </div>
         </main>
