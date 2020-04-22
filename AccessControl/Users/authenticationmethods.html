@@ -295,49 +295,34 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="user-accounts">User accounts</h1>
-<h2 id="users-and-user-management">Users and user management</h2>
-<p>In old Zikula versions the UsersModule was very large and responsible for too many roles in the project.
-Because of this, these roles have been split. Now, the UsersModule is only responsible for user management
-and maintenance of the single entity definition of a 'user' within the Zikula ecosystem. The UserModule
-determines the status (active/pending/inactive) of a user, various statistics like registration date and others,
-and a simple means of contacting users.</p>
-<h3 id="user-types">User types</h3>
-<p>Zikula will consider all users to be within two categories: &quot;logged in&quot; and &quot;not logged in&quot; users. Logged in users can
-be granted additional rights and roles with the Permissions Module. All users utilize sessions. It is not possible to
-visit any zikula page without beginning a session. Users that are not logged in are all considered UserId = 1. Other
-users are assigned a UID as they are created.</p>
-<h3 id="settings">Settings</h3>
-<ul>
-<li><a href="usersconfiguration.html">Users configuration</a></li>
-<li><a href="authenticationmethods.html">Authentication Methods</a></li>
-</ul>
-<h3 id="tbd">TBD</h3>
-<p>add more details about Users module</p>
-<h2 id="authentication">Authentication</h2>
-<p>Separate modules like ZAuthModule are responsible for the <em>authentication</em> of each user. For further details refer to <a href="../Authentication/index.html">Authentication</a>.</p>
-<h3 id="security">Security</h3>
-<p>With passwords, security should be an immediate concern of any site admin. The proper storage of passwords is a difficult
-process and many systems have been provided to block attacks attempting to gain access to user data. The advantage of
-the separation between UsersModule and authentication methods is that ALL of this can be provided by external systems
-like Google or Facebook (via OAuth) and therefore relieve the Zikula site admin of the responsibility of password security.</p>
-<h2 id="user-profiles">User profiles</h2>
-<p>TBD</p>
-<h2 id="importing-users-from-a-csv-file">Importing users from a CSV file</h2>
-<ul>
-<li><a href="importfromfile.html">Importing Users</a></li>
-</ul>
-<h2 id="generate-users">Generate users</h2>
-<ul>
-<li><a href="generateusers.html">Generate users for test purposes</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/currentuserapi.html">CurrentUserApi</a></li>
-<li><a href="Dev/accessuserandregistrationevents.html">Access, User and Registration events</a></li>
-<li><a href="Dev/profileinterface.html">Profile interface</a></li>
-<li><a href="Dev/messageinterface.html">Message interface</a></li>
-</ul>
+                    <h1 id="authentication-methods">Authentication Methods</h1>
+<p>In the Users module, the admin can select the <em>authentication method(s)</em> to which the admin would like to allow their
+users access. Simply check the box next to the methods to make them available to users. It is not recommended to provide
+<em>many</em> options to users. While theoretically allowing many is possible, it is not good design for a site and could
+confuse your users, causing them to register multiple accounts with different services. In addition, if an email address
+is registered with one authentication method, the same email address cannot register with a different authentication
+method (this is a change in Core-3.0). </p>
+<p>Zikula comes standard with the ZikulaZAuthModule which provides three methods:</p>
+<h3 id="native_uname-default">NATIVE_UNAME (default)</h3>
+<p>This method requires that the <code>uname</code> (user name) selected by the registering user be <strong>unique</strong>. However, the <code>email</code>
+address input by the registering user is <strong>NOT</strong> required to be unique when compared to other users registering with
+ZAuth's NATIVE_UNAME. When logging in, users are presented with a form requiring their <strong>uname</strong> and password.</p>
+<h3 id="native_email">NATIVE_EMAIL</h3>
+<p>This method requires that <strong>both</strong> the <code>uname</code> and <code>email</code> values be unique when compared to other users registering with
+ZAuth's NATIVE_EMAIL. When logging in, users are presented with a form requiring their <strong>email</strong> and password.</p>
+<h3 id="native_email-1">NATIVE_EMAIL</h3>
+<p>This method requires that both the <code>uname</code> and <code>email</code> values be unique when compared to other users registering with
+ZAuth's NATIVE_EMAIL. When logging in, users are presented with a form requiring either their <strong>uname</strong> or <strong>email</strong>
+and password. The login form detects the type of value in the first field and authenticates as needed from that info.</p>
+<h4 id="password-security-note">Password security note</h4>
+<p>Core-3.0 introduces a new and very much improved security layer for user passwords. Relying on Symfony and the password
+encryption improvements made in PHP 7, Zikula now automatically upgrades users to the best encryption available on the
+server. This is checked and improved on <em>every</em> login.</p>
+<h2 id="additional-methods">Additional Methods</h2>
+<p>Additional methods may be listed if other extensions supporting AuthenticationMethodInterface are installed
+and configured properly. Zikula provides the ZikulaOAuthModule which implements authentication via Facebook, Github,
+Google, LinkedIn or Instagram. Other third party extensions may provide more. For developer information on creating a
+new authentication method, see <a href="../Authentication/Dev/authenticationmethodinterface.html">AuthenticationMethodInterface.md</a></p>
                 </section>
             </div>
         </main>
