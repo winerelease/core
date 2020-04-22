@@ -306,13 +306,13 @@ method (this is a change in Core-3.0). </p>
 <h3 id="native_uname-default">NATIVE_UNAME (default)</h3>
 <p>This method requires that the <code>uname</code> (user name) selected by the registering user be <strong>unique</strong>. However, the <code>email</code>
 address input by the registering user is <strong>NOT</strong> required to be unique when compared to other users registering with
-ZAuth's NATIVE_UNAME. When logging in, users are presented with a form requiring their <strong>uname</strong> and password.</p>
+ZAuth. When logging in, users are presented with a form requiring their <strong>uname</strong> and password.</p>
 <h3 id="native_email">NATIVE_EMAIL</h3>
 <p>This method requires that <strong>both</strong> the <code>uname</code> and <code>email</code> values be unique when compared to other users registering with
-ZAuth's NATIVE_EMAIL. When logging in, users are presented with a form requiring their <strong>email</strong> and password.</p>
-<h3 id="native_email-1">NATIVE_EMAIL</h3>
+ZAuth. When logging in, users are presented with a form requiring their <strong>email</strong> and password.</p>
+<h3 id="native_either">NATIVE_EITHER</h3>
 <p>This method requires that both the <code>uname</code> and <code>email</code> values be unique when compared to other users registering with
-ZAuth's NATIVE_EMAIL. When logging in, users are presented with a form requiring either their <strong>uname</strong> or <strong>email</strong>
+ZAuth. When logging in, users are presented with a form requiring either their <strong>uname</strong> or <strong>email</strong>
 and password. The login form detects the type of value in the first field and authenticates as needed from that info.</p>
 <h4 id="password-security-note">Password security note</h4>
 <p>Core-3.0 introduces a new and very much improved security layer for user passwords. Relying on Symfony and the password
