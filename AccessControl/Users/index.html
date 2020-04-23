@@ -321,6 +321,17 @@ users are assigned a UID as they are created.</p>
 process and many systems have been provided to block attacks attempting to gain access to user data. The advantage of
 the separation between UsersModule and authentication methods is that ALL of this can be provided by external systems
 like Google or Facebook (via OAuth) and therefore relieve the Zikula site admin of the responsibility of password security.</p>
+<h3 id="user-deletion">User deletion</h3>
+<p>A site admin always has the right to delete users from the UserAdministration page or via CLI. When deleting users, two
+options are available: <strong>full</strong> deletion or <strong>ghost</strong> deletion.</p>
+<p>1) <strong>Full deletion</strong> means that the user record, all cascading records and all data in responding extensions are completely
+deleted. This could have unintended side effects and is not recommended. For example, the UID will be removed, thus
+if a third-party entity requires that user-record, the request could fail, creating 'orphaned' data.
+2) <strong>Ghost deletion</strong> means that the user's personal information (uname, email, etc) and all login ability is fully removed
+but the user record remains valid. This means that third-party records depending on the UserEntity (UID) will not
+fail and a 'ghost' user record will be returned.</p>
+<p>In both cases, the username is added to the list of 'illegal' usernames for the future to prevent impersonating deleted users.
+Additionally, the user cannot be reinstated.</p>
 <h2 id="user-profiles">User profiles</h2>
 <p>TBD</p>
 <h2 id="importing-users-from-a-csv-file">Importing users from a CSV file</h2>

@@ -321,6 +321,12 @@ in the system. These settings control the behavior of that page.</p>
 <p>The user account page can consist of a series of icons with text linking to
 user-specific functions, or of a series of text-only links to those functions.
 This setting controls which of those options is in effect.</p>
+<h3 id="allow-users-to-delete-themselves">Allow users to delete themselves</h3>
+<p>Default: no</p>
+<p>Shall users be allowed to delete themselves? If so, users that choose to do so
+will be converted to 'ghost' users. This means that private data will be deleted
+(uname, email, etc), but the user record remains valid thus maintaining data-integrity.
+Third-party extensions are expected to respect this private data-removal requirement.</p>
 <h2 id="registration-settings">Registration settings</h2>
 <p>These options control how a new user requests a new user account on the site.</p>
 <h3 id="allow-new-user-account-registrations">Allow new user account registrations</h3>
