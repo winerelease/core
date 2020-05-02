@@ -297,7 +297,9 @@
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
                     <h1 id="zikula-installation-instructions">Zikula installation instructions</h1>
 <p>First please check <a href="requirements.html">requirements</a>.</p>
-<p>This guide assumes you are going to install Zikula on a webserver which is fully operational. If you want to do the setup on a fresh root server there are additional steps to consider though. In this case maybe this guide can help: <a href="installingzikulaonubuntu.html">Installation of Zikula on Ubuntu Server</a>.</p>
+<p>This guide assumes you are going to install Zikula on a webserver which is fully operational. If you want to do the
+setup on a fresh root server there are additional steps to consider though. In this case maybe this guide can help:
+<a href="installingzikulaonubuntu.html">Installation of Zikula on Ubuntu Server</a>.</p>
 <h2 id="overview">Overview</h2>
 <ol>
 <li><a href="#upload">Install by uploading package</a></li>
@@ -309,11 +311,13 @@
 <h3 id="upload">Upload</h3>
 <p>If you obtained Zikula Core from the CI server, then you can upload the entire archive (<code>.zip</code> or <code>.tgz</code> file)
 to your server and then <code>unzip</code> them there. (This is faster and much more reliable than uploading many small
-files via FTP). <strong>Make sure to include the <code>-p</code> flag if you extract from <code>.tgz</code> to keep the correct permissions
-(for example: <code>tar -xpzvf Zikula_Core-2.0.0.build123.tar.gz</code>) change the filename to match the current download.</strong>
-Copy all the files and directories to your webroot (typically <code>public_html</code> or <code>httpdocs</code>).</p>
-<p>Another option can be to download the tar.gz directly from the ci server: e.g.
-<code>wget http://ci.zikula.org/job/Zikula_Core-2.0.0/lastSuccessfulBuild/artifact/build/archive/Zikula_Core-2.0.0.tar.gz</code>.
+files via FTP). <strong>Make sure to include the <code>-p</code> flag</strong> if you extract from <code>.tgz</code> to keep the correct permissions
+(for example: <code>tar -xpzvf Zikula_Core-3.0.0.build27.tar.gz</code>) change the filename to match the current download.
+Copy all the files and directories to your server and point your webroot (typically <code>public_html</code> or <code>httpdocs</code>)
+to the <code>public/</code> directory in the Zikula directory structure. Using symlinks or modifying the <code>.htaccess</code> file can
+accomplish this. (see <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">https://symfony.com/doc/current/setup/web_server_configuration.html</a> for more information).</p>
+<p>Another option can be to download the tar.gz directly from the github: e.g.
+<code>wget https://github.com/zikula/core/releases/download/3.0.0/3.0.tar.gz</code>.
 Again, change the filename/url to match the correct filename from the ci server.</p>
 <p>Windows/FTP users: Take care about copying all files. If there are some files you are not able to transfer
 to the server check if your longest path length is longer than Windows/FTP-Software allows (more than 256 characters).</p>
@@ -358,11 +362,11 @@ database, but this is not recommended unless Zikula will be the only application
 remove all existing tables from the existing database.</p>
 <h3 id="install-by-the-web-installer-or-command-line-not-both">Install by the Web installer or Command Line (not both!)</h3>
 <h4 id="web-installer">Web Installer</h4>
-<p>To begin the installer, simply visit the root directory with your browser, e.g. <code>http://www.example.com/</code>.
+<p>To begin the installer, simply visit the webroot directory with your browser, e.g. <code>http://www.example.com/</code>.
 If you installed Zikula into a subdirectory 'foo' the URL would be <code>http://www.example.com/foo/</code>. You will be
 automatically redirected to the installer.</p>
 <h4 id="command-line-installer">Command Line Installer</h4>
-<p>Via CLI, access your main zikula directory (<code>/src</code> if a Github clone) and run this command:</p>
+<p>Via CLI, access your main zikula directory and run this command:</p>
 <pre><code class="language-Shell">php bin/console zikula:install:start</code></pre>
 <p>Follow the prompts and complete that step. When you are finished, you are directed to run the next command:</p>
 <pre><code class="language-Shell">php bin/console zikula:install:finish</code></pre>

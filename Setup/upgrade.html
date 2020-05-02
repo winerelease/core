@@ -317,7 +317,7 @@ to Core-3.0.x.</p>
 <li>Make a note of your 'startpage' settings as they must be cleared in the upgrade process.</li>
 <li>All (1.x.x) blocks using MenuTree, ExtMenu or Menu will be DELETED during the upgrade as these are no longer available.
 You should consider deleting and replacing these with a MenuModule block before upgrading.</li>
-<li>All Hook connections will be deleted and need to be re-connected post-upgrade.</li>
+<li>All Pre-Core-2.0.0 Hook connections will be deleted and need to be re-connected post-upgrade.</li>
 <li>Before uploading the new files, delete <strong>all files</strong> in your web root (typically <code>public_html</code> or <code>httpdocs</code>).</li>
 <li>Upload the new package and unpack the archive.
 <ul>
@@ -340,7 +340,12 @@ recommended, please use the Web Installer.</li>
 <h3 id="continue">Continue</h3></li>
 </ul>
 </li>
-<li>Copy your <em>compatible</em> custom theme to your new installation. Themes are now placed in <code>src/extensions</code>.</li>
+<li>Please note, the <em>web root</em> <strong>must</strong> now point to the <code>public/</code> directory. Adjust your symlinks or directory structure as needed.
+(see <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">https://symfony.com/doc/current/setup/web_server_configuration.html</a> for more information).</li>
+<li>Copy your <em>compatible</em> custom theme to your new installation. Themes are now placed in <code>src/extensions</code>.
+<ul>
+<li>After upgrade, the site will default to the ZikulaBootstrapTheme until you complete testing of your custom theme.</li>
+</ul></li>
 <li>Return <em>compatible</em> extensions to the <code>src/extensions</code> directory.
 <ul>
 <li><strong>DO NOT copy the old Profile and Legal module</strong> as new versions of these are provided, and their location may differ.</li>
@@ -359,6 +364,14 @@ recommended, please use the Web Installer.</li>
 <li>Visit the extensions page and run each module upgrade one at a time.</li>
 </ul>
 </li>
+</ul>
+<h3 id="post-upgrade">Post Upgrade</h3>
+<ul>
+<li>MySQL databases will have been recoded from <code>utf8</code> to <code>utf8mb4</code>.
+<ul>
+<li>old copies of <code>app/config/config.yml</code> may have contained a reference to <code>doctrine.dbal.connections.default.charset</code> but this is removed.</li>
+</ul></li>
+<li>Double check fontawesome icons in your menu module options. An attempt has been made to correct them, but manual correction may be required.</li>
 </ul>
                 </section>
             </div>
