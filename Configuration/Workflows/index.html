@@ -313,7 +313,7 @@
 <p><strong>Caution:</strong> when overriding existing workflows in <code>/config/workflows/someFile.yaml</code> (or <code>someFile.xml</code>) ensure that these workflows get new, unique names. Otherwise transitions will be added to the original workflow instead of redefining a custom workflow.</p>
 <h3 id="workflow-editor">Workflow editor</h3>
 <p>Zikula provides a JavaScript-based workflow editor.</p>
-<p><img src="Workflows/images/workflow_ui.png" alt="Workflow editor" /></p>
+<p><img src="images/workflow_ui.png" alt="Workflow editor" /></p>
 <p>The editor expects the name of a workflow which should be loaded. You can for example include a link to it like this:</p>
 <pre><code class="language-twig">&lt;p&gt;
     &lt;a href="{{ path('zikula_workflow_editor_index', {workflow: 'acmetestmodule_enterprise'}) }}" title="{% trans %}Edit workflow for articles{% endtrans %}" target="_blank"&gt;{% trans %}Articles workflow{% endtrans %}&lt;/a&gt;
