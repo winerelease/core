@@ -303,13 +303,7 @@
     "extra": {
         "zikula": {
             …
-            "capabilities": {
-                …
-                "admin": {
-                    …
-                    "icon": "fas fa-star"
-                },
-                …
+                "icon": "fas fa-star"
             },
         },
     },
@@ -323,13 +317,14 @@ interfaces, etc. Extensions must update their implementation of any core/system 
 Further information can be found <a href="https://symfony.com/doc/current/service_container/3.3-di-changes.html#step-1-adding-defaults">in Symfony docs</a>.</p>
 <p>Module services should be registered by their classname (automatically as above) and not with old-fashioned
 <code>service.class.dot.notation</code>.</p>
+<p>Change <code>.yml</code> suffixes to <code>.yaml</code> (e.g. <code>routing.yaml</code>) and update <code>Extension.php</code> class.</p>
 <h3 id="blocks">Blocks</h3>
 <p>BlockHandler classes must implement <code>Zikula\BlocksModule\BlockHandlerInterface</code> as in Core-2.0 but there is no longer
 a need to tag these classes in your services file as they are auto-tagged. Also - as above, the classname should be
 used as the service name.</p>
 <h3 id="extension-menus">Extension menus</h3>
 <p><code>Zikula\Core\LinkContainer\LinkContainerCollector</code> and <code>Zikula\Core\LinkContainer\LinkContainerInterface</code> have been
-removed. Extension menus are not implemented using Knp Menu instead. See docs and system modules for further
+removed. Extension menus are now implemented using Knp Menu instead. See docs and system modules for further
 information and examples.</p>
 <h2 id="sending-mails">Sending mails</h2>
 <p>The <code>MailerApi</code> and <code>SwiftMailer</code> have been removed in favour of the Symfony Mailer component.</p>
@@ -546,6 +541,10 @@ class MyService
 <ul>
 <li>Change all template names from e.g. <code>Bundle:Controller:Action.html.twig</code> to <code>@Bundle/Controller/Action.html.twig</code>.</li>
 <li>Modules and themes retain the <code>Module</code> or <code>Theme</code> suffix but bundles do not.</li>
+<li>The form theme <code>@ZikulaFormExtension/Form/bootstrap_3_zikula_admin_layout.html.twig</code>
+<ul>
+<li>is changed to <code>@ZikulaFormExtension/Form/bootstrap_4_zikula_admin_layout.html.twig</code></li>
+</ul></li>
 </ul>
 <h3 id="templates">Templates</h3>
 <table>
