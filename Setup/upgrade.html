@@ -329,17 +329,17 @@ to see potential solutions to this problem when installing from the CLI.</li>
 check your phpinfo.) <code>mod_suexec</code> often is used in shared hosting environments. In this case, the CLI installer is not
 recommended, please use the Web Installer.</li>
 </ul></li>
-<li>
-<p>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.</p>
+<li>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.
 <ul>
 <li><strong>Remove</strong> the key/value pairs for <code>core_installed_version</code> and <code>installed</code>.</li>
 <li><strong>Change the value of <code>datadir</code> to <code>public/uploads</code></strong></li>
 <li>Do not change any other values.</li>
 <li>From the new installation, copy the <code>.env</code> file to <code>.env.local</code></li>
-<li><strong>Add</strong> <code>ZIKULA_INSTALLED='a.b.c'</code> to the end of the file. Change <code>a.b.c</code> to the exact version of your existing install (e.g. <code>2.0.11</code>).
-<h3 id="continue">Continue</h3></li>
+<li><strong>Add</strong> <code>ZIKULA_INSTALLED='a.b.c'</code> to the end of the file. Change <code>a.b.c</code> to the exact version of your existing install (e.g. <code>2.0.11</code>).</li>
+</ul></li>
 </ul>
-</li>
+<h3 id="continue">Continue</h3>
+<ul>
 <li>Please note, the <em>web root</em> <strong>must</strong> now point to the <code>public/</code> directory. Adjust your symlinks or directory structure as needed.
 (see <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">https://symfony.com/doc/current/setup/web_server_configuration.html</a> for more information).</li>
 <li>Copy your <em>compatible</em> custom theme to your new installation. Themes are now placed in <code>src/extensions</code>.
@@ -371,7 +371,7 @@ recommended, please use the Web Installer.</li>
 <ul>
 <li>old copies of <code>app/config/config.yml</code> may have contained a reference to <code>doctrine.dbal.connections.default.charset</code> but this is removed.</li>
 </ul></li>
-<li>Double check fontawesome icons in your menu module options. An attempt has been made to correct them, but manual correction may be required.</li>
+<li>Double check FontAwesome icons in your menu module options. An attempt has been made to correct them, but manual correction may be required. You can lookup icon name changes between FontAwesome version 4 and 5 <a href="https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4#name-changes">at this page</a>.</li>
 </ul>
                 </section>
             </div>
