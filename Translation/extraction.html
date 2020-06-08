@@ -318,6 +318,17 @@ php -dmemory_limit=2G bin/console translation:extract --bundle AcmeFooModule ext
 php -dmemory_limit=2G bin/console translation:extract --bundle AcmeFooModule acmefoomodule en</code></pre>
 <p>You can always check the status of your translation using the <code>translation:status</code> command.
 Check the available options using <code>-h</code> or <code>--help</code> like shown above.</p>
+<p>Note there is also a similar <code>translation:update</code> command that is from Symfony itself.
+We use <code>translation:extract</code> from php-translation though because this allows more sophisticated
+configuration options and processing, like handling multiple bundles, translation annotations etc.</p>
+<h2 id="about-default-values">About default values</h2>
+<p>Note that new translations are added with <code>null</code> as translation value. While this works like a charm in PHP and Twig,
+it will cause problems when being used in JavaScript because then <code>null</code> appears as string.</p>
+<p>So if you use English translations as translation keys, ensure that you add corresponding values at least for those
+entries that are used in JavaScript files also for the English translation.</p>
+<p>You can also use an additional command <code>zikula:translation:keytovalue</code> to fix default values:</p>
+<pre><code class="language-shell">php -dmemory_limit=2G bin/console zikula:translation:keytovalue
+php -dmemory_limit=2G bin/console zikula:translation:keytovalue --bundle AcmeFooModule</code></pre>
 <h2 id="translation-annotations">Translation annotations</h2>
 <p>To influence the extraction behaviour you can utilise some annotations from the <code>Translation\Extractor\Annotation</code> namespace.
 Import them like any other php class:</p>
