@@ -295,19 +295,12 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="core-events">Core events</h1>
-<p>The <code>\Zikula\Bundle\CoreBundle\CoreEvents</code> provides these events:</p>
+                    <h1 id="hook-events">Hook events</h1>
+<p>The <code>\Zikula\Bundle\HookBundle\Event</code> namespace provides these events:</p>
 <pre><code class="language-php">/**
- * Occurs during Core installation before the modules are installed.
- * Stop propagation of the event to cause the core installer to fail.
+ * Occurs when the binding between two hook areas changed.
  */
-public const CORE_INSTALL_PRE_MODULE = 'core.install.pre.module';
-
-/**
- * Occurs during Core upgrade before the modules are upgraded.
- * Stop propagation of the event to cause the core upgrader to fail.
- */
-public const CORE_UPGRADE_PRE_MODULE = 'core.upgrade.pre.module';</code></pre>
+class HookPostChangeEvent</code></pre>
                 </section>
             </div>
         </main>
