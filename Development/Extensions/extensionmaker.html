@@ -307,6 +307,8 @@ file and change it from <code>prod</code> to <code>dev</code>. Then decide on a 
 For example, if you are generating a Blog module and your name is Fabien, you could select <code>Fabien/Blog</code>. The first
 part is called the <em>vendor</em> (in this case 'Fabien') and the second part is going to be the name of the extension.
 The full extension name combines these into FabienBlogModule.</p>
+<p>Note: use of 'Zikula' as a vendor name is strongly discouraged. If used, you must include the <code>--force</code> option when
+using the commands below. When used, your files may get automatically placed in unexpected locations.</p>
 <p>Now call the function with your namespace and choose and extension type (Module or Theme). In this case, we are
 generating a <em>Module</em>.</p>
 <pre><code class="language-shell">php bin/console make:zikula-extension Fabien/Blog Module</code></pre>
