@@ -78,7 +78,12 @@
                                     </li>
                                                                     <li class="nav-item">
                                         <a href="https://docs.ziku.la/Setup/upgrade.html" class="nav-link active">
-                                            Upgrade
+                                            Upgrade 2 to 3
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="https://docs.ziku.la/" class="nav-link">
+                                            Upgrade 3 to 3
                                         </a>
                                     </li>
                                                             </ul>
@@ -295,70 +300,75 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="upgrading-zikula">Upgrading Zikula</h1>
+                    <h1 id="upgrading-zikula-1x-or-2x-to-3xx">Upgrading Zikula 1.x or 2.x to 3.x.x</h1>
+<p>This document is the upgrade process for <strong>Zikula Core 1.x or 2.x to 3.x.x</strong>. If you are upgrading from a version <strong>greater</strong> than
+3.0.0 please use the proper <a href="upgradefrom3to3.x.x.html">upgrade document</a>. The minimum upgrade version is Zikula Core 1.4.3.
+Please upgrade to at least this version before attempting to upgrade to Core-3.0.x.</p>
 <ol>
 <li><a href="#test-environment">Test Environment</a></li>
 <li><a href="#download">Before upgrading</a></li>
 <li><a href="#upgrading">Upgrading</a></li>
 </ol>
+<h2 id="backup-your-current-files-and-database">Backup your current files and database!</h2>
+<p><strong><em>Prior to any upgrade ensure that you have created a reliable backup of all files and the database.</em></strong></p>
 <h2 id="test-environment">Test Environment</h2>
 <p>The Zikula team strongly recommends having a duplicate testing environment of the live site in which all
 changes including upgrades are tested on before application to the live site.</p>
 <h2 id="download">Download</h2>
-<p><strong><em>Prior to any upgrade ensure that you have created a reliable backup of all files and the database.</em></strong></p>
 <p>Download the current release from <a href="https://github.com/zikula/core/releases/">GitHub releases</a>
 All the dependencies and requirements are included in this package.</p>
 <h2 id="upgrading">Upgrading</h2>
-<p>The minimum upgrade version is Zikula Core 1.4.3. Please upgrade to at least this version before attempting to upgrade
-to Core-3.0.x.</p>
-<p>The following process should be followed for all upgrades even small point releases (e.g. <code>3.0.x</code>).</p>
 <ul>
-<li>First: <strong>Backup all your files and database.</strong></li>
 <li>Make a note of your 'startpage' settings as they must be cleared in the upgrade process.</li>
+<li>If upgrading from Core-1.x:
+<ul>
 <li>All (1.x.x) blocks using MenuTree, ExtMenu or Menu will be DELETED during the upgrade as these are no longer available.
 You should consider deleting and replacing these with a MenuModule block before upgrading.</li>
-<li>All Pre-Core-2.0.0 Hook connections will be deleted and need to be re-connected post-upgrade.</li>
-<li>Before uploading the new files, delete <strong>all files</strong> in your web root (typically <code>public_html</code> or <code>httpdocs</code>).</li>
+<li>All (1.x.x) Hook connections will be deleted and need to be re-connected post-upgrade.</li>
+</ul></li>
+<li>Before uploading the new files, delete (or move) <strong>all files</strong> in your web root (typically <code>public_html</code> or <code>httpdocs</code>).</li>
 <li>Upload the new package and unpack the archive.
 <ul>
 <li>Please read the <a href="install.html#upload">INSTALL docs</a> for detailed information on proper uploading.</li>
-<li>Note 1: One common issue when installing is that the <code>/var/cache</code> and <code>/var/log</code> directories must be writable both by the
-web server and the command line user. See Symfony's <a href="http://symfony.com/doc/current/setup/file_permissions.html">Setting up or Fixing File Permissions</a>
+<li>Ensure that the <code>/var/cache</code> and <code>/var/log</code> directories must be writable both by the web server and the command line user.
+See Symfony's <a href="http://symfony.com/doc/current/setup/file_permissions.html">Setting up or Fixing File Permissions</a>
 to see potential solutions to this problem when installing from the CLI.</li>
-<li>Note 2: If you have <code>mod_suexec</code> installed for Apache the CLI will run into permission problems. (If you are not sure
-check your phpinfo.) <code>mod_suexec</code> often is used in shared hosting environments. In this case, the CLI installer is not
-recommended, please use the Web Installer.</li>
+<li>If you have <code>mod_suexec</code> installed for Apache the CLI will run into permission problems. (If you are not sure
+check your phpinfo.) <code>mod_suexec</code> is often used in shared hosting environments. In this case, the CLI installer is not
+recommended. Instead, please use the Web Installer.</li>
 </ul></li>
-<li>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.
-<ul>
-<li><strong>Remove</strong> the key/value pairs for <code>core_installed_version</code> and <code>installed</code>.</li>
-<li><strong>Change the value of <code>datadir</code> to <code>public/uploads</code></strong></li>
-<li>Do not change any other values.</li>
-<li>From the new installation, copy the <code>.env</code> file to <code>.env.local</code></li>
-<li><strong>Add</strong> <code>ZIKULA_INSTALLED='a.b.c'</code> to the end of the file. Change <code>a.b.c</code> to the exact version of your existing install (e.g. <code>2.0.11</code>).</li>
-</ul></li>
+<li>Please note, your <em>web root</em> <strong>must</strong> now point to the <code>public/</code> directory. Adjust your symlinks or directory structure as needed.
+(see <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">https://symfony.com/doc/current/setup/web_server_configuration.html</a> for more information).</li>
 </ul>
 <h3 id="continue">Continue</h3>
 <ul>
-<li>Please note, the <em>web root</em> <strong>must</strong> now point to the <code>public/</code> directory. Adjust your symlinks or directory structure as needed.
-(see <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">https://symfony.com/doc/current/setup/web_server_configuration.html</a> for more information).</li>
-<li>Copy your <em>compatible</em> custom theme to your new installation. Themes are now placed in <code>src/extensions</code>.
+<li>Copy old files to <em>new</em> locations:
+<ul>
+<li>Copy your previous installation's <code>/app/config/custom_parameters.yml</code> to <code>/config/services_custom.yaml</code> in your new installation.
+<ul>
+<li>note the name change and the suffix changed from <code>.yml</code> to <code>.yaml</code></li>
+</ul></li>
+<li>Copy your <em>compatible</em> custom theme to the <code>src/extensions</code> directory (There is no <code>/themes</code> directory any longer).
 <ul>
 <li>After upgrade, the site will default to the ZikulaBootstrapTheme until you complete testing of your custom theme.</li>
 </ul></li>
-<li>Return <em>compatible</em> extensions to the <code>src/extensions</code> directory.
+<li>Return <em>compatible</em> modules (extensions) to the <code>src/extensions</code> directory.
 <ul>
 <li><strong>DO NOT copy the old Profile and Legal module</strong> as new versions of these are provided, and their location may differ.</li>
+<li>Check compatibility in the <code>/composer.json</code> file is: <code>"extra": { "zikula" : { "core-compatibility": "&gt;=3.0.0"</code>
+(&quot;&gt;=2.0.0&quot; is <em>not</em> compatible with 3.x) or ask in the Zikula slack channel.</li>
 </ul></li>
 <li>Copy your backup contents of <code>/userdata</code> (1.x) or <code>/web/uploads</code> (2.x) into <code>/public/uploads</code></li>
+</ul></li>
 <li>
 <p>Then <strong>start the upgrade (do one or the other, CLI is recommended)</strong></p>
 <ul>
 <li>Via Web: launch <code>http://yoursiteurl/</code> (you will be redirected to <code>/upgrade</code>) and follow any on-screen prompts.</li>
 <li>Via CLI:</li>
 <li>
-<p>Access your main zikula directory and run this command:</p>
-<pre><code class="language-Shell">php bin/console zikula:upgrade</code></pre>
+<p>Access your main zikula directory then run each of these commands:</p>
+<pre><code class="language-Shell">php bin/console zikula:pre-upgrade
+php bin/console zikula:upgrade</code></pre>
 </li>
 <li>Follow the prompts and complete that step. When you are finished, Open your browser and login!</li>
 <li>Visit the extensions page and run each module upgrade one at a time.</li>
@@ -372,6 +382,7 @@ recommended, please use the Web Installer.</li>
 <li>old copies of <code>app/config/config.yml</code> may have contained a reference to <code>doctrine.dbal.connections.default.charset</code> but this is removed.</li>
 </ul></li>
 <li>Double check FontAwesome icons in your menu module options. An attempt has been made to correct them, but manual correction may be required. You can lookup icon name changes between FontAwesome version 4 and 5 <a href="https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4#name-changes">at this page</a>.</li>
+<li>Blocks with properties/content that could not be unserialized have been deleted. The content of the block has been dumped to <code>/var/log/removedBlock#.txt</code> for recovery if desired.</li>
 </ul>
                 </section>
             </div>
