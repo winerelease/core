@@ -318,9 +318,7 @@ setup on a fresh root server there are additional steps to consider though. In t
 to your server and then <code>unzip</code> them there. (This is faster and much more reliable than uploading many small
 files via FTP). <strong>Make sure to include the <code>-p</code> flag</strong> if you extract from <code>.tgz</code> to keep the correct permissions
 (for example: <code>tar -xpzvf Zikula_Core-3.0.0.build27.tar.gz</code>) change the filename to match the current download.
-Copy all the files and directories to your server and point your webroot (typically <code>public_html</code> or <code>httpdocs</code>)
-to the <code>public/</code> directory in the Zikula directory structure. Using symlinks or modifying the <code>.htaccess</code> file can
-accomplish this. (see <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">https://symfony.com/doc/current/setup/web_server_configuration.html</a> for more information).</p>
+Copy all the files and directories to your server.</p>
 <p>Another option can be to download the tar.gz directly from the github: e.g.
 <code>wget https://github.com/zikula/core/releases/download/3.0.0/3.0.tar.gz</code>.
 Again, change the filename/url to match the correct filename from the ci server.</p>
@@ -353,6 +351,10 @@ cloned repository and wait for the machine to boot (first time booting might
 take several minutes). Then head over to <code>localhost:8080</code> and install Zikula.
 Database user, password and table are all set to <code>zikula</code>. PHPMyAdmin is
 accessible from <code>localhost:8081</code>.</p>
+<h2 id="webroot-setup">Webroot Setup</h2>
+<p>Your host has set up a webroot. This is typically <code>public_html</code> or <code>httpdocs</code>. You must &quot;point&quot; this directory
+to the <code>public/</code> directory in the Zikula directory structure. Using symlinks or modifying the <code>.htaccess</code> file can
+accomplish this. (see <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">https://symfony.com/doc/current/setup/web_server_configuration.html</a> for more information).</p>
 <h2 id="finish-installation">Finish Installation</h2>
 <p><em>Note 1:</em> One common issue when installing is that the <code>var/cache</code> and <code>var/log</code> directories must be writable both by the
 web server and the command line user. See Symfony's <a href="https://symfony.com/doc/current/setup/file_permissions.html">Setting up or Fixing File Permissions</a>
