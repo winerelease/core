@@ -99,7 +99,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Configuration/Localisation/index.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/Configuration/Localisation/index.html" class="nav-link">
                                             Localisation
                                         </a>
                                     </li>
@@ -146,7 +146,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Content/Blocks.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/Content/Blocks.html" class="nav-link active">
                                             Blocks
                                         </a>
                                     </li>
@@ -317,23 +317,30 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="localisation">Localisation</h1>
-<p>The settings module contains a section for amending localisation options.</p>
-<h2 id="localisation-settings">Localisation settings</h2>
-<h3 id="language-system">Language system</h3>
-<p>TBD</p>
-<h3 id="browser">Browser</h3>
-<p>TBD</p>
-<h2 id="edit-in-place">Edit in place</h2>
-<p>TBD</p>
-<p>See <a href="../../Translation/userinterface.html">UI-based translations</a>.</p>
-<h2 id="translation-ui">Translation UI</h2>
-<p>TBD</p>
-<p>See <a href="../../Translation/userinterface.html">UI-based translations</a>.</p>
-<h2 id="for-developers">For developers</h2>
+                    <h1 id="blocks">Blocks</h1>
+<p>Zikula now includes the StaticContentModule as a Value-Added extension in Core-3.1.0.
+With this, standard blocks exist in Zikula to create and display basic content.</p>
 <ul>
-<li><a href="Dev/localeapi.html">LocaleApi</a></li>
+<li>HTML Block</li>
+<li>Text Block</li>
+<li>Xslt Block</li>
+<li>File Include Block</li>
+<li><strong>New in Core 3.1.0 - Template Block</strong></li>
 </ul>
+<h2 id="html-block">HTML Block</h2>
+<p>Renders and displays basic HTML content.</p>
+<h2 id="text-block">Text Block</h2>
+<p>Renders text only. Strips all tags and converts new lines to breaks.</p>
+<h2 id="xslt-block">Xslt Block</h2>
+<p>Parses and displays an XML document using PHP's XSL extension.</p>
+<h2 id="file-include-block">File Include Block</h2>
+<p>Displays a file when provided with a path to the file.</p>
+<h2 id="template-block">Template Block</h2>
+<p><strong>New in Core 3.1.0</strong>
+Renders a twig template when provided with a path to the template.</p>
+<h3 id="more-blocks">More blocks</h3>
+<p>Other extensions can provide additional content-providing blocks to Zikula. For example, the EZComments Module
+brovides blocks to display recent comments and the most commented content. Check out other extensions for more!</p>
                 </section>
             </div>
         </main>

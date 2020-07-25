@@ -99,7 +99,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Configuration/Localisation/index.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/Configuration/Localisation/index.html" class="nav-link">
                                             Localisation
                                         </a>
                                     </li>
@@ -141,7 +141,7 @@
                             </p>
                             <ul id="section4" class="nav flex-column collapse">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Content/Pages.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/Content/Pages.html" class="nav-link active">
                                             Static pages
                                         </a>
                                     </li>
@@ -317,22 +317,28 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="localisation">Localisation</h1>
-<p>The settings module contains a section for amending localisation options.</p>
-<h2 id="localisation-settings">Localisation settings</h2>
-<h3 id="language-system">Language system</h3>
-<p>TBD</p>
-<h3 id="browser">Browser</h3>
-<p>TBD</p>
-<h2 id="edit-in-place">Edit in place</h2>
-<p>TBD</p>
-<p>See <a href="../../Translation/userinterface.html">UI-based translations</a>.</p>
-<h2 id="translation-ui">Translation UI</h2>
-<p>TBD</p>
-<p>See <a href="../../Translation/userinterface.html">UI-based translations</a>.</p>
-<h2 id="for-developers">For developers</h2>
+                    <h1 id="static-pages">Static Pages</h1>
+<h3 id="new-in-core-310">New in Core 3.1.0</h3>
+<p>Zikula now includes the StaticContentModule as a Value-Added extension in Core-3.1.0.
+With this, basic <strong>template-driven</strong> static content is easily implemented in Zikula.
+Simply create a template with the needed content in <code>/templates/p/</code> like <code>/templates/p/apple.html.twig</code>.
+Then direct your browser to <code>/p/apple</code> and the template will be displayed.</p>
+<p>Any standard HTML can be used as well as any template functions and global template variables. </p>
 <ul>
-<li><a href="Dev/localeapi.html">LocaleApi</a></li>
+<li><code>{{ siteName() }}</code></li>
+<li><code>{{ pagevars.title }}</code></li>
+<li><code>{{ currentUser.loggedIn }}</code></li>
+<li><code>{{ app.request.method }}</code></li>
+<li><code>{{ pageAddAsset('javascript', asset('/path/from/public/to/my/javascript.js')) }}</code></li>
+<li>etc...</li>
+</ul>
+<p>There is no way to add additional variables in these pages.</p>
+<h3 id="better-pages">Better Pages</h3>
+<p>To display more advanced pages and non-static content please see</p>
+<ul>
+<li><a href="https://github.com/zikula-modules/Pages">Pages</a></li>
+<li><a href="https://github.com/zikula-modules/Content">Content</a></li>
+<li>Even more: <a href="../Extensions/content.html">Extensions &gt; Content</a></li>
 </ul>
                 </section>
             </div>
