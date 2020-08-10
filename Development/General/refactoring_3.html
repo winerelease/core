@@ -336,73 +336,58 @@ is outside the public folder that the webserver can see.</p>
 </code></pre>
 <p>You can remove the old <code>admin.png</code> file afterwards. In addition, it is recommended that you increment your module version
 one full point (i.e. 3.0.0 -&gt; 4.0.0). Upgrading to core 3.0 is not backward compatible with core 2.0. Also, change the
-php version to &gt;=7.2.5 (or higher if you module requires it) and the core-compatibility to &gt;=3.0.0.
-```{
-...
-&quot;version&quot;: &quot;5.0.0&quot;,
-...
-&quot;require&quot;: {
-&quot;php&quot;: &quot;&gt;7.2.5&quot;,
-&quot;zikula/core-bundle&quot;: &quot;3.*&quot;
-},
-&quot;extra&quot;: {
-&quot;zikula&quot;: {
-...
-&quot;core-compatibility&quot;: &quot;&gt;=3.0.0&quot;,
-...
-&quot;icon&quot;: &quot;fas fa-star&quot;,
-...
-}
-}
-}</p>
-<pre><code>
-### Interfaces
+php version to &gt;=7.2.5 (or higher if you module requires it) and the core-compatibility to &gt;=3.0.0.</p>
+<pre><code class="language-{">  ...
+  "version": "5.0.0",
+  ...
+  "require": {
+    "php": "&gt;7.2.5",
+    "zikula/core-bundle": "3.*"
+  },
+  "extra": {
+    "zikula": {
+      ...
+      "core-compatibility": "&gt;=3.0.0",
+      ...
+      "icon": "fas fa-star",
+      ...
+    }
+  }
+}</code></pre>
+<h3 id="interfaces">Interfaces</h3>
+<p>In general, interfaces and apis implement argument type-hinting in all methods. This can break an implementation of
+said interfaces, etc. Extensions must update their implementation of any core/system interface to adhere to the new
+signature. For example, if you are upgrading a Block class, a member function line goes from:</p>
+<p><code>public function display($properties) : {</code></p>
+<p>to</p>
+<p><code>public function display(array $properties) :string {</code></p>
+<p>You can let php know to enforce strict type-hinting by putting <code>declare(strict_types=1);</code> at the top of each php
+file just after the <code>&lt;?php</code> This is not required of other code, but strongly recommended.</p>
+<h3 id="service-registration">Service registration</h3>
+<p>Please use <code>autowire</code> and <code>autoconfigure</code> as this will magically solve most issues.
+Further information can be found <a href="https://symfony.com/doc/current/service_container/3.3-di-changes.html#step-1-adding-defaults">in Symfony docs</a>.</p>
+<p>Module services should be registered by their classname (automatically as above) and not with old-fashioned
+<code>service.class.dot.notation</code>.</p>
+<p>This change greatly simplifies using services, since each service does not have to be registered in your config files located in the Resources/config/ directory. Here is a previous services file from the Book module:</p>
+<pre><code>services:
+  paustian_book_module.container.link_container:
+    class: Paustian\BookModule\Container\LinkContainer
+    arguments:
+      - "@translator.default"
+      - "@router"
+      - "@zikula_permissions_module.api.permission"
+    tags:
+      - { name: zikula.link_container }
 
-In general, interfaces and apis implement argument type-hinting in all methods. This can break an implementation of 
-said interfaces, etc. Extensions must update their implementation of any core/system interface to adhere to the new 
-signature. For example, if you are upgrading a Block class, a member function line goes from:
-
-```public function display($properties) : {```
-
-to
-
-```public function display(array $properties) :string {```
-
-You can let php know to enforce strict type-hinting by putting ```declare(strict_types=1);``` at the top of each php 
-file just after the ```&lt;?php``` This is not required of other code, but strongly recommended.
-
-### Service registration
-
-Please use `autowire` and `autoconfigure` as this will magically solve most issues.
-Further information can be found [in Symfony docs](https://symfony.com/doc/current/service_container/3.3-di-changes.html#step-1-adding-defaults).
-
-Module services should be registered by their classname (automatically as above) and not with old-fashioned
-`service.class.dot.notation`.
-
-This change greatly simplifies using services, since each service does not have to be registered in your config files located in the Resources/config/ directory. Here is a previous services file from the Book module:</code></pre>
-<p>services:
-paustian_book_module.container.link_container:
-class: Paustian\BookModule\Container\LinkContainer
-arguments:</p>
-<ul>
-<li>&quot;@translator.default&quot;</li>
-<li>&quot;@router&quot;</li>
-<li>&quot;@zikula_permissions_module.api.permission&quot;
-tags:</li>
-<li>
-<p>{ name: zikula.link_container }</p>
-<p>paustian_book_module.form.article_type:
-class: Paustian\BookModule\Form\Article
-arguments:</p>
-</li>
-<li>&quot;@translator.default&quot;</li>
-<li>&quot;@zikula_settings_module.locale_api&quot;
-tags:</li>
-<li>{ name: form.type }
-... 60 more lines...
-<pre><code>
-Instead this is simply taken care of by a much shorter file where autowire and autoconfigure are set to true:</code></pre></li>
-</ul>
+  paustian_book_module.form.article_type:
+    class: Paustian\BookModule\Form\Article
+    arguments:
+      - "@translator.default"
+      - "@zikula_settings_module.locale_api"
+    tags:
+      - { name: form.type }
+      ... 60 more lines...</code></pre>
+<p>Instead this is simply taken care of by a much shorter file where autowire and autoconfigure are set to true:</p>
 <pre><code>services:
   _defaults:
     autowire: true
