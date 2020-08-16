@@ -321,34 +321,15 @@
 <p>Zikula Core provides functionality to combine both CSS and JavScript files into one cached file in your twig template
 which can improve performance of your website. Additionally, one can further minify the css files and also compress the
 response to even further improve performance.</p>
-<p>To enable the features, modify these parameters in the <code>/config/services_custom.yaml</code> file:</p>
-<table>
-<thead>
-<tr>
-<th>parameter</th>
-<th>possible values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>zikula_asset_manager.combine</td>
-<td><code>true</code> or <code>false</code> (enables combination)</td>
-</tr>
-<tr>
-<td>zikula_asset_manager.lifetime</td>
-<td>string like <code>"1 day"</code> or <code>"1 hour"</code></td>
-</tr>
-<tr>
-<td>zikula_asset_manager.compress</td>
-<td><code>true</code> or <code>false</code></td>
-</tr>
-<tr>
-<td>zikula_asset_manager.minify</td>
-<td><code>true</code> or <code>false</code></td>
-</tr>
-</tbody>
-</table>
-<p>If <code>zikula_asset_manager.combine</code> is false, none of the other parameters have any effect.</p>
+<p>To enable the features, modify these values in the <code>/config/packages/zikula_theme.yaml</code> file
+(create the file if needed):</p>
+<pre><code class="language-yaml">zikula_theme:
+    asset_manager:
+        combine: true # bool
+        lifetime: '1 day' # string like '1 day' or '1 hour'
+        compress: true # bool
+        minify: true # bool</code></pre>
+<p>If <code>asset_manager.combine</code> is false, none of the other parameters have any effect.</p>
 <p>Please note: Asset combination only occurs in the <code>prod</code> environment. If <code>env</code> is set to another value, it is disabled.</p>
                 </section>
             </div>

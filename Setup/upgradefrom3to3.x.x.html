@@ -347,7 +347,10 @@ recommended, please use the Web Upgrade.</li>
 <li>Copy old files to parallel locations:
 <ul>
 <li>Copy your previous installation's <code>/.env.local</code> to <code>/.env.local</code> in your new installation.</li>
-<li>Copy your previous installation's <code>/config/services_custom.yaml</code> to <code>/config/services_custom.yaml</code> in your new installation.</li>
+<li>Copy your previous installation's <code>/config/services_custom.yaml</code> to <code>/config/services_custom.yaml</code> in your new installation.
+<ul>
+<li>When the upgrade to 3.1.0 is complete, the file will be deleted because the values are moved to config files.</li>
+</ul></li>
 <li>Copy your custom theme to the <code>src/extensions</code> directory.
 <ul>
 <li>After upgrade, the site will default to the ZikulaBootstrapTheme until you complete testing of your custom theme.</li>

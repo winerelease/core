@@ -324,14 +324,18 @@
 <pre><code class="language-yaml">bootstrapPath: '@AcmeFooTheme:css/bootstrap.min.css'</code></pre>
 <h2 id="full-site">Full site</h2>
 <p>A <strong>site administrator</strong> can force the core to use a customized assets setting parameter values
-in <code>/config/services_custom.yaml</code>:</p>
-<pre><code class="language-yaml">zikula.javascript.bootstrap.min.path: '@AcmeFooModule:js/bootstrap.min.js' 
-zikula.stylesheet.bootstrap.min.path: '@AcmeFooModule:css/bootstrap.min.css'
-zikula.stylesheet.fontawesome.min.path: '@AcmeFooModule:css/font-awesome.min.css'</code></pre>
+Modify these values in the <code>/config/packages/zikula_theme.yaml</code> file (create the file if needed):</p>
+<pre><code class="language-yaml">zikula_theme:
+    bootstrap:
+        css_path: '/bootstrap/css/bootstrap.min.css'
+        js_path: '/bootstrap/js/bootstrap.bundle.min.js'
+    font_awesome_path: '/font-awesome/css/all.min.css'</code></pre>
 <p>Note these resolve to <code>public/</code> subfolders (see <a href="../Templating/templateandassetlocations.html">Locations of Templates and Assets</a>).</p>
 <p>Instead of putting it into an extension you can also have it inside <code>public</code> directly:</p>
-<pre><code class="language-yaml">zikula.stylesheet.bootstrap.min.path: /custom-bootstrap.min.css</code></pre>
-<p><strong>Warning:</strong> setting the value in <code>/config/services_custom.yaml</code> will affect <em>every</em> theme on the site.</p>
+<pre><code class="language-yaml">zikula_theme:
+    bootstrap:
+        css_path: /custom-bootstrap.min.css</code></pre>
+<p><strong>Warning:</strong> setting these values will affect <em>every</em> theme on the site.</p>
                 </section>
             </div>
         </main>
