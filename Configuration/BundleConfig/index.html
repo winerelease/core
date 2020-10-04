@@ -94,7 +94,7 @@
                             </p>
                             <ul id="section3" class="nav flex-column collapse">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Configuration/BundleConfig/index.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/Configuration/BundleConfig/index.html" class="nav-link active">
                                             Bundle config
                                         </a>
                                     </li>
@@ -200,7 +200,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/LayoutDesign/Blocks/index.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/LayoutDesign/Blocks/index.html" class="nav-link">
                                             Blocks
                                         </a>
                                     </li>
@@ -322,21 +322,26 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="blockfilterapi">BlockFilterApi</h1>
-<p>Interface: <code>\Zikula\BlocksModule\Api\ApiInterface\BlockFilterApiInterface</code>.<br />
-Class: <code>\Zikula\BlocksModule\Api\BlockFilterApi</code>.</p>
-<p>The BlockFilterApi helps determine if blocks should be displayed or not.</p>
-<p>The class makes the following methods available:</p>
-<pre><code class="language-php">/**
- * Determine if the block is displayable based on the filter criteria.
- */
-public function isDisplayable(BlockEntity $blockEntity): bool;
-
-/**
- * Get all the attributes of the request + 'query param'.
- */
-public function getFilterAttributeChoices(): array;</code></pre>
-<p>The class is fully tested.</p>
+                    <h1 id="bundle-config">Bundle config</h1>
+<p>As of Zikula 3.1.0, all bundle config options that were previously stored in <code>services_custom.yaml</code> are now stored
+in standard Symfony config objects. The largest advantage of this approach is that default values can be easily
+set in php and do not need to be stored in yaml files. Therefore only non-default values must be set in the config
+objects. As of 3.1.0, the following bundles/extensions have config objects in use:</p>
+<ul>
+<li>CoreBundle (<a href="Defaults/core.yaml">default values</a>)</li>
+<li>ZikulaRoutesModule (<a href="Defaults/zikula_routes.yaml">default values</a>)</li>
+<li>ZikulaSecurityCenterModule (<a href="Defaults/zikula_security_center.yaml">default values</a>)</li>
+<li>ZikulaSettingsModule (<a href="Defaults/zikula_settings.yaml">default values</a>)</li>
+<li>ZikulaThemeModule (<a href="Defaults/zikula_theme.yaml">default values</a>)</li>
+</ul>
+<p>These files are stored in the <code>config/packages</code> directory. If these files do not exist in your installation, do not be
+alarmed. The file will only exist if <strong>non-default</strong> values have been set previously. If only default values are in use,
+the file is removed because it is unneeded.</p>
+<p>In most situations, these files can be safely ignored. The values within will be updated when config changes are made
+via the UI within the Zikula admin settings. It is permissible, however, for advanced users to alter the
+values of these files manually. When this is done, the cache must be manually cleared for new values to function.
+Be warned; manual alteration of <em>any</em> config value can have unintended side effects including complete disabling of
+your website.</p>
                 </section>
             </div>
         </main>
