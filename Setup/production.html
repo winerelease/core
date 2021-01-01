@@ -72,7 +72,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Setup/installation.html" class="nav-link">
+                                        <a href="https://docs.ziku.la/Setup/installation.html" class="nav-link active">
                                             Installation
                                         </a>
                                     </li>
@@ -227,7 +227,7 @@
                             </p>
                             <ul id="section7" class="nav flex-column collapse">
                                                                     <li class="nav-item">
-                                        <a href="https://docs.ziku.la/Translation/index.html" class="nav-link active">
+                                        <a href="https://docs.ziku.la/Translation/index.html" class="nav-link">
                                             Overview
                                         </a>
                                     </li>
@@ -327,36 +327,15 @@
                                                             </ul>
                                             </nav>
                                 <section class="offset-md-3 offset-xl-2 col-md-9 col-xl-10">
-                    <h1 id="translation">Translation</h1>
-<h2 id="basic-topics">Basic topics</h2>
-<ul>
-<li><a href="terminology.html">Translation terminology</a></li>
-<li><a href="installation.html">Installation of translations</a></li>
-<li><a href="usage.html">Translator usage</a></li>
-<li><a href="extraction.html">Translation extraction</a></li>
-<li><a href="pluralforms.html">Plural forms</a></li>
-<li><a href="userinterface.html">UI-based translations</a></li>
-</ul>
-<h2 id="specific-and-advanced-topics">Specific and advanced topics</h2>
-<ul>
-<li><a href="translation.html">Translation in Zikula</a></li>
-<li><a href="javascript.html">Javascript translation</a></li>
-<li><a href="debugging.html">Debugging translations</a></li>
-<li><a href="intl.html">Using the PHP and Symfony's Intl classes</a></li>
-<li><a href="overriding.html">Overriding translations</a></li>
-<li><a href="contributing.html">Contributing translations</a></li>
-</ul>
-<h2 id="tools-and-external-resources">Tools and external resources</h2>
-<p>Here are some recommended tools. We recommend you try them all to find your favorite tool.</p>
-<ul>
-<li><a href="https://poedit.net/">Poedit</a> - Powerful Gettext translation tool, works with Windows, Mac and Linux</li>
-<li><a href="https://virtaal.translatehouse.org/">Virtaal</a> - Another excellent translation tool</li>
-<li><a href="https://yml2po.com/">YAML to PO converter</a></li>
-</ul>
-<h2 id="for-developers">For developers</h2>
-<ul>
-<li><a href="Dev/translatortrait.html">TranslatorTrait</a></li>
-</ul>
+                    <h1 id="production">Production</h1>
+<p>In an ideal situation, you would test your installation of Zikula in a local (developmet) environment before
+moving the entire site into &quot;production&quot;. This process is called <em>deployment</em>. </p>
+<p>Symfony provides documentation for this process <a href="https://symfony.com/doc/current/deployment.html">here</a>. </p>
+<p>Before deploying your site, you should <strong>remove all unused Zikula extensions</strong>. </p>
+<p>Another recommended step is to run <code>composer dump-autoload -a</code> (authoritative mode). This will allow all supported
+Zikula core classes to load faster. (see composer's <a href="https://getcomposer.org/doc/articles/autoloader-optimization.html">autoloader optimization</a>).
+It will also pre-cache all annotation classes in supported classes which will also speed up loading.</p>
+<p>Beware however, as classes that are generated at runtime will not autoload and this <a href="https://getcomposer.org/doc/articles/autoloader-optimization.html#trade-offs-2">could cause issues</a>.</p>
                 </section>
             </div>
         </main>
