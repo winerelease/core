@@ -360,7 +360,7 @@ it will cause problems when being used in JavaScript because then <code>null</co
 entries that are used in JavaScript files also for the English translation.</p>
 <p>You can also use an additional command <code>zikula:translation:keytovalue</code> to fix default values:</p>
 <pre><code class="language-shell">php -dmemory_limit=2G bin/console zikula:translation:keytovalue
-php -dmemory_limit=2G bin/console zikula:translation:keytovalue --bundle AcmeFooModule</code></pre>
+php -dmemory_limit=2G bin/console zikula:translation:keytovalue AcmeFooModule</code></pre>
 <h2 id="translation-annotations">Translation annotations</h2>
 <p>To influence the extraction behaviour you can utilise some annotations from the <code>Translation\Extractor\Annotation</code> namespace.
 Import them like any other php class:</p>
